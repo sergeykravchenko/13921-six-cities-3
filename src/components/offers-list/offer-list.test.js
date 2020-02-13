@@ -1,13 +1,7 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import Main from "./main.jsx";
+import renderer from "react-test-renderer";
+import OffersList from "./offers-list.jsx";
 
-Enzyme.configure({
-  adapter: new Adapter(),
-});
-
-const offersCount = 12;
 const offers = [
   {
     "id": 1,
@@ -48,22 +42,16 @@ const offers = [
   }
 ];
 
-it(`Should title link be pressed`, () => {
+it(`Render offer-list`, () => {
   const onPlaceTitleClick = jest.fn();
 
-  const main = shallow(
-      <Main
-        offersCount={offersCount}
-        offers={offers}
-        onPlaceTitleClick={onPlaceTitleClick}
-      />
-  );
-
-  const PlaceTitleLinks = main.find(`.place-card__name a`);
-
-  PlaceTitleLinks.forEach((item) =>{
-    item.props().onClick();
-  });
-
-  expect(onPlaceTitleClick.mock.calls.length).toBe(PlaceTitleLinks.length);
+  const tree = renderer
+    .create(
+        <OffersList
+          offers={offers}
+          onPlaceTitleClick={onPlaceTitleClick}
+        />
+    )
+    .toJSON();
+  expect(tree).toMatchSnapshot();
 });
