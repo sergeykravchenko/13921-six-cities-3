@@ -7,7 +7,7 @@ class OffersList extends PureComponent {
     super(props);
 
     this.state = {
-      activeCard: 0
+      activeCard: null
     };
 
     this._setActiveCard = this._setActiveCard.bind(this);
