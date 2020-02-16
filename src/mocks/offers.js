@@ -1,14 +1,4 @@
-import React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import Main from "./main.jsx";
-
-Enzyme.configure({
-  adapter: new Adapter(),
-});
-
-const offersCount = 12;
-const offers = [
+export default [
   {
     "id": 1,
     "name": `Canal View Prinsengracht`,
@@ -47,23 +37,3 @@ const offers = [
     "type": `Apartment`
   }
 ];
-
-it(`Should title link be pressed`, () => {
-  const onPlaceTitleClick = jest.fn();
-
-  const main = shallow(
-      <Main
-        offersCount={offersCount}
-        offers={offers}
-        onPlaceTitleClick={onPlaceTitleClick}
-      />
-  );
-
-  const PlaceTitleLinks = main.find(`.place-card__name a`);
-
-  PlaceTitleLinks.forEach((item) =>{
-    item.props().onClick();
-  });
-
-  expect(onPlaceTitleClick.mock.calls.length).toBe(PlaceTitleLinks.length);
-});
