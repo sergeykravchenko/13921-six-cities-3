@@ -95,7 +95,7 @@ exports[`Render place 1`] = `
     >
       <a
         href="#"
-        onClick={[MockFunction]}
+        onClick={[Function]}
       >
         Canal View Prinsengracht
       </a>

@@ -10,21 +10,13 @@ const PlaceCard = (props) => {
     price,
     priceText,
     rating,
-    type,
+    features,
     isPremium,
     isInBookmark
   } = place;
 
-  const Rating = {
-    1: `20%`,
-    2: `40%`,
-    3: `60%`,
-    4: `80%`,
-    5: `100%`
-  };
-
   return (
-    <article onMouseEnter={() => (onHoverCard(id))} className="cities__place-card place-card">
+    <article onMouseEnter={onHoverCard ? () => (onHoverCard(id)) : () => {}} className="cities__place-card place-card">
       {isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>
@@ -52,14 +44,14 @@ const PlaceCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${Rating[rating]}`}}></span>
+            <span style={{width: `${rating < 5 ? Math.floor(rating) * 20 : 100}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick={onPlaceTitleClick} href="#">{name}</a>
+          <a onClick={() => (onPlaceTitleClick(id))} href="#">{name}</a>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{features.type}</p>
       </div>
     </article>
   );
@@ -73,11 +65,23 @@ PlaceCard.propTypes = {
     price: PropTypes.number.isRequired,
     priceText: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
+    features: PropTypes.exact({
+      type: PropTypes.string.isRequired,
+      bedrooms: PropTypes.number.isRequired,
+      maxGuests: PropTypes.number.isRequired,
+    }),
     isPremium: PropTypes.bool,
-    isInBookmark: PropTypes.bool
+    isInBookmark: PropTypes.bool,
+    houseHolds: PropTypes.arrayOf(PropTypes.string).isRequired,
+    gallery: PropTypes.arrayOf(PropTypes.string).isRequired,
+    host: PropTypes.exact({
+      name: PropTypes.string.isRequired,
+      img: PropTypes.string.isRequired,
+      pro: PropTypes.bool
+    }),
+    description: PropTypes.arrayOf(PropTypes.string).isRequired
   }).isRequired,
-  onHoverCard: PropTypes.func.isRequired,
+  onHoverCard: PropTypes.func,
   onPlaceTitleClick: PropTypes.func.isRequired
 };
 

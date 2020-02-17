@@ -13,10 +13,40 @@ const place = {
   "picture": `img/room.jpg`,
   "price": 120,
   "priceText": `night`,
-  "rating": 4,
-  "type": `Private room`,
+  "rating": 4.8,
+  "features": {
+    "type": `Private room`,
+    "bedrooms": 3,
+    "maxGuests": 3,
+  },
   "isPremium": true,
-  "isInBookmark": true
+  "isInBookmark": true,
+  "houseHolds": [
+    `Wi-Fi`,
+    `Washing machine`,
+    `Towels`,
+    `Heating`,
+    `Coffee machine`,
+    `Baby seat`,
+    `Kitchen`,
+    `Dishwasher`,
+    `Cabel TV`,
+    `Fridge`,
+  ],
+  "gallery": [
+    `img/apartment-01.jpg`,
+    `img/apartment-02.jpg`,
+    `img/apartment-03.jpg`,
+    `img/room.jpg`,
+    `img/studio-01.jpg`,
+    `img/apartment-03.jpg`,
+  ],
+  "host": {
+    "name": `Max`,
+    "img": `img/avatar-max.jpg`,
+    "pro": true,
+  },
+  "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`],
 };
 
 it(`Should title be clicked`, () => {

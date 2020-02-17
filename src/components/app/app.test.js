@@ -11,9 +11,27 @@ const offers = [
     "price": 120,
     "priceText": `night`,
     "rating": 4,
-    "type": `Private room`,
+    "features": {
+      "type": `Private room`,
+      "bedrooms": 8,
+      "maxGuests": 7,
+    },
     "isPremium": true,
-    "isInBookmark": true
+    "isInBookmark": true,
+    "houseHolds": [
+      `Wi-Fi`,
+      `Washing machine`,
+    ],
+    "gallery": [
+      `img/apartment-01.jpg`,
+      `img/apartment-02.jpg`,
+    ],
+    "host": {
+      "name": `Max`,
+      "img": `img/avatar-max.jpg`,
+      "pro": true,
+    },
+    "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`]
 
   }, {
     "id": 2,
@@ -22,7 +40,28 @@ const offers = [
     "price": 80,
     "priceText": `night`,
     "rating": 4,
-    "type": `Apartment`
+    "features": {
+      "type": `Apartment`,
+      "bedrooms": 8,
+      "maxGuests": 7,
+    },
+    "houseHolds": [
+      `Wi-Fi`,
+      `Heating`,
+      `Coffee machine`,
+    ],
+    "gallery": [
+      `img/apartment-01.jpg`,
+      `img/apartment-02.jpg`,
+      `img/apartment-03.jpg`,
+      `img/room.jpg`,
+    ],
+    "host": {
+      "name": `Max`,
+      "img": `img/avatar-max.jpg`,
+      "pro": true,
+    },
+    "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`]
   }, {
     "id": 3,
     "name": `Wood and stone place`,
@@ -30,8 +69,28 @@ const offers = [
     "price": 132,
     "priceText": `night`,
     "rating": 5,
-    "type": `Private room`,
-    "isPremium": true
+    "features": {
+      "type": `Apartment`,
+      "bedrooms": 8,
+      "maxGuests": 7,
+    },
+    "isPremium": true,
+    "houseHolds": [
+      `Wi-Fi`,
+      `Washing machine`,
+      `Towels`,
+    ],
+    "gallery": [
+      `img/apartment-01.jpg`,
+      `img/apartment-02.jpg`,
+      `img/apartment-03.jpg`,
+    ],
+    "host": {
+      "name": `Angelina`,
+      "img": `img/avatar-angelina.jpg`,
+      "pro": false,
+    },
+    "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`]
   }, {
     "id": 4,
     "name": `Beautiful &amp; luxurious apartment at great location`,
@@ -39,7 +98,30 @@ const offers = [
     "price": 180,
     "priceText": `night`,
     "rating": 4,
-    "type": `Apartment`
+    "features": {
+      "type": `Private room`,
+      "bedrooms": 8,
+      "maxGuests": 7,
+    },
+    "houseHolds": [
+      `Wi-Fi`,
+      `Washing machine`,
+      `Towels`,
+      `Heating`,
+      `Coffee machine`,
+    ],
+    "gallery": [
+      `img/apartment-01.jpg`,
+      `img/apartment-02.jpg`,
+      `img/apartment-03.jpg`,
+      `img/room.jpg`,
+    ],
+    "host": {
+      "name": `Max`,
+      "img": `img/avatar-max.jpg`,
+      "pro": true,
+    },
+    "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`]
   }
 ];
 

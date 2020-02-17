@@ -9,11 +9,40 @@ const offers = [
     "picture": `img/room.jpg`,
     "price": 120,
     "priceText": `night`,
-    "rating": 4,
-    "type": `Private room`,
+    "rating": 4.8,
+    "features": {
+      "type": `Private room`,
+      "bedrooms": 3,
+      "maxGuests": 3,
+    },
     "isPremium": true,
-    "isInBookmark": true
-
+    "isInBookmark": true,
+    "houseHolds": [
+      `Wi-Fi`,
+      `Washing machine`,
+      `Towels`,
+      `Heating`,
+      `Coffee machine`,
+      `Baby seat`,
+      `Kitchen`,
+      `Dishwasher`,
+      `Cabel TV`,
+      `Fridge`,
+    ],
+    "gallery": [
+      `img/apartment-01.jpg`,
+      `img/apartment-02.jpg`,
+      `img/apartment-03.jpg`,
+      `img/room.jpg`,
+      `img/studio-01.jpg`,
+      `img/apartment-03.jpg`,
+    ],
+    "host": {
+      "name": `Max`,
+      "img": `img/avatar-max.jpg`,
+      "pro": true,
+    },
+    "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`],
   }, {
     "id": 2,
     "name": `Nice, cozy, warm big bed apartment`,
@@ -21,7 +50,32 @@ const offers = [
     "price": 80,
     "priceText": `night`,
     "rating": 4,
-    "type": `Apartment`
+    "features": {
+      "type": `Apartment`,
+      "bedrooms": 3,
+      "maxGuests": 3,
+    },
+    "houseHolds": [
+      `Wi-Fi`,
+      `Washing machine`,
+      `Towels`,
+      `Heating`,
+      `Coffee machine`,
+    ],
+    "gallery": [
+      `img/apartment-01.jpg`,
+      `img/apartment-02.jpg`,
+      `img/apartment-03.jpg`,
+      `img/room.jpg`,
+      `img/studio-01.jpg`,
+      `img/apartment-03.jpg`,
+    ],
+    "host": {
+      "name": `Angelina`,
+      "img": `img/avatar-angelina.jpg`,
+      "pro": false,
+    },
+    "description": [`An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`],
   }, {
     "id": 3,
     "name": `Wood and stone place`,
@@ -29,8 +83,32 @@ const offers = [
     "price": 132,
     "priceText": `night`,
     "rating": 5,
-    "type": `Private room`,
-    "isPremium": true
+    "features": {
+      "type": `Private room`,
+      "bedrooms": 4,
+      "maxGuests": 3,
+    },
+    "isPremium": true,
+    "houseHolds": [
+      `Baby seat`,
+      `Kitchen`,
+      `Dishwasher`,
+      `Cabel TV`,
+    ],
+    "gallery": [
+      `img/apartment-01.jpg`,
+      `img/apartment-02.jpg`,
+      `img/apartment-03.jpg`,
+      `img/room.jpg`,
+      `img/studio-01.jpg`,
+      `img/apartment-03.jpg`,
+    ],
+    "host": {
+      "name": `Max`,
+      "img": `img/avatar-max.jpg`,
+      "pro": false,
+    },
+    "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`],
   }, {
     "id": 4,
     "name": `Beautiful &amp; luxurious apartment at great location`,
@@ -38,7 +116,31 @@ const offers = [
     "price": 180,
     "priceText": `night`,
     "rating": 4,
-    "type": `Apartment`
+    "features": {
+      "type": `Apartment`,
+      "bedrooms": 5,
+      "maxGuests": 3,
+    },
+    "houseHolds": [
+      `Heating`,
+      `Coffee machine`,
+      `Baby seat`,
+      `Kitchen`,
+    ],
+    "gallery": [
+      `img/apartment-01.jpg`,
+      `img/apartment-02.jpg`,
+      `img/apartment-03.jpg`,
+      `img/room.jpg`,
+      `img/studio-01.jpg`,
+      `img/apartment-03.jpg`,
+    ],
+    "host": {
+      "name": `Angelina`,
+      "img": `img/avatar-angelina.jpg`,
+      "pro": true,
+    },
+    "description": [`An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`],
   }
 ];
 
