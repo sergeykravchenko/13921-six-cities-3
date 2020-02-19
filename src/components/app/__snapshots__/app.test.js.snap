@@ -477,7 +477,7 @@ exports[`App renders correctly 1`] = `
               <p
                 className="place-card__type"
               >
-                Private room
+                Apartment
               </p>
             </div>
           </article>
@@ -577,7 +577,7 @@ exports[`App renders correctly 1`] = `
               <p
                 className="place-card__type"
               >
-                Apartment
+                Private room
               </p>
             </div>
           </article>

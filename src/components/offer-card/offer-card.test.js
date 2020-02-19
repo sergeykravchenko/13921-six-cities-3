@@ -1,8 +1,8 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import PlaceCard from "./place-card.jsx";
+import React from 'react';
+import renderer from 'react-test-renderer';
+import OfferCard from './offer-card.jsx';
 
-const place = {
+const offer = {
   "id": 1,
   "name": `Canal View Prinsengracht`,
   "picture": `img/room.jpg`,
@@ -32,18 +32,12 @@ const place = {
   "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`]
 };
 
-it(`Render place`, () => {
-  const onPlaceTitleClick = jest.fn();
-  const onHoverCard = jest.fn();
-
+it(`Offer-card renders correctly`, () => {
   const tree = renderer
-    .create(
-        <PlaceCard
-          place={place}
-          onPlaceTitleClick={onPlaceTitleClick}
-          onHoverCard = {onHoverCard}
-        />
-    )
+    .create(<OfferCard
+      offer={offer}
+      onPlaceTitleClick={()=>{}}
+    />)
     .toJSON();
   expect(tree).toMatchSnapshot();
 });
