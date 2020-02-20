@@ -31,7 +31,8 @@ const offers = [
       "img": `img/avatar-max.jpg`,
       "pro": true,
     },
-    "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`]
+    "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`],
+    "coords": [52.3909553943508, 4.85309666406112],
 
   }, {
     "id": 2,
@@ -61,7 +62,8 @@ const offers = [
       "img": `img/avatar-max.jpg`,
       "pro": true,
     },
-    "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`]
+    "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`],
+    "coords": [52.3909553943508, 4.85309666406196],
   }, {
     "id": 3,
     "name": `Wood and stone place`,
@@ -90,7 +92,8 @@ const offers = [
       "img": `img/avatar-angelina.jpg`,
       "pro": false,
     },
-    "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`]
+    "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`],
+    "coords": [52.3909553943508, 4.85309666406248],
   }, {
     "id": 4,
     "name": `Beautiful &amp; luxurious apartment at great location`,
@@ -121,7 +124,8 @@ const offers = [
       "img": `img/avatar-max.jpg`,
       "pro": true,
     },
-    "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`]
+    "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`],
+    "coords": [52.3909553943508, 4.85309666406198],
   }
 ];
 
@@ -131,7 +135,10 @@ it(`App renders correctly`, () => {
       offersCount={offersCount}
       offers={offers}
       onPlaceTitleClick={()=>{}}
-    />)
+    />, {
+      createNodeMock: () => {
+        return document.createElement(`div`);
+      }})
     .toJSON();
   expect(tree).toMatchSnapshot();
 });
