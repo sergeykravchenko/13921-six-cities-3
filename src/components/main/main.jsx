@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list.jsx";
+import Map from '../map/map.jsx';
 
 const Main = (props) => {
   const {offersCount, offers, onPlaceTitleClick} = props;
@@ -69,7 +70,7 @@ const Main = (props) => {
             </div>
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <Map offers={offers}/>
           </div>
         </div>
       </div>
@@ -79,29 +80,7 @@ const Main = (props) => {
 
 Main.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(PropTypes.exact({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    picture: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    priceText: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    features: PropTypes.exact({
-      type: PropTypes.string.isRequired,
-      bedrooms: PropTypes.number.isRequired,
-      maxGuests: PropTypes.number.isRequired,
-    }),
-    isPremium: PropTypes.bool,
-    isInBookmark: PropTypes.bool,
-    houseHolds: PropTypes.arrayOf(PropTypes.string).isRequired,
-    gallery: PropTypes.arrayOf(PropTypes.string).isRequired,
-    host: PropTypes.exact({
-      name: PropTypes.string.isRequired,
-      img: PropTypes.string.isRequired,
-      pro: PropTypes.bool
-    }),
-    description: PropTypes.arrayOf(PropTypes.string).isRequired
-  })).isRequired,
+  offers: PropTypes.array.isRequired,
   onPlaceTitleClick: PropTypes.func.isRequired
 };
 

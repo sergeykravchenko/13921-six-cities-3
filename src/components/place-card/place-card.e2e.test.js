@@ -47,6 +47,7 @@ const place = {
     "pro": true,
   },
   "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`],
+  "coords": [52.3909553943508, 4.929309666406198],
 };
 
 it(`Should title be clicked`, () => {

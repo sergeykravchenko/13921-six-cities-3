@@ -58,7 +58,7 @@ const PlaceCard = (props) => {
 };
 
 PlaceCard.propTypes = {
-  place: PropTypes.exact({
+  place: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     picture: PropTypes.string.isRequired,
@@ -79,7 +79,7 @@ PlaceCard.propTypes = {
       img: PropTypes.string.isRequired,
       pro: PropTypes.bool
     }),
-    description: PropTypes.arrayOf(PropTypes.string).isRequired
+    description: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
   onHoverCard: PropTypes.func,
   onPlaceTitleClick: PropTypes.func.isRequired
