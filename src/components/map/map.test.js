@@ -2,6 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Map from "./map.jsx";
 
+const string = `className`;
 const offers = [
   {
     "coords": [52.3909553943508, 4.85309666406198],
@@ -18,6 +19,7 @@ const offers = [
 it(`Should map render correctly`, () => {
   const tree = renderer
     .create(<Map
+      bemBlock={string}
       offers={offers}
     />, {
       createNodeMock: () => {

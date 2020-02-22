@@ -29,7 +29,16 @@ const offer = {
     "img": `img/avatar-max.jpg`,
     "pro": true,
   },
-  "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`]
+  "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`],
+  "closest": [
+    {
+      "coords": [52.3909553943508, 4.929309666406198],
+    }, {
+      "coords": [52.3909553943508, 4.929309666406197],
+    }, {
+      "coords": [52.3909553943508, 4.929309666406196],
+    },
+  ]
 };
 
 it(`Offer-card renders correctly`, () => {
@@ -37,7 +46,10 @@ it(`Offer-card renders correctly`, () => {
     .create(<OfferCard
       offer={offer}
       onPlaceTitleClick={()=>{}}
-    />)
+    />, {
+      createNodeMock: () => {
+        return document.createElement(`div`);
+      }})
     .toJSON();
   expect(tree).toMatchSnapshot();
 });
