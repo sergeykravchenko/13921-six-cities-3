@@ -2,6 +2,6 @@
 
 exports[`Should map render correctly 1`] = `
 <section
-  className="cities__map map"
+  className="className__map map"
 />
 `;

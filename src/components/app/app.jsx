@@ -63,7 +63,7 @@ class App extends PureComponent {
 
 App.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  offers: PropTypes.array.isRequired
+  offers: PropTypes.array.isRequired,
 };
 
 export default App;

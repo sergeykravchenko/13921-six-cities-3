@@ -38,13 +38,15 @@ export default class Map extends PureComponent {
   }
 
   render() {
+    const {bemBlock} = this.props;
     return (
-      <section ref={this._mapRef} className="cities__map map" />
+      <section ref={this._mapRef} className={`${bemBlock}__map map`} />
     );
   }
 }
 
 Map.propTypes = {
+  bemBlock: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     coords: PropTypes.arrayOf(PropTypes.number).isRequired
   })).isRequired

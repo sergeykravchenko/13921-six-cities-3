@@ -40,6 +40,33 @@ export default [
     },
     "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`],
     "coords": [52.3909553943508, 4.85309666406198],
+    "reviews": [
+      {
+        "id": 1,
+        "author": `Max`,
+        "avatar": `img/avatar-max.jpg`,
+        "rating": 4,
+        "text": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
+                 The building is green and from 18th century.`,
+        "date": new Date(),
+      }, {
+        "id": 2,
+        "author": `Angelina`,
+        "avatar": `img/avatar-angelina.jpg`,
+        "rating": 5,
+        "text": `Picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+        "date": new Date(),
+      }
+    ],
+    "closest": [
+      {
+        "coords": [52.369553943508, 4.85309666406198],
+      }, {
+        "coords": [52.3909553943508, 4.929309666406198],
+      }, {
+        "coords": [52.3809553943508, 4.939309666406198],
+      },
+    ],
   }, {
     "id": 2,
     "name": `Nice, cozy, warm big bed apartment`,
@@ -74,6 +101,25 @@ export default [
     },
     "description": [`An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`],
     "coords": [52.369553943508, 4.85309666406198],
+    "reviews": [
+      {
+        "id": 1,
+        "author": `Angelina`,
+        "avatar": `img/avatar-angelina.jpg`,
+        "rating": 4.5,
+        "text": `Picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+        "date": new Date(`2019-04-8`),
+      }
+    ],
+    "closest": [
+      {
+        "coords": [52.3909553943508, 4.85309666406198],
+      }, {
+        "coords": [52.3909553943508, 4.929309666406198],
+      }, {
+        "coords": [52.3809553943508, 4.939309666406198],
+      },
+    ]
   }, {
     "id": 3,
     "name": `Wood and stone place`,
@@ -108,6 +154,26 @@ export default [
     },
     "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`],
     "coords": [52.3909553943508, 4.929309666406198],
+    "reviews": [
+      {
+        "id": 1,
+        "author": `Max`,
+        "avatar": `img/avatar-max.jpg`,
+        "rating": 4,
+        "text": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
+                 The building is green and from 18th century.`,
+        "date": new Date(`2019-04-24`),
+      }
+    ],
+    "closest": [
+      {
+        "coords": [52.3909553943508, 4.85309666406198],
+      }, {
+        "coords": [52.369553943508, 4.85309666406198],
+      }, {
+        "coords": [52.3809553943508, 4.939309666406198],
+      },
+    ],
   }, {
     "id": 4,
     "name": `Beautiful &amp; luxurious apartment at great location`,
@@ -141,5 +207,14 @@ export default [
     },
     "description": [`An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`],
     "coords": [52.3809553943508, 4.939309666406198],
+    "closest": [
+      {
+        "coords": [52.3909553943508, 4.85309666406198],
+      }, {
+        "coords": [52.369553943508, 4.85309666406198],
+      }, {
+        "coords": [52.3909553943508, 4.929309666406198],
+      },
+    ],
   }
 ];

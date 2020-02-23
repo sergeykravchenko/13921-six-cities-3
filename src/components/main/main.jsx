@@ -70,7 +70,7 @@ const Main = (props) => {
             </div>
           </section>
           <div className="cities__right-section">
-            <Map offers={offers}/>
+            <Map bemBlock={`cities`} offers={offers}/>
           </div>
         </div>
       </div>
