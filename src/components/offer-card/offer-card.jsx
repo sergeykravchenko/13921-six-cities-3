@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import PlaceCard from "../place-card/place-card.jsx";
-import offers from "../../mocks/offers.js";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 import Map from "../map/map.jsx";
 
 const OfferCard = (props) => {
-  const {offer, onPlaceTitleClick} = props;
+  const {offer, offers, activeCity, handlePlaceTitleClick} = props;
   const {
     id,
     name,
@@ -156,7 +155,7 @@ const OfferCard = (props) => {
             </section>
           </div>
         </div>
-        <Map bemBlock={`property`} offers={closest}/>
+        <Map bemBlock={`property`} activeCity={activeCity} offers={closest}/>
       </section>
       <div className="container">
         <section className="near-places places">
@@ -165,7 +164,7 @@ const OfferCard = (props) => {
             {offers.filter((item) => item.id !== id).map((place) => (
               <PlaceCard key={place.id}
                 place={place}
-                onPlaceTitleClick={onPlaceTitleClick}
+                handlePlaceTitleClick={handlePlaceTitleClick}
               />
             ))}
           </div>
@@ -176,6 +175,7 @@ const OfferCard = (props) => {
 };
 
 OfferCard.propTypes = {
+  offers: PropTypes.array,
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -201,7 +201,8 @@ OfferCard.propTypes = {
     reviews: PropTypes.array,
     closest: PropTypes.array,
   }),
-  onPlaceTitleClick: PropTypes.func,
+  activeCity: PropTypes.object.isRequired,
+  handlePlaceTitleClick: PropTypes.func,
 };
 
 export default OfferCard;

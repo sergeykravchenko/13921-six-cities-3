@@ -34,14 +34,14 @@ const place = {
 };
 
 it(`Render place`, () => {
-  const onPlaceTitleClick = jest.fn();
+  const handlePlaceTitleClick = jest.fn();
   const onHoverCard = jest.fn();
 
   const tree = renderer
     .create(
         <PlaceCard
           place={place}
-          onPlaceTitleClick={onPlaceTitleClick}
+          handlePlaceTitleClick={handlePlaceTitleClick}
           onHoverCard = {onHoverCard}
         />
     )
