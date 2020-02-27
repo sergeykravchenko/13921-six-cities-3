@@ -17,7 +17,7 @@ const cities = [
   },
 ];
 
-const activeCity = cities[0].name;
+const activeCity = cities[0];
 
 it(`Should title be clicked`, () => {
   const handleCityClick = jest.fn();

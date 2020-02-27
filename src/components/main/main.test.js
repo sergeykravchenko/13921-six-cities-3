@@ -149,7 +149,7 @@ const offers = [
 ];
 
 const cities = [`Amsterdam`, `Paris`];
-const activeCity = `Amsterdam`;
+const activeCity = {"name": `Amsterdam`, "coords": [222, 333]};
 
 it(`Main renders correctly`, () => {
   const tree = renderer

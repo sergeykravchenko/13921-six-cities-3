@@ -201,7 +201,7 @@ OfferCard.propTypes = {
     reviews: PropTypes.array,
     closest: PropTypes.array,
   }),
-  activeCity: PropTypes.object.isRequired,
+  activeCity: PropTypes.object,
   handlePlaceTitleClick: PropTypes.func,
 };
 

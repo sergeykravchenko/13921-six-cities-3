@@ -12,7 +12,7 @@ const cities = [
   },
 ];
 
-const activeCity = cities[0].name;
+const activeCity = cities[0];
 
 it(`Render locations list correctly`, () => {
   const handleCityClick = jest.fn();

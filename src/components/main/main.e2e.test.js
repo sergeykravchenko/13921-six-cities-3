@@ -154,7 +154,7 @@ const offers = [
 ];
 
 const cities = [`Amsterdam`, `Paris`];
-const activeCity = `Amsterdam`;
+const activeCity = {"name": `Amsterdam`, "coords": [222, 333]};
 
 it(`Should title link be pressed`, () => {
   const handlePlaceTitleClick = jest.fn();
