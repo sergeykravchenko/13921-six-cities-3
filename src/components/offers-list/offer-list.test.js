@@ -149,13 +149,13 @@ const offers = [
 ];
 
 it(`Render offer-list`, () => {
-  const onPlaceTitleClick = jest.fn();
+  const handlePlaceTitleClick = jest.fn();
 
   const tree = renderer
     .create(
         <OffersList
           offers={offers}
-          onPlaceTitleClick={onPlaceTitleClick}
+          handlePlaceTitleClick={handlePlaceTitleClick}
         />
     )
     .toJSON();

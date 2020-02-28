@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const PlaceCard = (props) => {
-  const {place, onPlaceTitleClick, onHoverCard} = props;
+  const {place, handlePlaceTitleClick, onHoverCard} = props;
   const {
     id,
     name,
@@ -49,7 +49,7 @@ const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick={() => (onPlaceTitleClick(id))} href="#">{name}</a>
+          <a onClick={() => (handlePlaceTitleClick(place))} href="#">{name}</a>
         </h2>
         <p className="place-card__type">{features.type}</p>
       </div>
@@ -82,7 +82,7 @@ PlaceCard.propTypes = {
     description: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
   onHoverCard: PropTypes.func,
-  onPlaceTitleClick: PropTypes.func.isRequired
+  handlePlaceTitleClick: PropTypes.func.isRequired
 };
 
 export default PlaceCard;

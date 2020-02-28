@@ -1,50 +1,41 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../reducer.js";
 import Main from "../main/main.jsx";
 import OfferCard from "../offer-card/offer-card.jsx";
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeId: 0,
-    };
-
-    this.onPlaceTitleClick = this.onPlaceTitleClick.bind(this);
-  }
-
   _renderApp() {
-    const {offersCount, offers} = this.props;
-    const {activeId} = this.state;
+    const {
+      offers,
+      cities,
+      activeCity,
+      activeOffer,
+      handleCityClick,
+      handlePlaceTitleClick
+    } = this.props;
 
-    if (activeId < 1) {
-      return (
-        <Main
-          offersCount={offersCount}
-          offers={offers}
-          onPlaceTitleClick={this.onPlaceTitleClick}
-        />
-      );
-    }
-
-    if (activeId >= 1) {
+    if (activeOffer) {
       return (
         <OfferCard
-          offer={offers[activeId - 1]}
-          onPlaceTitleClick={this.onPlaceTitleClick}
+          offer={activeOffer}
+          offers={offers}
+          activeCity={activeCity}
+          handlePlaceTitleClick={handlePlaceTitleClick}
         />
       );
     }
-
-    return null;
-  }
-
-  onPlaceTitleClick(id) {
-    this.setState({
-      activeId: id
-    });
+    return (
+      <Main
+        offers={offers}
+        handlePlaceTitleClick={handlePlaceTitleClick}
+        cities={cities}
+        activeCity={activeCity}
+        handleCityClick={handleCityClick}
+      />
+    );
   }
 
   render() {
@@ -62,8 +53,32 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offersCount: PropTypes.number.isRequired,
   offers: PropTypes.array.isRequired,
+  cities: PropTypes.array.isRequired,
+  activeCity: PropTypes.object.isRequired,
+  activeOffer: PropTypes.object,
+  handleCityClick: PropTypes.func.isRequired,
+  handlePlaceTitleClick: PropTypes.func.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    cities: state.cities,
+    activeCity: state.activeCity,
+    offers: state.offers,
+    activeOffer: state.activeOffer,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  handleCityClick(activeCity) {
+    dispatch(ActionCreator.changeCity(activeCity));
+    dispatch(ActionCreator.getOffers(activeCity.name));
+  },
+  handlePlaceTitleClick(offer) {
+    dispatch(ActionCreator.getActiveOffer(offer));
+  },
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

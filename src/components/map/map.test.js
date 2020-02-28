@@ -15,11 +15,16 @@ const offers = [
   }
 ];
 
+const activeCity = {
+  "name": `Amsterdam`,
+  "coords": [52.38333, 4.9],
+};
 
 it(`Should map render correctly`, () => {
   const tree = renderer
     .create(<Map
       bemBlock={string}
+      activeCity={activeCity}
       offers={offers}
     />, {
       createNodeMock: () => {

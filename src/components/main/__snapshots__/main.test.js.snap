@@ -18,77 +18,32 @@ exports[`Main renders correctly 1`] = `
       <ul
         className="locations__list tabs__list"
       >
-        <li
-          className="locations__item"
+        <ul
+          className="locations__list tabs__list"
         >
-          <a
-            className="locations__item-link tabs__item"
-            href="#"
+          <li
+            className="locations__item"
           >
-            <span>
-              Paris
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item"
-            href="#"
+            <a
+              className="locations__item-link tabs__item "
+              href="#"
+              onClick={[Function]}
+            >
+              <span />
+            </a>
+          </li>
+          <li
+            className="locations__item"
           >
-            <span>
-              Cologne
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item"
-            href="#"
-          >
-            <span>
-              Brussels
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item tabs__item--active"
-          >
-            <span>
-              Amsterdam
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item"
-            href="#"
-          >
-            <span>
-              Hamburg
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item"
-            href="#"
-          >
-            <span>
-              Dusseldorf
-            </span>
-          </a>
-        </li>
+            <a
+              className="locations__item-link tabs__item "
+              href="#"
+              onClick={[Function]}
+            >
+              <span />
+            </a>
+          </li>
+        </ul>
       </ul>
     </section>
   </div>
@@ -109,8 +64,11 @@ exports[`Main renders correctly 1`] = `
         <b
           className="places__found"
         >
-          24
-           places to stay in Amsterdam
+          4
+           place
+          s
+           to stay in 
+          Amsterdam
         </b>
         <form
           action="#"

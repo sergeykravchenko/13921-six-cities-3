@@ -67,6 +67,10 @@ export default [
         "coords": [52.3809553943508, 4.939309666406198],
       },
     ],
+    "city": {
+      "name": `Amsterdam`,
+      "coords": [52.38333, 4.9],
+    },
   }, {
     "id": 2,
     "name": `Nice, cozy, warm big bed apartment`,
@@ -119,7 +123,11 @@ export default [
       }, {
         "coords": [52.3809553943508, 4.939309666406198],
       },
-    ]
+    ],
+    "city": {
+      "name": `Paris`,
+      "coords": [52.38565, 4.9],
+    },
   }, {
     "id": 3,
     "name": `Wood and stone place`,
@@ -174,6 +182,10 @@ export default [
         "coords": [52.3809553943508, 4.939309666406198],
       },
     ],
+    "city": {
+      "name": `Cologne`,
+      "coords": [52.38343, 4.9],
+    }
   }, {
     "id": 4,
     "name": `Beautiful &amp; luxurious apartment at great location`,
@@ -216,5 +228,9 @@ export default [
         "coords": [52.3909553943508, 4.929309666406198],
       },
     ],
+    "city": {
+      "name": `Hamburg`,
+      "coords": [52.38013, 4.9],
+    },
   }
 ];

@@ -7,7 +7,6 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const offersCount = 12;
 const offers = [
   {
     "id": 1,
@@ -154,14 +153,19 @@ const offers = [
   }
 ];
 
+const cities = [`Amsterdam`, `Paris`];
+const activeCity = {"name": `Amsterdam`, "coords": [222, 333]};
+
 it(`Should title link be pressed`, () => {
-  const onPlaceTitleClick = jest.fn();
+  const handlePlaceTitleClick = jest.fn();
 
   const main = shallow(
       <Main
-        offersCount={offersCount}
         offers={offers}
-        onPlaceTitleClick={onPlaceTitleClick}
+        cities={cities}
+        activeCity={activeCity}
+        handleCityClick={() =>{}}
+        handlePlaceTitleClick={() => {}}
       />
   );
 
@@ -171,5 +175,5 @@ it(`Should title link be pressed`, () => {
     item.props().onClick();
   });
 
-  expect(onPlaceTitleClick.mock.calls.length).toBe(PlaceTitleLinks.length);
+  expect(handlePlaceTitleClick.mock.calls.length).toBe(PlaceTitleLinks.length);
 });

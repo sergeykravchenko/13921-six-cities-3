@@ -51,30 +51,30 @@ const place = {
 };
 
 it(`Should title be clicked`, () => {
-  const onPlaceTitleClick = jest.fn();
+  const handlePlaceTitleClick = jest.fn();
   const onHoverCard = jest.fn();
 
   const placeCard = shallow(
       <PlaceCard
         place={place}
-        onPlaceTitleClick={onPlaceTitleClick}
+        handlePlaceTitleClick={handlePlaceTitleClick}
         onHoverCard={onHoverCard}
       />
   );
   const cardTitle = placeCard.find(`.place-card__name a`);
   cardTitle.props().onClick();
 
-  expect(onPlaceTitleClick).toHaveBeenCalledTimes(1);
+  expect(handlePlaceTitleClick).toHaveBeenCalledTimes(1);
 });
 
 it(`On hover card must be card's id`, () => {
-  const onPlaceTitleClick = jest.fn();
+  const handlePlaceTitleClick = jest.fn();
   const onHoverCard = jest.fn();
 
   const placeCard = shallow(
       <PlaceCard
         place={place}
-        onPlaceTitleClick={onPlaceTitleClick}
+        handlePlaceTitleClick={handlePlaceTitleClick}
         onHoverCard={onHoverCard}
       />
   );

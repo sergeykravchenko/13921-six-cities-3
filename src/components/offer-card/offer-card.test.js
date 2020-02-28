@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import OfferCard from './offer-card.jsx';
+import offers from '../../mocks/offers';
 
 const offer = {
   "id": 1,
@@ -41,11 +42,18 @@ const offer = {
   ]
 };
 
+const activeCity = {
+  "name": `Hamburg`,
+  "coords": [52.38013, 4.9],
+};
+
 it(`Offer-card renders correctly`, () => {
   const tree = renderer
     .create(<OfferCard
       offer={offer}
-      onPlaceTitleClick={()=>{}}
+      offers={offers}
+      activeCity={activeCity}
+      handlePlaceTitleClick={()=>{}}
     />, {
       createNodeMock: () => {
         return document.createElement(`div`);
