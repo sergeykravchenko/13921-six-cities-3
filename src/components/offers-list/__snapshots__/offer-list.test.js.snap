@@ -1,10 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render offer-list 1`] = `
-Array [
+<div
+  className="cities__places-list places__list tabs__content"
+>
   <article
     className="cities__place-card place-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="place-card__mark"
@@ -107,10 +110,11 @@ Array [
         Private room
       </p>
     </div>
-  </article>,
+  </article>
   <article
     className="cities__place-card place-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     
     <div
@@ -207,10 +211,11 @@ Array [
         Apartment
       </p>
     </div>
-  </article>,
+  </article>
   <article
     className="cities__place-card place-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="place-card__mark"
@@ -313,10 +318,11 @@ Array [
         Private room
       </p>
     </div>
-  </article>,
+  </article>
   <article
     className="cities__place-card place-card"
     onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     
     <div
@@ -413,6 +419,6 @@ Array [
         Apartment
       </p>
     </div>
-  </article>,
-]
+  </article>
+</div>
 `;

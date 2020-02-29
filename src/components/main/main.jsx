@@ -1,11 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Sort from "../sort/sort.jsx";
 import LocationsList from "../locations-list/locations-list.jsx";
 import OffersList from "../offers-list/offers-list.jsx";
 import Map from '../map/map.jsx';
+import NoOffers from "../no-offers/no-offers.jsx";
 
 const Main = (props) => {
-  const {offers, cities, activeCity, handleCityClick, handlePlaceTitleClick} = props;
+  const {
+    offers,
+    hoveredOffer,
+    cities,
+    activeCity,
+    activeSortType,
+    handleCityClick,
+    handlePlaceTitleClick,
+    handleSortTypeClick,
+    handleCardHover} = props;
 
   return (
     <main className="page__main page__main--index">
@@ -26,27 +37,15 @@ const Main = (props) => {
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{offers.length} place{offers.length > 1 && `s`} to stay in {activeCity.name}</b>
-            <form className="places__sorting" action="#" method="get">
-              <span className="places__sorting-caption">Sort by</span>
-              <span className="places__sorting-type" tabIndex="0">
-                Popular
-                <svg className="places__sorting-arrow" width="7" height="4">
-                  <use xlinkHref="#icon-arrow-select"></use>
-                </svg>
-              </span>
-              <ul className="places__options places__options--custom places__options--opened">
-                <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                <li className="places__option" tabIndex="0">Price: low to high</li>
-                <li className="places__option" tabIndex="0">Price: high to low</li>
-                <li className="places__option" tabIndex="0">Top rated first</li>
-              </ul>
-            </form>
-            <div className="cities__places-list places__list tabs__content">
-              {<OffersList offers={offers} handlePlaceTitleClick={handlePlaceTitleClick}/>}
-            </div>
+            <Sort activeSortType={activeSortType} handleSortTypeClick={handleSortTypeClick}/>
+            {offers.length ?
+              <OffersList offers={offers} handleCardHover={handleCardHover} activeSortType={activeSortType} handlePlaceTitleClick={handlePlaceTitleClick}/>
+              :
+              <NoOffers city={activeCity}/>
+            }
           </section>
           <div className="cities__right-section">
-            <Map bemBlock={`cities`} activeCity={activeCity} offers={offers}/>
+            <Map bemBlock={`cities`} activeCity={activeCity} hoveredOffer={hoveredOffer} offers={offers}/>
           </div>
         </div>
       </div>
@@ -57,9 +56,13 @@ const Main = (props) => {
 Main.propTypes = {
   cities: PropTypes.array.isRequired,
   activeCity: PropTypes.object.isRequired,
+  activeSortType: PropTypes.string.isRequired,
+  hoveredOffer: PropTypes.number,
   handleCityClick: PropTypes.func.isRequired,
   offers: PropTypes.array.isRequired,
-  handlePlaceTitleClick: PropTypes.func.isRequired
+  handlePlaceTitleClick: PropTypes.func.isRequired,
+  handleSortTypeClick: PropTypes.func.isRequired,
+  handleCardHover: PropTypes.func,
 };
 
 export default Main;

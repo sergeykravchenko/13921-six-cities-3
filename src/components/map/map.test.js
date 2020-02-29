@@ -20,11 +20,14 @@ const activeCity = {
   "coords": [52.38333, 4.9],
 };
 
+const hoveredOffer = 2;
+
 it(`Should map render correctly`, () => {
   const tree = renderer
     .create(<Map
       bemBlock={string}
       activeCity={activeCity}
+      hoveredOffer={hoveredOffer}
       offers={offers}
     />, {
       createNodeMock: () => {

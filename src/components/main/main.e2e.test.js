@@ -155,6 +155,7 @@ const offers = [
 
 const cities = [`Amsterdam`, `Paris`];
 const activeCity = {"name": `Amsterdam`, "coords": [222, 333]};
+const activeSortType = `Popular`;
 
 it(`Should title link be pressed`, () => {
   const handlePlaceTitleClick = jest.fn();
@@ -164,8 +165,10 @@ it(`Should title link be pressed`, () => {
         offers={offers}
         cities={cities}
         activeCity={activeCity}
+        activeSortType={activeSortType}
         handleCityClick={() =>{}}
         handlePlaceTitleClick={() => {}}
+        handleSortTypeClick={() => {}}
       />
   );
 
