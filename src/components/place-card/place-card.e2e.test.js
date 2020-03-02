@@ -52,13 +52,13 @@ const place = {
 
 it(`Should title be clicked`, () => {
   const handlePlaceTitleClick = jest.fn();
-  const onHoverCard = jest.fn();
+  const handleCardHover = jest.fn();
 
   const placeCard = shallow(
       <PlaceCard
         place={place}
         handlePlaceTitleClick={handlePlaceTitleClick}
-        onHoverCard={onHoverCard}
+        handleCardHover={handleCardHover}
       />
   );
   const cardTitle = placeCard.find(`.place-card__name a`);
@@ -69,18 +69,19 @@ it(`Should title be clicked`, () => {
 
 it(`On hover card must be card's id`, () => {
   const handlePlaceTitleClick = jest.fn();
-  const onHoverCard = jest.fn();
+  const handleCardHover = jest.fn();
 
   const placeCard = shallow(
       <PlaceCard
         place={place}
         handlePlaceTitleClick={handlePlaceTitleClick}
-        onHoverCard={onHoverCard}
+        handleCardHover={handleCardHover}
       />
   );
 
   const card = placeCard.find(`.place-card`);
   card.props().onMouseEnter();
+  card.props().onMouseLeave();
 
-  expect(onHoverCard).toBeCalledWith(expect.any(Number));
+  expect(handleCardHover).toBeCalledWith(expect.any(Number));
 });

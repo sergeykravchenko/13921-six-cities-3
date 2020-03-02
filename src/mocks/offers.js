@@ -77,7 +77,7 @@ export default [
     "picture": `img/apartment-02.jpg`,
     "price": 80,
     "priceText": `night`,
-    "rating": 4,
+    "rating": 5,
     "features": {
       "type": `Apartment`,
       "bedrooms": 3,
@@ -125,8 +125,8 @@ export default [
       },
     ],
     "city": {
-      "name": `Paris`,
-      "coords": [52.38565, 4.9],
+      "name": `Amsterdam`,
+      "coords": [52.38333, 4.9],
     },
   }, {
     "id": 3,
@@ -232,5 +232,5 @@ export default [
       "name": `Hamburg`,
       "coords": [52.38013, 4.9],
     },
-  }
+  },
 ];

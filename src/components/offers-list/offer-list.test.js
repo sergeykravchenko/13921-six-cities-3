@@ -148,6 +148,8 @@ const offers = [
   }
 ];
 
+const activeSortType = `Popular`;
+
 it(`Render offer-list`, () => {
   const handlePlaceTitleClick = jest.fn();
 
@@ -155,6 +157,7 @@ it(`Render offer-list`, () => {
     .create(
         <OffersList
           offers={offers}
+          activeSortType={activeSortType}
           handlePlaceTitleClick={handlePlaceTitleClick}
         />
     )

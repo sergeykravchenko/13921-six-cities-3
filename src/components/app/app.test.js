@@ -15,7 +15,11 @@ const store = mockStore({
   activeCity: cities[0],
   offers,
   activeOffer: null,
+  hoveredOffer: null,
+  activeSortType: `Popular`,
 });
+
+const activeSortType = `Popular`;
 
 it(`App renders correctly`, () => {
   const tree = renderer
@@ -26,6 +30,7 @@ it(`App renders correctly`, () => {
             cities={cities}
             activeCity={activeCity}
             activeOffer={activeOffer}
+            activeSortType={activeSortType}
             handleCityClick={()=> {}}
             handlePlaceTitleClick={()=>{}}
           />

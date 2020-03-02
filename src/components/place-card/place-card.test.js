@@ -35,14 +35,14 @@ const place = {
 
 it(`Render place`, () => {
   const handlePlaceTitleClick = jest.fn();
-  const onHoverCard = jest.fn();
+  const handleCardHover = jest.fn();
 
   const tree = renderer
     .create(
         <PlaceCard
           place={place}
           handlePlaceTitleClick={handlePlaceTitleClick}
-          onHoverCard = {onHoverCard}
+          handleCardHover={handleCardHover}
         />
     )
     .toJSON();

@@ -150,6 +150,7 @@ const offers = [
 
 const cities = [`Amsterdam`, `Paris`];
 const activeCity = {"name": `Amsterdam`, "coords": [222, 333]};
+const activeSortType = `Popular`;
 
 it(`Main renders correctly`, () => {
   const tree = renderer
@@ -157,8 +158,10 @@ it(`Main renders correctly`, () => {
       offers={offers}
       cities={cities}
       activeCity={activeCity}
+      activeSortType={activeSortType}
       handleCityClick={() =>{}}
       handlePlaceTitleClick={() => {}}
+      handleSortTypeClick={() => {}}
     />, {
       createNodeMock: () => {
         return document.createElement(`div`);

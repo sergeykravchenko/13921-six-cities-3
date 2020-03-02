@@ -7,6 +7,11 @@ const ICON = leaflet.icon({
   iconSize: [30, 40]
 });
 
+const ACTIVE_ICON = leaflet.icon({
+  iconUrl: `img/pin-active.svg`,
+  iconSize: [30, 40]
+});
+
 export default class Map extends PureComponent {
   constructor(props) {
     super(props);
@@ -15,12 +20,15 @@ export default class Map extends PureComponent {
     this._mapRef = createRef();
   }
 
-  _createMap() {
+  _createMap(hovered) {
+    if (this._layerGroup) {
+      this._layerGroup.clearLayers();
+    }
     this._layerGroup = leaflet.layerGroup().addTo(this._map);
 
     this.props.offers.map((item) => {
       leaflet
-      .marker(item.coords, {icon: ICON})
+      .marker(item.coords, {icon: hovered && hovered === item.id ? ACTIVE_ICON : ICON})
       .addTo(this._layerGroup);
     });
   }
@@ -47,9 +55,13 @@ export default class Map extends PureComponent {
 
   componentDidUpdate(prevProps) {
     if (this.props.activeCity !== prevProps.activeCity) {
-      this._layerGroup.clearLayers();
+
       this._map.setView(this.props.activeCity.coords, this.zoom);
-      this._createMap();
+    }
+    this._createMap();
+
+    if (this.props.hoveredOffer !== prevProps.hoveredOffer) {
+      this._createMap(this.props.hoveredOffer);
     }
   }
 
@@ -68,6 +80,7 @@ export default class Map extends PureComponent {
 Map.propTypes = {
   bemBlock: PropTypes.string.isRequired,
   activeCity: PropTypes.object.isRequired,
+  hoveredOffer: PropTypes.number,
   offers: PropTypes.arrayOf(PropTypes.shape({
     coords: PropTypes.arrayOf(PropTypes.number).isRequired
   })).isRequired
