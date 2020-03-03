@@ -3,29 +3,13 @@ import PropTypes from "prop-types";
 import {SortType} from "../../utils";
 
 class Sort extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isOpened: false,
-    };
-
-    this._handleSortClick = this._handleSortClick.bind(this);
-  }
-
-  _handleSortClick() {
-    this.setState({
-      isOpened: !this.state.isOpened,
-    });
-  }
-
   render() {
-    const {activeSortType, handleSortTypeClick} = this.props;
+    const {activeSortType, handleSortTypeClick, isOpened, handleToggleClick} = this.props;
     return (
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by </span>
         <span
-          onClick={this._handleSortClick}
+          onClick={handleToggleClick}
           className="places__sorting-type"
           tabIndex="0">
           {activeSortType}
@@ -34,11 +18,11 @@ class Sort extends PureComponent {
           </svg>
         </span>
 
-        <ul className={`places__options ${this.state.isOpened ? `  places__options--opened` : ``} places__options--custom`}>
+        <ul className={`places__options ${isOpened ? `  places__options--opened` : ``} places__options--custom`}>
           {Object.values(SortType).map((item, i) => (
             <li key={i} onClick={() => {
               handleSortTypeClick(item);
-              this._handleSortClick();
+              handleToggleClick();
             }}
             className={`places__option ${item === activeSortType ? `places__option--active` : ``}`}
             tabIndex="0">
@@ -53,6 +37,8 @@ class Sort extends PureComponent {
 
 Sort.propTypes = {
   activeSortType: PropTypes.string.isRequired,
+  isOpened: PropTypes.bool.isRequired,
+  handleToggleClick: PropTypes.func.isRequired,
   handleSortTypeClick: PropTypes.func.isRequired,
 };
 

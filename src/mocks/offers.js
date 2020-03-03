@@ -48,14 +48,14 @@ export default [
         "rating": 4,
         "text": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
                  The building is green and from 18th century.`,
-        "date": new Date(),
+        "date": new Date(`2019-04-10`),
       }, {
         "id": 2,
         "author": `Angelina`,
         "avatar": `img/avatar-angelina.jpg`,
         "rating": 5,
         "text": `Picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
-        "date": new Date(),
+        "date": new Date(`2019-04-10`),
       }
     ],
     "closest": [

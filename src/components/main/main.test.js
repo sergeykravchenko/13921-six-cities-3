@@ -1,6 +1,7 @@
 import React from 'react';
 import Main from './main.jsx';
 import renderer from 'react-test-renderer';
+import {SortType} from '../../utils';
 
 const offers = [
   {
@@ -150,7 +151,7 @@ const offers = [
 
 const cities = [`Amsterdam`, `Paris`];
 const activeCity = {"name": `Amsterdam`, "coords": [222, 333]};
-const activeSortType = `Popular`;
+const activeSortType = SortType.POPULAR;
 
 it(`Main renders correctly`, () => {
   const tree = renderer

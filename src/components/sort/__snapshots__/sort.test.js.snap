@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should Sort  render correctly 1`] = `
+exports[`Should Sort render correctly 1`] = `
 <form
   action="#"
   className="places__sorting"

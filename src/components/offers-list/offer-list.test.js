@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import OffersList from "./offers-list.jsx";
+import {SortType} from '../../utils';
 
 const offers = [
   {
@@ -148,7 +149,7 @@ const offers = [
   }
 ];
 
-const activeSortType = `Popular`;
+const activeSortType = SortType.POPULAR;
 
 it(`Render offer-list`, () => {
   const handlePlaceTitleClick = jest.fn();

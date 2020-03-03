@@ -2,6 +2,7 @@ import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Main from "./main.jsx";
+import {SortType} from '../../utils';
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -155,7 +156,7 @@ const offers = [
 
 const cities = [`Amsterdam`, `Paris`];
 const activeCity = {"name": `Amsterdam`, "coords": [222, 333]};
-const activeSortType = `Popular`;
+const activeSortType = SortType.POPULAR;
 
 it(`Should title link be pressed`, () => {
   const handlePlaceTitleClick = jest.fn();

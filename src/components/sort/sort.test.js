@@ -1,14 +1,17 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Sort from "./sort.jsx";
+import {SortType} from '../../utils';
 
-const activeSortType = `Popular`;
+const activeSortType = SortType.POPULAR;
 
-it(`Should Sort  render correctly`, () => {
+it(`Should Sort render correctly`, () => {
   const tree = renderer
     .create(<Sort
       activeSortType={activeSortType}
-      handleSortTypeClick={()=>{}}
+      isOpened={false}
+      handleSortTypeClick={() => {}}
+      handleToggleClick={() => {}}
     />)
     .toJSON();
 
