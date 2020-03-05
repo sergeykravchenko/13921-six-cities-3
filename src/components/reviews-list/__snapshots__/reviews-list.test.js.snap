@@ -69,9 +69,9 @@ Array [
         </p>
         <time
           className="reviews__time"
-          dateTime="2020-02-29"
+          dateTime="2020-03-03"
         >
-          February
+          March
            
           2020
         </time>
@@ -130,9 +130,9 @@ Array [
         </p>
         <time
           className="reviews__time"
-          dateTime="2020-02-29"
+          dateTime="2020-03-03"
         >
-          February
+          March
            
           2020
         </time>

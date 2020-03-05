@@ -1,10 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Sort from "../sort/sort.jsx";
+import withToggle from '../../hocs/with-toggle/with-toggle.jsx';
 import LocationsList from "../locations-list/locations-list.jsx";
 import OffersList from "../offers-list/offers-list.jsx";
 import Map from '../map/map.jsx';
 import NoOffers from "../no-offers/no-offers.jsx";
+
+const SortWrapped = withToggle(Sort);
 
 const Main = (props) => {
   const {
@@ -37,7 +40,7 @@ const Main = (props) => {
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{offers.length} place{offers.length > 1 && `s`} to stay in {activeCity.name}</b>
-            <Sort activeSortType={activeSortType} handleSortTypeClick={handleSortTypeClick}/>
+            <SortWrapped activeSortType={activeSortType} handleSortTypeClick={handleSortTypeClick}/>
             {offers.length ?
               <OffersList offers={offers} handleCardHover={handleCardHover} activeSortType={activeSortType} handlePlaceTitleClick={handlePlaceTitleClick}/>
               :
