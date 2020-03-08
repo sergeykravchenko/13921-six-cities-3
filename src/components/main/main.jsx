@@ -57,12 +57,12 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  cities: PropTypes.array.isRequired,
-  activeCity: PropTypes.object.isRequired,
-  activeSortType: PropTypes.string.isRequired,
+  cities: PropTypes.array,
+  activeCity: PropTypes.object,
+  activeSortType: PropTypes.string,
   hoveredOffer: PropTypes.number,
   handleCityClick: PropTypes.func.isRequired,
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.array,
   handlePlaceTitleClick: PropTypes.func.isRequired,
   handleSortTypeClick: PropTypes.func.isRequired,
   handleCardHover: PropTypes.func,

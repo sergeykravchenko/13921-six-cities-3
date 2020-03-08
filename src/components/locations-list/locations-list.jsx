@@ -20,9 +20,9 @@ const LocationsList = (props) => {
 };
 
 LocationsList.propTypes = {
-  cities: PropTypes.array.isRequired,
-  activeCity: PropTypes.object.isRequired,
-  handleCityClick: PropTypes.func.isRequired,
+  cities: PropTypes.array,
+  activeCity: PropTypes.object,
+  handleCityClick: PropTypes.func,
 };
 
 export default LocationsList;

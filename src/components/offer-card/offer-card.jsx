@@ -89,7 +89,7 @@ const OfferCard = (props) => {
             <div className="property__host">
               <h2 className="property__host-title">Meet the host</h2>
               <div className="property__host-user user">
-                <div className={`property__avatar-wrapper ${host.pro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`}>
+                <div className={`property__avatar-wrapper ${host.isPro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`}>
                   <img className="property__avatar user__avatar" src={host.img} width="74" height="74" alt="Host avatar" />
                 </div>
                 <span className="property__user-name">
@@ -195,7 +195,7 @@ OfferCard.propTypes = {
     host: PropTypes.exact({
       name: PropTypes.string.isRequired,
       img: PropTypes.string.isRequired,
-      pro: PropTypes.bool
+      isPro: PropTypes.bool
     }),
     description: PropTypes.arrayOf(PropTypes.string).isRequired,
     reviews: PropTypes.array,

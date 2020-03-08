@@ -2,7 +2,9 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/data/data.js";
+import {getAllOffers} from "../../reducer/data/selectors.js";
+import {getCities, getActiveCity, getOffers} from "../../reducer/state/selectors.js";
 import Main from "../main/main.jsx";
 import OfferCard from "../offer-card/offer-card.jsx";
 
@@ -61,12 +63,12 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offers: PropTypes.array.isRequired,
-  cities: PropTypes.array.isRequired,
+  offers: PropTypes.array,
+  cities: PropTypes.array,
   hoveredOffer: PropTypes.number,
-  activeCity: PropTypes.object.isRequired,
+  activeCity: PropTypes.object,
   activeOffer: PropTypes.object,
-  activeSortType: PropTypes.string.isRequired,
+  activeSortType: PropTypes.string,
   handleCityClick: PropTypes.func.isRequired,
   handlePlaceTitleClick: PropTypes.func.isRequired,
   handleSortTypeClick: PropTypes.func,
@@ -75,9 +77,10 @@ App.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    cities: state.cities,
-    activeCity: state.activeCity,
-    offers: state.offers,
+    allOffers: getAllOffers(state),
+    cities: getCities(state),
+    activeCity: getActiveCity(state),
+    offers: getOffers(state),
     activeOffer: state.activeOffer,
     hoveredOffer: state.hoveredOffer,
     activeSortType: state.activeSortType,

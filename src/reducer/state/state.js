@@ -1,15 +1,12 @@
-import offers from './mocks/offers';
-import {extend, getCities, getOffersByCity} from './utils';
-
-const cities = getCities(offers);
+import {extend, SortType} from '../../utils';
 
 const initialState = {
-  cities,
-  activeCity: cities[0],
-  offers: getOffersByCity(offers, cities[0].name),
+  cities: [],
+  activeCity: {},
+  offers: [],
   activeOffer: null,
   hoveredOffer: null,
-  activeSortType: `Popular`,
+  activeSortType: SortType.Popular,
 };
 
 const ActionType = {
@@ -18,6 +15,8 @@ const ActionType = {
   GET_ACTIVE_OFFER: `GET_ACTIVE_OFFER`,
   GET_HOVERED_OFFER: `GET_HOVERED_OFFER`,
   GET_ACTIVE_SORT_TYPE: `GET_ACTIVE_SORT_TYPE`,
+  GET_CITIES: `GET_CITIES`,
+  GET_ACTIVE_CITY: `GET_ACTIVE_CITY`,
 };
 
 const ActionCreator = {
@@ -41,6 +40,14 @@ const ActionCreator = {
     type: ActionType.GET_ACTIVE_SORT_TYPE,
     payload: type,
   }),
+  getCities: (array) => ({
+    type: ActionType.GET_CITIES,
+    payload: array,
+  }),
+  getActiveCity: (city) => ({
+    type: ActionType.GET_ACTIVE_CITY,
+    payload: city,
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -49,7 +56,7 @@ const reducer = (state = initialState, action) => {
       return extend(state, {activeCity: action.payload});
 
     case ActionType.GET_OFFERS:
-      return extend(state, {offers: getOffersByCity(offers, action.payload)});
+      return extend(state, {offers: action.payload});
 
     case ActionType.GET_ACTIVE_OFFER:
       return extend(state, {activeOffer: action.payload});
@@ -59,6 +66,12 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.GET_ACTIVE_SORT_TYPE:
       return extend(state, {activeSortType: action.payload});
+
+    case ActionType.GET_CITIES:
+      return extend(state, {cities: action.payload});
+
+    case ActionType.GET_ACTIVE_CITY:
+      return extend(state, {activeCity: state.cities[0]});
   }
   return state;
 };

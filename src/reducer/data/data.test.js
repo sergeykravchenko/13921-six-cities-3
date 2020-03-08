@@ -1,4 +1,4 @@
-import {reducer, ActionCreator, ActionType} from "./reducer.js";
+import {reducer, ActionCreator, ActionType} from "../reducer.js";
 import offers from "./mocks/offers";
 import {getCities, getOffersByCity} from './utils';
 
