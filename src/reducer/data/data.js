@@ -1,5 +1,6 @@
 import {extend} from '../../utils';
 import ModelOffer from '../../models/model-offer';
+import {ActionCreator as stateActionCreator} from '../state/state';
 
 const initialState = {
   allOffers: [],
@@ -22,6 +23,7 @@ const Operation = {
       .then((response) => {
         const offers = ModelOffer.parseOffers(response.data);
         dispatch(ActionCreator.loadOffers(offers));
+        dispatch(stateActionCreator.getActiveCity(offers[0].city));
       });
   },
 };

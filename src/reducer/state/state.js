@@ -71,7 +71,7 @@ const reducer = (state = initialState, action) => {
       return extend(state, {cities: action.payload});
 
     case ActionType.GET_ACTIVE_CITY:
-      return extend(state, {activeCity: state.cities[0]});
+      return extend(state, {activeCity: action.payload});
   }
   return state;
 };

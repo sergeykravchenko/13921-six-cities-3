@@ -2,9 +2,9 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/data/data.js";
-import {getAllOffers} from "../../reducer/data/selectors.js";
-import {getCities, getActiveCity, getOffers} from "../../reducer/state/selectors.js";
+import {ActionCreator} from "../../reducer/state/state";
+import {getAllOffers} from "../../reducer/data/selectors";
+import {getCities, getActiveCity, getOffers} from "../../reducer/state/selectors";
 import Main from "../main/main.jsx";
 import OfferCard from "../offer-card/offer-card.jsx";
 

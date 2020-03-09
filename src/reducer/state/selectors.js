@@ -8,13 +8,15 @@ export const getCities = createSelector(
 );
 
 export const getActiveCity = (state) => {
-  return state[NameSpace.STATE].cities[0];
+  return state[NameSpace.STATE].activeCity;
 };
 
 export const getOffers = createSelector(
     getAllOffers,
     getActiveCity,
     (offers, activeCity) => {
+      console.log(offers);
+      console.log(activeCity);
       return offers.filter((item) => item.city.name === activeCity.name);
     }
 );
