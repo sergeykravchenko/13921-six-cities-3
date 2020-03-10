@@ -49,7 +49,7 @@ const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick={() => (handlePlaceTitleClick(place))} href="#">{name}</a>
+          <a onClick={() => handlePlaceTitleClick(place)} href="#">{name}</a>
         </h2>
         <p className="place-card__type">{features.type}</p>
       </div>
@@ -75,11 +75,12 @@ PlaceCard.propTypes = {
     houseHolds: PropTypes.arrayOf(PropTypes.string).isRequired,
     gallery: PropTypes.arrayOf(PropTypes.string).isRequired,
     host: PropTypes.exact({
+      id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
       img: PropTypes.string.isRequired,
-      pro: PropTypes.bool
+      isPro: PropTypes.bool
     }),
-    description: PropTypes.arrayOf(PropTypes.string).isRequired,
+    description: PropTypes.string.isRequired,
   }).isRequired,
   handleCardHover: PropTypes.func,
   handlePlaceTitleClick: PropTypes.func.isRequired

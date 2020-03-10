@@ -24,6 +24,7 @@ const Operation = {
         const offers = ModelOffer.parseOffers(response.data);
         dispatch(ActionCreator.loadOffers(offers));
         dispatch(stateActionCreator.getActiveCity(offers[0].city));
+        dispatch(stateActionCreator.changeFetchStatus(false));
       });
   },
 };

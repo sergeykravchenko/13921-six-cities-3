@@ -2,7 +2,10 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import NoOffers from './no-offers';
 
-const city = `Amsterdam`;
+const city = {
+  "name": `Amsterdam`,
+  "coords": [1, 2]
+};
 
 describe(`NoOffers`, () => {
   it(`should render NoPlaces correctly`, () => {

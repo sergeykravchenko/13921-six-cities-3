@@ -15,7 +15,6 @@ const ACTIVE_ICON = leaflet.icon({
 export default class Map extends PureComponent {
   constructor(props) {
     super(props);
-    this.zoom = 12;
     this._map = null;
     this._mapRef = createRef();
   }
@@ -24,6 +23,7 @@ export default class Map extends PureComponent {
     if (this._layerGroup) {
       this._layerGroup.clearLayers();
     }
+
     this._layerGroup = leaflet.layerGroup().addTo(this._map);
 
     this.props.offers.map((item) => {
@@ -34,11 +34,11 @@ export default class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {activeCity} = this.props;
+    const {activeCity, zoom} = this.props;
     const city = activeCity.coords;
     this._map = leaflet.map(this._mapRef.current, {
       center: city,
-      zoom: this.zoom,
+      zoom,
       zoomControl: false,
       marker: true
     });
@@ -83,5 +83,6 @@ Map.propTypes = {
   hoveredOffer: PropTypes.number,
   offers: PropTypes.arrayOf(PropTypes.shape({
     coords: PropTypes.arrayOf(PropTypes.number).isRequired
-  })).isRequired
+  })).isRequired,
+  zoom: PropTypes.number,
 };

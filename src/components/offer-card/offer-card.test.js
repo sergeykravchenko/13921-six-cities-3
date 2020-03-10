@@ -10,6 +10,7 @@ const offer = {
   "price": 120,
   "priceText": `night`,
   "rating": 4,
+  "zoom": 16,
   "features": {
     "type": `Private room`,
     "bedrooms": 8,
@@ -26,11 +27,12 @@ const offer = {
     `img/apartment-02.jpg`,
   ],
   "host": {
+    "id": 2,
     "name": `Max`,
     "img": `img/avatar-max.jpg`,
-    "pro": true,
+    "isPro": true,
   },
-  "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`],
+  "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
   "closest": [
     {
       "coords": [52.3909553943508, 4.929309666406198],

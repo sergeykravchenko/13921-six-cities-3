@@ -25,11 +25,12 @@ const place = {
     `img/apartment-02.jpg`,
   ],
   "host": {
+    "id": 12,
     "name": `Max`,
     "img": `img/avatar-max.jpg`,
-    "pro": true,
+    "isPro": true,
   },
-  "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`],
+  "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
   "coords": [52.3809553943508, 4.939309666406198],
 };
 

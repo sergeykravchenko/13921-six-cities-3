@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 const LocationsList = (props) => {
   const {cities, activeCity, handleCityClick} = props;
-
   return (
     <ul className="locations__list tabs__list">
       {cities.map((city, i) => (

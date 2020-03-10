@@ -26,12 +26,14 @@ export default class ModelOffer {
       data[`location`][`latitude`],
       data[`location`][`longitude`]
     ];
+    this.zoom = data[`location`][`zoom`];
     this.city = {
       name: data[`city`][`name`],
       coords: [
         data[`city`][`location`][`latitude`],
         data[`city`][`location`][`longitude`]
-      ]
+      ],
+      zoom: data[`city`][`location`][`zoom`]
     };
     this.reviews = [];
   }

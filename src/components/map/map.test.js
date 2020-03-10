@@ -18,9 +18,11 @@ const offers = [
 const activeCity = {
   "name": `Amsterdam`,
   "coords": [52.38333, 4.9],
+  "zoom": 14,
 };
 
 const hoveredOffer = 2;
+const zoom = 15;
 
 it(`Should map render correctly`, () => {
   const tree = renderer
@@ -29,6 +31,7 @@ it(`Should map render correctly`, () => {
       activeCity={activeCity}
       hoveredOffer={hoveredOffer}
       offers={offers}
+      zoom={zoom}
     />, {
       createNodeMock: () => {
         return document.createElement(`div`);

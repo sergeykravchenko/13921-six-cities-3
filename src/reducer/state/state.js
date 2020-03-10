@@ -1,17 +1,16 @@
 import {extend, SortType} from '../../utils';
 
 const initialState = {
-  cities: [],
   activeCity: {},
-  offers: [],
   activeOffer: null,
   hoveredOffer: null,
-  activeSortType: SortType.Popular,
+  activeSortType: SortType.POPULAR,
+  isFetching: true,
 };
 
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
-  GET_OFFERS: `GET_OFFERS`,
+  CHANGE_FETCH_STATUS: `CHANGE_FETCH_STATUS`,
   GET_ACTIVE_OFFER: `GET_ACTIVE_OFFER`,
   GET_HOVERED_OFFER: `GET_HOVERED_OFFER`,
   GET_ACTIVE_SORT_TYPE: `GET_ACTIVE_SORT_TYPE`,
@@ -24,9 +23,9 @@ const ActionCreator = {
     type: ActionType.CHANGE_CITY,
     payload: city,
   }),
-  getOffers: (data) => ({
-    type: ActionType.GET_OFFERS,
-    payload: data,
+  changeFetchStatus: (bool) => ({
+    type: ActionType.CHANGE_FETCH_STATUS,
+    payload: bool,
   }),
   getActiveOffer: (offer) => ({
     type: ActionType.GET_ACTIVE_OFFER,
@@ -55,8 +54,8 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_CITY:
       return extend(state, {activeCity: action.payload});
 
-    case ActionType.GET_OFFERS:
-      return extend(state, {offers: action.payload});
+    case ActionType.CHANGE_FETCH_STATUS:
+      return extend(state, {isFetching: action.payload});
 
     case ActionType.GET_ACTIVE_OFFER:
       return extend(state, {activeOffer: action.payload});
