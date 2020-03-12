@@ -5,7 +5,7 @@ import ReviewsList from "../reviews-list/reviews-list.jsx";
 import Map from "../map/map.jsx";
 
 const OfferCard = (props) => {
-  const {offer, offers, activeCity, handlePlaceTitleClick} = props;
+  const {offer, offers, activeCity, handlePlaceTitleClick, handleCardHover, hoveredOffer} = props;
   const {
     id,
     name,
@@ -20,8 +20,11 @@ const OfferCard = (props) => {
     host,
     description,
     reviews,
-    closest
+    zoom,
   } = offer;
+
+  const closest = offers.filter((item) => item.id !== id);
+
   return (
     <main id={id} className="page__main page__main--property">
       <section className="property">
@@ -89,7 +92,7 @@ const OfferCard = (props) => {
             <div className="property__host">
               <h2 className="property__host-title">Meet the host</h2>
               <div className="property__host-user user">
-                <div className={`property__avatar-wrapper ${host.pro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`}>
+                <div className={`property__avatar-wrapper ${host.isPro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`}>
                   <img className="property__avatar user__avatar" src={host.img} width="74" height="74" alt="Host avatar" />
                 </div>
                 <span className="property__user-name">
@@ -97,11 +100,9 @@ const OfferCard = (props) => {
                 </span>
               </div>
               <div className="property__description">
-                {description.map((item, i) => (
-                  <p key={i} className="property__text">
-                    {item}
-                  </p>
-                ))}
+                <p className="property__text">
+                  {description}
+                </p>
               </div>
             </div>
             <section className="property__reviews reviews">
@@ -155,7 +156,7 @@ const OfferCard = (props) => {
             </section>
           </div>
         </div>
-        <Map bemBlock={`property`} activeCity={activeCity} offers={closest}/>
+        <Map bemBlock={`property`} hoveredOffer={hoveredOffer} activeCity={activeCity} offers={closest} zoom={zoom}/>
       </section>
       <div className="container">
         <section className="near-places places">
@@ -165,6 +166,7 @@ const OfferCard = (props) => {
               <PlaceCard key={place.id}
                 place={place}
                 handlePlaceTitleClick={handlePlaceTitleClick}
+                handleCardHover={handleCardHover}
               />
             ))}
           </div>
@@ -177,12 +179,13 @@ const OfferCard = (props) => {
 OfferCard.propTypes = {
   offers: PropTypes.array,
   offer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    picture: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    priceText: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
+    id: PropTypes.number,
+    name: PropTypes.string,
+    picture: PropTypes.string,
+    zoom: PropTypes.number,
+    price: PropTypes.number,
+    priceText: PropTypes.string,
+    rating: PropTypes.number,
     features: PropTypes.exact({
       type: PropTypes.string.isRequired,
       bedrooms: PropTypes.number.isRequired,
@@ -190,19 +193,25 @@ OfferCard.propTypes = {
     }),
     isPremium: PropTypes.bool,
     isInBookmark: PropTypes.bool,
-    houseHolds: PropTypes.arrayOf(PropTypes.string).isRequired,
-    gallery: PropTypes.arrayOf(PropTypes.string).isRequired,
+    houseHolds: PropTypes.arrayOf(PropTypes.string),
+    gallery: PropTypes.arrayOf(PropTypes.string),
     host: PropTypes.exact({
+      id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
       img: PropTypes.string.isRequired,
-      pro: PropTypes.bool
+      isPro: PropTypes.bool
     }),
-    description: PropTypes.arrayOf(PropTypes.string).isRequired,
+    description: PropTypes.string,
     reviews: PropTypes.array,
     closest: PropTypes.array,
   }),
   activeCity: PropTypes.object,
   handlePlaceTitleClick: PropTypes.func,
+  city: PropTypes.shape({
+    name: PropTypes.string,
+  }),
+  handleCardHover: PropTypes.func,
+  hoveredOffer: PropTypes.number,
 };
 
 export default OfferCard;

@@ -1,23 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NoOffers should render NoPlaces correctly 1`] = `
-<section
-  className="cities__no-places"
+<div
+  className="cities__places-container cities__places-container--empty container"
 >
-  <div
-    className="cities__status-wrapper tabs__content"
+  <section
+    className="cities__no-places"
   >
-    <b
-      className="cities__status"
+    <div
+      className="cities__status-wrapper tabs__content"
     >
-      No places to stay available
-    </b>
-    <p
-      className="cities__status-description"
-    >
-      We could not find any property availbale at the moment in 
-      Amsterdam
-    </p>
-  </div>
-</section>
+      <b
+        className="cities__status"
+      >
+        No places to stay available
+      </b>
+      <p
+        className="cities__status-description"
+      >
+        We could not find any property availbale at the moment in 
+        Amsterdam
+      </p>
+    </div>
+  </section>
+  <div
+    className="cities__right-section"
+  />
+</div>
 `;

@@ -1,6 +1,7 @@
 export default [
   {
     "id": 1,
+    "zoom": 15,
     "name": `Canal View Prinsengracht`,
     "picture": `img/room.jpg`,
     "price": 120,
@@ -34,11 +35,12 @@ export default [
       `img/apartment-03.jpg`,
     ],
     "host": {
+      "id": 2,
       "name": `Max`,
       "img": `img/avatar-max.jpg`,
-      "pro": true,
+      "isPro": true,
     },
-    "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`],
+    "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
     "coords": [52.3909553943508, 4.85309666406198],
     "reviews": [
       {
@@ -73,6 +75,7 @@ export default [
     },
   }, {
     "id": 2,
+    "zoom": 13,
     "name": `Nice, cozy, warm big bed apartment`,
     "picture": `img/apartment-02.jpg`,
     "price": 80,
@@ -99,11 +102,12 @@ export default [
       `img/apartment-03.jpg`,
     ],
     "host": {
+      "id": 3,
       "name": `Angelina`,
       "img": `img/avatar-angelina.jpg`,
-      "pro": false,
+      "isPro": false,
     },
-    "description": [`An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`],
+    "description": `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`,
     "coords": [52.369553943508, 4.85309666406198],
     "reviews": [
       {
@@ -130,6 +134,7 @@ export default [
     },
   }, {
     "id": 3,
+    "zoom": 11,
     "name": `Wood and stone place`,
     "picture": `img/room.jpg`,
     "price": 132,
@@ -156,11 +161,12 @@ export default [
       `img/apartment-03.jpg`,
     ],
     "host": {
+      "id": 4,
       "name": `Max`,
       "img": `img/avatar-max.jpg`,
-      "pro": false,
+      "isPro": false,
     },
-    "description": [`A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`],
+    "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
     "coords": [52.3909553943508, 4.929309666406198],
     "reviews": [
       {
@@ -188,6 +194,7 @@ export default [
     }
   }, {
     "id": 4,
+    "zoom": 18,
     "name": `Beautiful &amp; luxurious apartment at great location`,
     "picture": `img/apartment-01.jpg`,
     "price": 180,
@@ -213,11 +220,12 @@ export default [
       `img/apartment-03.jpg`,
     ],
     "host": {
+      "id": 1,
       "name": `Angelina`,
       "img": `img/avatar-angelina.jpg`,
-      "pro": true,
+      "isPro": true,
     },
-    "description": [`An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`],
+    "description": `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`,
     "coords": [52.3809553943508, 4.939309666406198],
     "closest": [
       {

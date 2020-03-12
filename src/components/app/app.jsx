@@ -2,13 +2,24 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/state/state";
+import {getAllOffers} from "../../reducer/data/selectors";
+import {
+  getCities,
+  getActiveCity,
+  getOffers,
+  getActiveSortType,
+  getActiveOffer,
+  getFetchStatus,
+  getHoveredOffer,
+} from "../../reducer/state/selectors";
 import Main from "../main/main.jsx";
 import OfferCard from "../offer-card/offer-card.jsx";
 
 class App extends PureComponent {
   _renderApp() {
     const {
+      isFetching,
       offers,
       hoveredOffer,
       cities,
@@ -26,13 +37,16 @@ class App extends PureComponent {
         <OfferCard
           offer={activeOffer}
           offers={offers}
+          hoveredOffer={hoveredOffer}
           activeCity={activeCity}
           handlePlaceTitleClick={handlePlaceTitleClick}
+          handleCardHover={handleCardHover}
         />
       );
     }
     return (
       <Main
+        isFetching={isFetching}
         offers={offers}
         hoveredOffer={hoveredOffer}
         handlePlaceTitleClick={handlePlaceTitleClick}
@@ -61,12 +75,15 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offers: PropTypes.array.isRequired,
-  cities: PropTypes.array.isRequired,
+  isFetching: PropTypes.bool,
+  allOffers: PropTypes.array,
+  offers: PropTypes.array,
+  closest: PropTypes.array,
+  cities: PropTypes.array,
   hoveredOffer: PropTypes.number,
-  activeCity: PropTypes.object.isRequired,
+  activeCity: PropTypes.object,
   activeOffer: PropTypes.object,
-  activeSortType: PropTypes.string.isRequired,
+  activeSortType: PropTypes.string,
   handleCityClick: PropTypes.func.isRequired,
   handlePlaceTitleClick: PropTypes.func.isRequired,
   handleSortTypeClick: PropTypes.func,
@@ -75,19 +92,20 @@ App.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    cities: state.cities,
-    activeCity: state.activeCity,
-    offers: state.offers,
-    activeOffer: state.activeOffer,
-    hoveredOffer: state.hoveredOffer,
-    activeSortType: state.activeSortType,
+    isFetching: getFetchStatus(state),
+    allOffers: getAllOffers(state),
+    cities: getCities(state),
+    activeCity: getActiveCity(state),
+    offers: getOffers(state),
+    activeOffer: getActiveOffer(state),
+    hoveredOffer: getHoveredOffer(state),
+    activeSortType: getActiveSortType(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   handleCityClick(activeCity) {
     dispatch(ActionCreator.changeCity(activeCity));
-    dispatch(ActionCreator.getOffers(activeCity.name));
   },
   handlePlaceTitleClick(offer) {
     dispatch(ActionCreator.getActiveOffer(offer));

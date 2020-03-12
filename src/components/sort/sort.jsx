@@ -36,7 +36,7 @@ class Sort extends PureComponent {
 }
 
 Sort.propTypes = {
-  activeSortType: PropTypes.string.isRequired,
+  activeSortType: PropTypes.string,
   isOpened: PropTypes.bool.isRequired,
   handleToggleClick: PropTypes.func.isRequired,
   handleSortTypeClick: PropTypes.func.isRequired,

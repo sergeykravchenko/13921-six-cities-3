@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 const LocationsList = (props) => {
   const {cities, activeCity, handleCityClick} = props;
-
   return (
     <ul className="locations__list tabs__list">
       {cities.map((city, i) => (
@@ -20,9 +19,9 @@ const LocationsList = (props) => {
 };
 
 LocationsList.propTypes = {
-  cities: PropTypes.array.isRequired,
-  activeCity: PropTypes.object.isRequired,
-  handleCityClick: PropTypes.func.isRequired,
+  cities: PropTypes.array,
+  activeCity: PropTypes.object,
+  handleCityClick: PropTypes.func,
 };
 
 export default LocationsList;
