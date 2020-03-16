@@ -2,7 +2,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Header = (props) => {
+let Header = (props) => {
   const {user, isAuthenticated} = props;
   return (
     <header className="header">
@@ -48,4 +48,4 @@ Header.propTypes = {
   isAuthenticated: PropTypes.bool,
 };
 
-export default Header;
+export default Header = React.memo(Header);
