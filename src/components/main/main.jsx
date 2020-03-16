@@ -33,13 +33,11 @@ const Main = (props) => {
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
             <section className="locations container">
-              <ul className="locations__list tabs__list">
-                <LocationsList
-                  cities={cities}
-                  activeCity={activeCity}
-                  handleCityClick={handleCityClick}
-                />
-              </ul>
+              <LocationsList
+                cities={cities}
+                activeCity={activeCity}
+                handleCityClick={handleCityClick}
+              />
             </section>
           </div>
           <div className="cities">

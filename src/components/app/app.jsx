@@ -13,13 +13,19 @@ import {
   getFetchStatus,
   getHoveredOffer,
 } from "../../reducer/state/selectors";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {getAuthorizationStatus, getUser} from "../../reducer/user/selectors.js";
+import {Operation as UserOperation} from "../../reducer/user/user.js";
+import Header from "../header/header.jsx";
 import Main from "../main/main.jsx";
 import OfferCard from "../offer-card/offer-card.jsx";
+import SignIn from "../sign-in/sign-in.jsx";
 
 class App extends PureComponent {
   _renderApp() {
     const {
       isFetching,
+      isAuthenticated,
       offers,
       hoveredOffer,
       cities,
@@ -30,34 +36,67 @@ class App extends PureComponent {
       handlePlaceTitleClick,
       handleSortTypeClick,
       handleCardHover,
+      user,
     } = this.props;
 
     if (activeOffer) {
       return (
-        <OfferCard
-          offer={activeOffer}
-          offers={offers}
-          hoveredOffer={hoveredOffer}
-          activeCity={activeCity}
-          handlePlaceTitleClick={handlePlaceTitleClick}
-          handleCardHover={handleCardHover}
-        />
+        <div className="page">
+          <Header
+            isAuthenticated={isAuthenticated}
+            user={user}/>
+          <OfferCard
+            isAuthenticated={isAuthenticated}
+            offer={activeOffer}
+            offers={offers}
+            hoveredOffer={hoveredOffer}
+            activeCity={activeCity}
+            handlePlaceTitleClick={handlePlaceTitleClick}
+            handleCardHover={handleCardHover}
+          />
+        </div>
       );
     }
+
     return (
-      <Main
-        isFetching={isFetching}
-        offers={offers}
-        hoveredOffer={hoveredOffer}
-        handlePlaceTitleClick={handlePlaceTitleClick}
-        cities={cities}
-        activeCity={activeCity}
-        activeSortType={activeSortType}
-        handleCityClick={handleCityClick}
-        handleSortTypeClick={handleSortTypeClick}
-        handleCardHover={handleCardHover}
-      />
+      <div className="page page--gray page--main">
+        <Header
+          isAuthenticated={isAuthenticated}
+          user={user}
+        />
+        <Main
+          isFetching={isFetching}
+          offers={offers}
+          hoveredOffer={hoveredOffer}
+          handlePlaceTitleClick={handlePlaceTitleClick}
+          cities={cities}
+          activeCity={activeCity}
+          activeSortType={activeSortType}
+          handleCityClick={handleCityClick}
+          handleSortTypeClick={handleSortTypeClick}
+          handleCardHover={handleCardHover}
+        />
+      </div>
     );
+  }
+
+  _renderSignIn() {
+    const {login, user, isAuthenticated, activeCity} = this.props;
+    if (!isAuthenticated) {
+      return (
+        <div className="page page--gray page--login">
+          <Header
+            isAuthenticated={isAuthenticated}
+            user={user}
+          />
+          <SignIn
+            city={activeCity}
+            onSubmit={login}
+          />
+        </div>
+      );
+    }
+    return this._renderApp();
   }
 
   render() {
@@ -66,8 +105,11 @@ class App extends PureComponent {
         <Route exact path="/">
           {this._renderApp()}
         </Route>
-        <Route exact path="/dev-offer">
+        <Route exact path="/offer">
           <OfferCard />
+        </Route>
+        <Route exact path="/sign-in">
+          {this._renderSignIn()}
         </Route>
       </Switch>
     </BrowserRouter>;
@@ -76,6 +118,8 @@ class App extends PureComponent {
 
 App.propTypes = {
   isFetching: PropTypes.bool,
+  isAuthenticated: PropTypes.bool,
+  login: PropTypes.func,
   allOffers: PropTypes.array,
   offers: PropTypes.array,
   closest: PropTypes.array,
@@ -88,11 +132,13 @@ App.propTypes = {
   handlePlaceTitleClick: PropTypes.func.isRequired,
   handleSortTypeClick: PropTypes.func,
   handleCardHover: PropTypes.func,
+  user: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {
   return {
     isFetching: getFetchStatus(state),
+    isAuthenticated: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
     allOffers: getAllOffers(state),
     cities: getCities(state),
     activeCity: getActiveCity(state),
@@ -100,10 +146,14 @@ const mapStateToProps = (state) => {
     activeOffer: getActiveOffer(state),
     hoveredOffer: getHoveredOffer(state),
     activeSortType: getActiveSortType(state),
+    user: getUser(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  login(authData) {
+    dispatch(UserOperation.login(authData));
+  },
   handleCityClick(activeCity) {
     dispatch(ActionCreator.changeCity(activeCity));
   },
