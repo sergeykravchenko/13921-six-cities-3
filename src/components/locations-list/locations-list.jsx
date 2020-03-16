@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LocationsList = (props) => {
+let LocationsList = (props) => {
   const {cities, activeCity, handleCityClick} = props;
   return (
     <ul className="locations__list tabs__list">
@@ -24,4 +24,4 @@ LocationsList.propTypes = {
   handleCityClick: PropTypes.func,
 };
 
-export default LocationsList;
+export default LocationsList = React.memo(LocationsList);
