@@ -1,7 +1,19 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
 import OfferCard from './offer-card.jsx';
 import offers from '../../mocks/offers';
+
+const mockStore = configureStore([]);
+const store = mockStore({
+  allOffers: [],
+  nearByOffer: offers,
+  activeOffer: null,
+  hoveredOffer: null,
+  isFetching: true,
+  requestStatus: null,
+});
 
 const offer = {
   "id": 1,
@@ -51,15 +63,18 @@ const activeCity = {
 
 it(`Offer-card renders correctly`, () => {
   const tree = renderer
-    .create(<OfferCard
-      offer={offer}
-      offers={offers}
-      activeCity={activeCity}
-      handlePlaceTitleClick={()=>{}}
-    />, {
-      createNodeMock: () => {
-        return document.createElement(`div`);
-      }})
+    .create(
+        <Provider store={store}>
+          <OfferCard
+            offer={offer}
+            nearByOffer={offers}
+            activeCity={activeCity}
+            handlePlaceTitleClick={()=>{}}
+          />,
+        </Provider>, {
+          createNodeMock: () => {
+            return document.createElement(`div`);
+          }})
     .toJSON();
   expect(tree).toMatchSnapshot();
 });

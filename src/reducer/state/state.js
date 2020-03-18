@@ -6,6 +6,7 @@ const initialState = {
   hoveredOffer: null,
   activeSortType: SortType.POPULAR,
   isFetching: true,
+  requestStatus: null,
 };
 
 const ActionType = {
@@ -16,6 +17,7 @@ const ActionType = {
   GET_ACTIVE_SORT_TYPE: `GET_ACTIVE_SORT_TYPE`,
   GET_CITIES: `GET_CITIES`,
   GET_ACTIVE_CITY: `GET_ACTIVE_CITY`,
+  GET_REQUEST_STATUS: `GET_REQUEST_STATUS`,
 };
 
 const ActionCreator = {
@@ -26,6 +28,10 @@ const ActionCreator = {
   changeFetchStatus: (bool) => ({
     type: ActionType.CHANGE_FETCH_STATUS,
     payload: bool,
+  }),
+  getRequestStatus: (status) => ({
+    type: ActionType.GET_REQUEST_STATUS,
+    payload: status,
   }),
   getActiveOffer: (offer) => ({
     type: ActionType.GET_ACTIVE_OFFER,
@@ -56,6 +62,9 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.CHANGE_FETCH_STATUS:
       return extend(state, {isFetching: action.payload});
+
+    case ActionType.GET_REQUEST_STATUS:
+      return extend(state, {requestStatus: action.payload});
 
     case ActionType.GET_ACTIVE_OFFER:
       return extend(state, {activeOffer: action.payload});

@@ -18,7 +18,8 @@ const MONTHS = [
 
 const ReviewsItem = (props) => {
   const {review} = props;
-  const {author, avatar, rating, text, date} = review;
+  const {user, rating, comment, date} = review;
+  const {name, avatar} = user;
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -26,7 +27,7 @@ const ReviewsItem = (props) => {
           <img className="reviews__avatar user__avatar" src={avatar} width="54" height="54" alt="Reviews avatar"/>
         </div>
         <span className="reviews__user-name">
-          {author}
+          {name}
         </span>
       </div>
       <div className="reviews__info">
@@ -37,7 +38,7 @@ const ReviewsItem = (props) => {
           </div>
         </div>
         <p className="reviews__text">
-          {text}
+          {comment}
         </p>
         <time className="reviews__time" dateTime={date.toISOString().slice(0, 10)}>
           {MONTHS[date.getMonth()]} {date.getFullYear()}
@@ -48,13 +49,15 @@ const ReviewsItem = (props) => {
 };
 
 ReviewsItem.propTypes = {
-  review: PropTypes.exact({
-    id: PropTypes.number.isRequired,
-    author: PropTypes.string.isRequired,
-    avatar: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    date: PropTypes.instanceOf(Date).isRequired,
+  review: PropTypes.shape({
+    id: PropTypes.number,
+    user: PropTypes.shape({
+      name: PropTypes.string,
+      avatar: PropTypes.string,
+    }),
+    rating: PropTypes.number,
+    comment: PropTypes.string,
+    date: PropTypes.instanceOf(Date),
   })
 };
 

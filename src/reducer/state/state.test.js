@@ -1,6 +1,6 @@
 import {reducer, ActionCreator, ActionType} from "./state.js";
 import offers from "../../mocks/offers";
-import {getCities} from "../../utils";
+import {getCities, RequestStatus} from "../../utils";
 
 const cities = getCities(offers);
 
@@ -11,6 +11,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     hoveredOffer: null,
     activeSortType: `Popular`,
     isFetching: true,
+    requestStatus: null,
   });
 });
 
@@ -47,6 +48,26 @@ it(`Reducer set active offer `, () => {
     hoveredOffer: null,
     activeSortType: `Popular`,
     isFetching: true,
+  });
+});
+
+it(`Reducer set request status`, () => {
+  expect(reducer({
+    activeCity: ``,
+    activeOffer: null,
+    hoveredOffer: null,
+    activeSortType: `Popular`,
+    isFetching: true,
+    requestStatus: null,
+  },
+  ActionCreator.getRequestStatus(RequestStatus.FAILURE)
+  )).toEqual({
+    activeCity: ``,
+    activeOffer: null,
+    hoveredOffer: null,
+    activeSortType: `Popular`,
+    isFetching: true,
+    requestStatus: RequestStatus.FAILURE,
   });
 });
 
@@ -115,4 +136,10 @@ describe(`Action creators work correctly`, () => {
     });
   });
 
+  it(`Action creator for get request status returns correct action`, () => {
+    expect(ActionCreator.getRequestStatus(RequestStatus.SUCCESS)).toEqual({
+      type: ActionType.GET_REQUEST_STATUS,
+      payload: RequestStatus.SUCCESS,
+    });
+  });
 });

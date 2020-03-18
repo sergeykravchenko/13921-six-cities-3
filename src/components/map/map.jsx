@@ -19,38 +19,39 @@ export default class Map extends PureComponent {
     this._mapRef = createRef();
   }
 
-  _createMap(hovered) {
+  _createMap(activeMarkerId) {
     if (this._layerGroup) {
       this._layerGroup.clearLayers();
     }
 
     this._layerGroup = leaflet.layerGroup().addTo(this._map);
-
+    if (this.props.activeOffer) {
+      this.props.offers.push(this.props.activeOffer);
+    }
     this.props.offers.map((item) => {
       leaflet
-      .marker(item.coords, {icon: hovered && hovered === item.id ? ACTIVE_ICON : ICON})
+      .marker(item.coords, {icon: activeMarkerId && activeMarkerId === item.id ? ACTIVE_ICON : ICON})
       .addTo(this._layerGroup);
     });
   }
 
   componentDidMount() {
-    const {activeCity, zoom} = this.props;
-    const city = activeCity.coords;
+    const {activeCity, activeOffer, zoom} = this.props;
+    const center = activeOffer ? activeOffer.coords : activeCity.coords;
     this._map = leaflet.map(this._mapRef.current, {
-      center: city,
+      center,
       zoom,
       zoomControl: false,
       marker: true
     });
 
-    this._map.setView(city, this.zoom);
+    this._map.setView(center, this.zoom);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
     })
     .addTo(this._map);
-    this._createMap();
   }
 
   componentDidUpdate(prevProps) {
@@ -58,7 +59,11 @@ export default class Map extends PureComponent {
 
       this._map.setView(this.props.activeCity.coords, this.zoom);
     }
-    this._createMap();
+    if (this.props.activeOffer) {
+      this._createMap(this.props.activeOffer.id);
+    } else {
+      this._createMap();
+    }
 
     if (this.props.hoveredOffer !== prevProps.hoveredOffer) {
       this._createMap(this.props.hoveredOffer);
@@ -79,7 +84,8 @@ export default class Map extends PureComponent {
 
 Map.propTypes = {
   bemBlock: PropTypes.string.isRequired,
-  activeCity: PropTypes.object.isRequired,
+  activeCity: PropTypes.object,
+  activeOffer: PropTypes.object,
   hoveredOffer: PropTypes.number,
   offers: PropTypes.arrayOf(PropTypes.shape({
     coords: PropTypes.arrayOf(PropTypes.number).isRequired

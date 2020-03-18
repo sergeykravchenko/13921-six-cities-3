@@ -1,5 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import data from "../../mocks/offers";
 import Map from "./map.jsx";
 
 const string = `className`;
@@ -29,6 +30,7 @@ it(`Should map render correctly`, () => {
     .create(<Map
       bemBlock={string}
       activeCity={activeCity}
+      activeOffer={data[0]}
       hoveredOffer={hoveredOffer}
       offers={offers}
       zoom={zoom}

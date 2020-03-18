@@ -28,6 +28,10 @@ export const getHoveredOffer = (state) => {
   return state[NameSpace.STATE].hoveredOffer;
 };
 
+export const getRequestStatus = (state) => {
+  return state[NameSpace.STATE].requestStatus;
+};
+
 export const getOffers = createSelector(
     getAllOffers,
     getActiveCity,

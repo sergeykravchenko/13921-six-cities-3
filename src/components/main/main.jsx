@@ -50,7 +50,13 @@ const Main = (props) => {
                   <OffersList offers={offers} handleCardHover={handleCardHover} activeSortType={activeSortType} handlePlaceTitleClick={handlePlaceTitleClick}/>
                 </section>
                 <div className="cities__right-section">
-                  <Map bemBlock={`cities`} activeCity={activeCity} hoveredOffer={hoveredOffer} offers={offers} zoom={activeCity.zoom}/>
+                  <Map
+                    bemBlock={`cities`}
+                    activeCity={activeCity}
+                    hoveredOffer={hoveredOffer}
+                    offers={offers}
+                    zoom={activeCity.zoom}
+                  />
                 </div>
               </div>
               :
