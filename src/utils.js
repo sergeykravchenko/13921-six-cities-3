@@ -5,6 +5,12 @@ export const SortType = {
   TOP_RATED: `Top rated first`
 };
 
+export const RequestStatus = {
+  SUCCESS: `SUCCESS`,
+  WAITING: `WAITING`,
+  FAILURE: `FAILURE`,
+};
+
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };

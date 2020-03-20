@@ -24,8 +24,12 @@ export const getFetchStatus = (state) => {
   return state[NameSpace.STATE].isFetching;
 };
 
-export const getHoveredOffer = (state) => {
-  return state[NameSpace.STATE].hoveredOffer;
+export const getActiveMarker = (state) => {
+  return state[NameSpace.STATE].activeMarker;
+};
+
+export const getRequestStatus = (state) => {
+  return state[NameSpace.STATE].requestStatus;
 };
 
 export const getOffers = createSelector(

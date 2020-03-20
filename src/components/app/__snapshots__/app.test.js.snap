@@ -44,12 +44,16 @@ exports[`App renders correctly 1`] = `
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
+                  style={
+                    Object {
+                      "backgroundImage": "url(https://htmlacademy-react-3.appspot.com/six-citiesundefined)",
+                      "borderRadius": "50%",
+                    }
+                  }
                 />
                 <span
-                  className="header__login"
-                >
-                  Sign in
-                </span>
+                  className="header__user-name user__name"
+                />
               </a>
             </li>
           </ul>
@@ -148,7 +152,8 @@ exports[`App renders correctly 1`] = `
               Canal View Prinsengracht
             </h1>
             <button
-              className="property__bookmark-button property__bookmark-button--active button"
+              className="property__bookmark-button
+                property__bookmark-button--active button"
               type="button"
             >
               <svg
@@ -337,140 +342,191 @@ exports[`App renders correctly 1`] = `
             <h2
               className="reviews__title"
             >
-              Reviews · 
+              Reviews ·
               <span
                 className="reviews__amount"
               >
-                2
+                0
               </span>
             </h2>
             <ul
               className="reviews__list"
+            />
+            <form
+              action="#"
+              className="reviews__form form"
+              disabled={null}
+              method="post"
+              onSubmit={[Function]}
             >
-              <li
-                className="reviews__item"
+              
+              <label
+                className="reviews__label form__label"
+                htmlFor="review"
               >
-                <div
-                  className="reviews__user user"
-                >
-                  <div
-                    className="reviews__avatar-wrapper user__avatar-wrapper"
-                  >
-                    <img
-                      alt="Reviews avatar"
-                      className="reviews__avatar user__avatar"
-                      height="54"
-                      src="img/avatar-max.jpg"
-                      width="54"
-                    />
-                  </div>
-                  <span
-                    className="reviews__user-name"
-                  >
-                    Max
-                  </span>
-                </div>
-                <div
-                  className="reviews__info"
-                >
-                  <div
-                    className="reviews__rating rating"
-                  >
-                    <div
-                      className="reviews__stars rating__stars"
-                    >
-                      <span
-                        style={
-                          Object {
-                            "width": "80%",
-                          }
-                        }
-                      />
-                      <span
-                        className="visually-hidden"
-                      >
-                        Rating
-                      </span>
-                    </div>
-                  </div>
-                  <p
-                    className="reviews__text"
-                  >
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
-                 The building is green and from 18th century.
-                  </p>
-                  <time
-                    className="reviews__time"
-                    dateTime="2019-04-10"
-                  >
-                    April
-                     
-                    2019
-                  </time>
-                </div>
-              </li>
-              <li
-                className="reviews__item"
+                Your review
+              </label>
+              <div
+                className="reviews__rating-form form__rating"
               >
-                <div
-                  className="reviews__user user"
+                <input
+                  checked={false}
+                  className="form__rating-input visually-hidden"
+                  id="5-stars"
+                  name="rating"
+                  onChange={[Function]}
+                  type="radio"
+                  value={5}
+                />
+                <label
+                  className="reviews__rating-label form__rating-label"
+                  htmlFor="5-stars"
+                  title="perfect"
                 >
-                  <div
-                    className="reviews__avatar-wrapper user__avatar-wrapper"
+                  <svg
+                    className="form__star-image"
+                    height="33"
+                    width="37"
                   >
-                    <img
-                      alt="Reviews avatar"
-                      className="reviews__avatar user__avatar"
-                      height="54"
-                      src="img/avatar-angelina.jpg"
-                      width="54"
+                    <use
+                      xlinkHref="#icon-star"
                     />
-                  </div>
-                  <span
-                    className="reviews__user-name"
-                  >
-                    Angelina
-                  </span>
-                </div>
-                <div
-                  className="reviews__info"
+                  </svg>
+                </label>
+                <input
+                  checked={false}
+                  className="form__rating-input visually-hidden"
+                  id="4-stars"
+                  name="rating"
+                  onChange={[Function]}
+                  type="radio"
+                  value={4}
+                />
+                <label
+                  className="reviews__rating-label form__rating-label"
+                  htmlFor="4-stars"
+                  title="perfect"
                 >
-                  <div
-                    className="reviews__rating rating"
+                  <svg
+                    className="form__star-image"
+                    height="33"
+                    width="37"
                   >
-                    <div
-                      className="reviews__stars rating__stars"
-                    >
-                      <span
-                        style={
-                          Object {
-                            "width": "100%",
-                          }
-                        }
-                      />
-                      <span
-                        className="visually-hidden"
-                      >
-                        Rating
-                      </span>
-                    </div>
-                  </div>
-                  <p
-                    className="reviews__text"
+                    <use
+                      xlinkHref="#icon-star"
+                    />
+                  </svg>
+                </label>
+                <input
+                  checked={false}
+                  className="form__rating-input visually-hidden"
+                  id="3-stars"
+                  name="rating"
+                  onChange={[Function]}
+                  type="radio"
+                  value={3}
+                />
+                <label
+                  className="reviews__rating-label form__rating-label"
+                  htmlFor="3-stars"
+                  title="perfect"
+                >
+                  <svg
+                    className="form__star-image"
+                    height="33"
+                    width="37"
                   >
-                    Picturesque that hides behind a a river by the unique lightness of Amsterdam.
-                  </p>
-                  <time
-                    className="reviews__time"
-                    dateTime="2019-04-10"
+                    <use
+                      xlinkHref="#icon-star"
+                    />
+                  </svg>
+                </label>
+                <input
+                  checked={false}
+                  className="form__rating-input visually-hidden"
+                  id="2-stars"
+                  name="rating"
+                  onChange={[Function]}
+                  type="radio"
+                  value={2}
+                />
+                <label
+                  className="reviews__rating-label form__rating-label"
+                  htmlFor="2-stars"
+                  title="perfect"
+                >
+                  <svg
+                    className="form__star-image"
+                    height="33"
+                    width="37"
                   >
-                    April
-                     
-                    2019
-                  </time>
-                </div>
-              </li>
-            </ul>
+                    <use
+                      xlinkHref="#icon-star"
+                    />
+                  </svg>
+                </label>
+                <input
+                  checked={false}
+                  className="form__rating-input visually-hidden"
+                  id="1-stars"
+                  name="rating"
+                  onChange={[Function]}
+                  type="radio"
+                  value={1}
+                />
+                <label
+                  className="reviews__rating-label form__rating-label"
+                  htmlFor="1-stars"
+                  title="perfect"
+                >
+                  <svg
+                    className="form__star-image"
+                    height="33"
+                    width="37"
+                  >
+                    <use
+                      xlinkHref="#icon-star"
+                    />
+                  </svg>
+                </label>
+              </div>
+              <textarea
+                className="reviews__textarea form__textarea"
+                id="review"
+                name="review"
+                onChange={[Function]}
+                placeholder="Tell how was your stay, what you like and what can be improved"
+                value=""
+              />
+              <div
+                className="reviews__button-wrapper"
+              >
+                <p
+                  className="reviews__help"
+                >
+                  To submit review please make sure to set 
+                  <span
+                    className="reviews__star"
+                  >
+                    rating
+                  </span>
+                   and describe your stay with at least 
+                  <b
+                    className="reviews__text-amount"
+                  >
+                    50 characters
+                  </b>
+                  .
+                </p>
+                <button
+                  className="reviews__submit form__submit button"
+                  disabled={true}
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
           </section>
         </div>
       </div>
@@ -494,8 +550,111 @@ exports[`App renders correctly 1`] = `
         >
           <article
             className="cities__place-card place-card"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
+          >
+            <div
+              className="place-card__mark"
+            >
+              <span>
+                Premium
+              </span>
+            </div>
+            <div
+              className="cities__image-wrapper place-card__image-wrapper"
+            >
+              <a
+                href="#"
+              >
+                <img
+                  alt="Place image"
+                  className="place-card__image"
+                  height="200"
+                  src="img/room.jpg"
+                  width="260"
+                />
+              </a>
+            </div>
+            <div
+              className="place-card__info"
+            >
+              <div
+                className="place-card__price-wrapper"
+              >
+                <div
+                  className="place-card__price"
+                >
+                  <b
+                    className="place-card__price-value"
+                  >
+                    €
+                    120
+                     
+                  </b>
+                  <span
+                    className="place-card__price-text"
+                  >
+                    / 
+                    night
+                  </span>
+                </div>
+                <button
+                  className="place-card__bookmark-button place-card__bookmark-button--active button"
+                  type="button"
+                >
+                  <svg
+                    className="place-card__bookmark-icon"
+                    height="19"
+                    width="18"
+                  >
+                    <use
+                      xlinkHref="#icon-bookmark"
+                    />
+                  </svg>
+                  <span
+                    className="visually-hidden"
+                  >
+                    To bookmarks
+                  </span>
+                </button>
+              </div>
+              <div
+                className="place-card__rating rating"
+              >
+                <div
+                  className="place-card__stars rating__stars"
+                >
+                  <span
+                    style={
+                      Object {
+                        "width": "80%",
+                      }
+                    }
+                  />
+                  <span
+                    className="visually-hidden"
+                  >
+                    Rating
+                  </span>
+                </div>
+              </div>
+              <h2
+                className="place-card__name"
+              >
+                <a
+                  href="#"
+                  onClick={[Function]}
+                >
+                  Canal View Prinsengracht
+                </a>
+              </h2>
+              <p
+                className="place-card__type"
+              >
+                Private room
+              </p>
+            </div>
+          </article>
+          <article
+            className="cities__place-card place-card"
           >
             
             <div
@@ -595,8 +754,6 @@ exports[`App renders correctly 1`] = `
           </article>
           <article
             className="cities__place-card place-card"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
           >
             <div
               className="place-card__mark"
@@ -702,8 +859,6 @@ exports[`App renders correctly 1`] = `
           </article>
           <article
             className="cities__place-card place-card"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
           >
             
             <div

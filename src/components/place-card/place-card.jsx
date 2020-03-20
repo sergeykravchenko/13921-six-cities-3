@@ -16,7 +16,11 @@ const PlaceCard = (props) => {
   } = place;
 
   return (
-    <article onMouseEnter={() => handleCardHover(id)} onMouseLeave={() => handleCardHover(0)} className="cities__place-card place-card">
+    <article
+      className="cities__place-card place-card"
+      onMouseEnter={handleCardHover ? () => handleCardHover(id) : undefined}
+      onMouseLeave={handleCardHover ? () => handleCardHover(0) : undefined}
+    >
       {isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>

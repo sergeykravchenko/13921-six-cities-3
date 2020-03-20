@@ -6,8 +6,6 @@ exports[`Render offer-list 1`] = `
 >
   <article
     className="cities__place-card place-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
   >
     <div
       className="place-card__mark"
@@ -113,8 +111,6 @@ exports[`Render offer-list 1`] = `
   </article>
   <article
     className="cities__place-card place-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
   >
     
     <div
@@ -214,8 +210,6 @@ exports[`Render offer-list 1`] = `
   </article>
   <article
     className="cities__place-card place-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
   >
     <div
       className="place-card__mark"
@@ -321,8 +315,6 @@ exports[`Render offer-list 1`] = `
   </article>
   <article
     className="cities__place-card place-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
   >
     
     <div

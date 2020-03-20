@@ -19,49 +19,50 @@ export default class Map extends PureComponent {
     this._mapRef = createRef();
   }
 
-  _createMap(hovered) {
+  _createMap(activeMarkerId) {
     if (this._layerGroup) {
       this._layerGroup.clearLayers();
     }
 
     this._layerGroup = leaflet.layerGroup().addTo(this._map);
+    const offers = this.props.offers;
 
-    this.props.offers.map((item) => {
+    offers.map((item) => {
       leaflet
-      .marker(item.coords, {icon: hovered && hovered === item.id ? ACTIVE_ICON : ICON})
+      .marker(item.coords, {icon: activeMarkerId && activeMarkerId === item.id ? ACTIVE_ICON : ICON})
       .addTo(this._layerGroup);
     });
   }
 
   componentDidMount() {
-    const {activeCity, zoom} = this.props;
-    const city = activeCity.coords;
+    const {coords, zoom} = this.props;
+
+    const center = coords;
     this._map = leaflet.map(this._mapRef.current, {
-      center: city,
+      center,
       zoom,
       zoomControl: false,
       marker: true
     });
 
-    this._map.setView(city, this.zoom);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
     })
     .addTo(this._map);
-    this._createMap();
+    this._map.setView(center, zoom);
+    this._createMap(this.props.activeMarker);
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.activeCity !== prevProps.activeCity) {
-
-      this._map.setView(this.props.activeCity.coords, this.zoom);
+    if (this.props.offers !== prevProps.offers) {
+      this._map.setView(this.props.coords, this.props.zoom);
+      this._createMap(this.props.activeMarker);
     }
-    this._createMap();
 
-    if (this.props.hoveredOffer !== prevProps.hoveredOffer) {
-      this._createMap(this.props.hoveredOffer);
+    if (this.props.activeMarker !== prevProps.activeMarker) {
+      this._createMap(this.props.activeMarker);
     }
   }
 
@@ -78,11 +79,11 @@ export default class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  bemBlock: PropTypes.string.isRequired,
-  activeCity: PropTypes.object.isRequired,
-  hoveredOffer: PropTypes.number,
+  bemBlock: PropTypes.string,
+  coords: PropTypes.arrayOf(PropTypes.number),
+  activeMarker: PropTypes.number,
   offers: PropTypes.arrayOf(PropTypes.shape({
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired
-  })).isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number)
+  })),
   zoom: PropTypes.number,
 };

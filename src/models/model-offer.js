@@ -35,7 +35,6 @@ export default class ModelOffer {
       ],
       zoom: data[`city`][`location`][`zoom`]
     };
-    this.reviews = [];
   }
 
   static parseOffer(data) {

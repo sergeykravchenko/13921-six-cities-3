@@ -5,7 +5,7 @@ import ReviewsList from "../reviews-list/reviews-list.jsx";
 import Map from "../map/map.jsx";
 
 const OfferCard = (props) => {
-  const {offer, offers, activeCity, handlePlaceTitleClick, handleCardHover, hoveredOffer, isAuthenticated} = props;
+  const {offer, nearByOffer, handlePlaceTitleClick, isAuthenticated} = props;
   const {
     id,
     name,
@@ -19,11 +19,8 @@ const OfferCard = (props) => {
     gallery,
     host,
     description,
-    reviews,
     zoom,
   } = offer;
-
-  const closest = offers.filter((item) => item.id !== id);
 
   return (
     <main id={id} className="page__main page__main--property">
@@ -49,7 +46,11 @@ const OfferCard = (props) => {
               <h1 className="property__name">
                 {name}
               </h1>
-              <button className={`property__bookmark-button ${isInBookmark ? `property__bookmark-button--active` : ``} button`} type="button">
+              <button
+                className={`property__bookmark-button
+                ${isInBookmark && `property__bookmark-button--active`} button`}
+                type="button"
+              >
                 <svg className="property__bookmark-icon" width="31" height="33">
                   <use xlinkHref="#icon-bookmark"/>
                 </svg>
@@ -106,69 +107,20 @@ const OfferCard = (props) => {
               </div>
             </div>
             <section className="property__reviews reviews">
-              <ReviewsList reviews={reviews}/>
-              {isAuthenticated &&
-                <form className="reviews__form form" action="#" method="post">
-                  <label className="reviews__label form__label" htmlFor="review">Your review</label>
-                  <div className="reviews__rating-form form__rating">
-                    <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
-                    <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"/>
-                      </svg>
-                    </label>
-
-                    <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio" />
-                    <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"/>
-                      </svg>
-                    </label>
-
-                    <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" />
-                    <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"/>
-                      </svg>
-                    </label>
-
-                    <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" />
-                    <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"/>
-                      </svg>
-                    </label>
-
-                    <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" />
-                    <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"/>
-                      </svg>
-                    </label>
-                  </div>
-                  <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
-                  <div className="reviews__button-wrapper">
-                    <p className="reviews__help">
-                      To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
-                    </p>
-                    <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
-                  </div>
-                </form>
-              }
+              <ReviewsList isAuthenticated={isAuthenticated} id={id}/>
             </section>
           </div>
         </div>
-        <Map bemBlock={`property`} hoveredOffer={hoveredOffer} activeCity={activeCity} offers={closest} zoom={zoom}/>
+        <Map bemBlock={`property`} coords={offer.coords} activeMarker={offer.id} offers={[...nearByOffer, offer]} zoom={zoom}/>
       </section>
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
-            {offers.filter((item) => item.id !== id).map((place) => (
+            {nearByOffer.map((place) => (
               <PlaceCard key={place.id}
                 place={place}
                 handlePlaceTitleClick={handlePlaceTitleClick}
-                handleCardHover={handleCardHover}
               />
             ))}
           </div>
@@ -180,7 +132,7 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   isAuthenticated: PropTypes.bool,
-  offers: PropTypes.array,
+  nearByOffer: PropTypes.array,
   offer: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
@@ -204,17 +156,15 @@ OfferCard.propTypes = {
       img: PropTypes.string.isRequired,
       isPro: PropTypes.bool
     }),
+    coords: PropTypes.arrayOf(PropTypes.number),
     description: PropTypes.string,
-    reviews: PropTypes.array,
-    closest: PropTypes.array,
   }),
-  activeCity: PropTypes.object,
   handlePlaceTitleClick: PropTypes.func,
   city: PropTypes.shape({
     name: PropTypes.string,
   }),
-  handleCardHover: PropTypes.func,
-  hoveredOffer: PropTypes.number,
+  activeMarker: PropTypes.number,
 };
+
 
 export default OfferCard;

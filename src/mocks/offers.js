@@ -60,15 +60,6 @@ export default [
         "date": new Date(`2019-04-10`),
       }
     ],
-    "closest": [
-      {
-        "coords": [52.369553943508, 4.85309666406198],
-      }, {
-        "coords": [52.3909553943508, 4.929309666406198],
-      }, {
-        "coords": [52.3809553943508, 4.939309666406198],
-      },
-    ],
     "city": {
       "name": `Amsterdam`,
       "coords": [52.38333, 4.9],
@@ -118,15 +109,6 @@ export default [
         "text": `Picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
         "date": new Date(`2019-04-8`),
       }
-    ],
-    "closest": [
-      {
-        "coords": [52.3909553943508, 4.85309666406198],
-      }, {
-        "coords": [52.3909553943508, 4.929309666406198],
-      }, {
-        "coords": [52.3809553943508, 4.939309666406198],
-      },
     ],
     "city": {
       "name": `Amsterdam`,
@@ -179,15 +161,6 @@ export default [
         "date": new Date(`2019-04-24`),
       }
     ],
-    "closest": [
-      {
-        "coords": [52.3909553943508, 4.85309666406198],
-      }, {
-        "coords": [52.369553943508, 4.85309666406198],
-      }, {
-        "coords": [52.3809553943508, 4.939309666406198],
-      },
-    ],
     "city": {
       "name": `Cologne`,
       "coords": [52.38343, 4.9],
@@ -227,15 +200,6 @@ export default [
     },
     "description": `An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.`,
     "coords": [52.3809553943508, 4.939309666406198],
-    "closest": [
-      {
-        "coords": [52.3909553943508, 4.85309666406198],
-      }, {
-        "coords": [52.369553943508, 4.85309666406198],
-      }, {
-        "coords": [52.3909553943508, 4.929309666406198],
-      },
-    ],
     "city": {
       "name": `Hamburg`,
       "coords": [52.38013, 4.9],

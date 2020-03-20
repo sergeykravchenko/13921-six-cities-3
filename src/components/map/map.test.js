@@ -21,15 +21,15 @@ const activeCity = {
   "zoom": 14,
 };
 
-const hoveredOffer = 2;
+const activeMarker = 2;
 const zoom = 15;
 
 it(`Should map render correctly`, () => {
   const tree = renderer
     .create(<Map
       bemBlock={string}
-      activeCity={activeCity}
-      hoveredOffer={hoveredOffer}
+      coords={activeCity.coords}
+      activeMarker={activeMarker}
       offers={offers}
       zoom={zoom}
     />, {

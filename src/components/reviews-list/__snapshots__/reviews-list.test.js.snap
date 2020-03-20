@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render review item 1`] = `
+exports[`Render review list 1`] = `
 Array [
   <h2
     className="reviews__title"
   >
-    Reviews · 
+    Reviews ·
     <span
       className="reviews__amount"
     >
@@ -90,7 +90,7 @@ Array [
             alt="Reviews avatar"
             className="reviews__avatar user__avatar"
             height="54"
-            src="img/avatar-angelina.jpg"
+            src="img/avatar-Angelina.jpg"
             width="54"
           />
         </div>
@@ -112,7 +112,7 @@ Array [
             <span
               style={
                 Object {
-                  "width": "80%",
+                  "width": "100%",
                 }
               }
             />
@@ -126,7 +126,7 @@ Array [
         <p
           className="reviews__text"
         >
-          Picturesque that hides behind a a river by the unique lightness of Amsterdam.
+          A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
         </p>
         <time
           className="reviews__time"

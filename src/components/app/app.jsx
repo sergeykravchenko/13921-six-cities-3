@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/state/state";
-import {getAllOffers} from "../../reducer/data/selectors";
+import {getAllOffers, getNearByOffer} from "../../reducer/data/selectors";
 import {
   getCities,
   getActiveCity,
@@ -11,11 +11,12 @@ import {
   getActiveSortType,
   getActiveOffer,
   getFetchStatus,
-  getHoveredOffer,
+  getActiveMarker,
 } from "../../reducer/state/selectors";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {getAuthorizationStatus, getUser} from "../../reducer/user/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 import Header from "../header/header.jsx";
 import Main from "../main/main.jsx";
 import OfferCard from "../offer-card/offer-card.jsx";
@@ -27,7 +28,8 @@ class App extends PureComponent {
       isFetching,
       isAuthenticated,
       offers,
-      hoveredOffer,
+      nearByOffer,
+      activeMarker,
       cities,
       activeCity,
       activeOffer,
@@ -48,8 +50,8 @@ class App extends PureComponent {
           <OfferCard
             isAuthenticated={isAuthenticated}
             offer={activeOffer}
-            offers={offers}
-            hoveredOffer={hoveredOffer}
+            nearByOffer={nearByOffer}
+            activeMarker={activeMarker}
             activeCity={activeCity}
             handlePlaceTitleClick={handlePlaceTitleClick}
             handleCardHover={handleCardHover}
@@ -67,7 +69,7 @@ class App extends PureComponent {
         <Main
           isFetching={isFetching}
           offers={offers}
-          hoveredOffer={hoveredOffer}
+          activeMarker={activeMarker}
           handlePlaceTitleClick={handlePlaceTitleClick}
           cities={cities}
           activeCity={activeCity}
@@ -122,9 +124,10 @@ App.propTypes = {
   login: PropTypes.func,
   allOffers: PropTypes.array,
   offers: PropTypes.array,
+  nearByOffer: PropTypes.array,
   closest: PropTypes.array,
   cities: PropTypes.array,
-  hoveredOffer: PropTypes.number,
+  activeMarker: PropTypes.number,
   activeCity: PropTypes.object,
   activeOffer: PropTypes.object,
   activeSortType: PropTypes.string,
@@ -140,11 +143,12 @@ const mapStateToProps = (state) => {
     isFetching: getFetchStatus(state),
     isAuthenticated: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
     allOffers: getAllOffers(state),
+    nearByOffer: getNearByOffer(state),
     cities: getCities(state),
     activeCity: getActiveCity(state),
     offers: getOffers(state),
     activeOffer: getActiveOffer(state),
-    hoveredOffer: getHoveredOffer(state),
+    activeMarker: getActiveMarker(state),
     activeSortType: getActiveSortType(state),
     user: getUser(state),
   };
@@ -159,12 +163,14 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handlePlaceTitleClick(offer) {
     dispatch(ActionCreator.getActiveOffer(offer));
+    dispatch(DataOperation.loadComments(offer.id));
+    dispatch(DataOperation.loadNearByOffer(offer.id));
   },
   handleSortTypeClick(type) {
     dispatch(ActionCreator.getActiveSortType(type));
   },
   handleCardHover(id) {
-    dispatch(ActionCreator.getHoveredOffer(id));
+    dispatch(ActionCreator.getActiveMarker(id));
   }
 });
 
