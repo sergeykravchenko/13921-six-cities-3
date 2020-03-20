@@ -4,6 +4,7 @@ exports[`Render review form 1`] = `
 <form
   action="#"
   className="reviews__form form"
+  disabled={true}
   method="post"
   onSubmit={[Function]}
 >

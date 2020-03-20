@@ -1,16 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
 import ReviewsItem from "./reviews-item.jsx";
-import NameSpace from "../../reducer/name-space.js";
-
-const mockStore = configureStore([]);
-const store = mockStore({
-  [NameSpace.DATA]: {
-    comments: []
-  }
-});
 
 const comment = {
   "id": 1,
@@ -27,11 +17,9 @@ const comment = {
 it(`Render review item`, () => {
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <ReviewsItem
-            review={comment}
-          />
-        </Provider>
+        <ReviewsItem
+          review={comment}
+        />
     )
     .toJSON();
   expect(tree).toMatchSnapshot();

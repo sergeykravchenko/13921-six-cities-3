@@ -5,7 +5,7 @@ import ReviewsList from "../reviews-list/reviews-list.jsx";
 import Map from "../map/map.jsx";
 
 const OfferCard = (props) => {
-  const {offer, nearByOffer, handlePlaceTitleClick, handleCardHover, isAuthenticated} = props;
+  const {offer, nearByOffer, handlePlaceTitleClick, isAuthenticated} = props;
   const {
     id,
     name,
@@ -46,7 +46,11 @@ const OfferCard = (props) => {
               <h1 className="property__name">
                 {name}
               </h1>
-              <button className={`property__bookmark-button ${isInBookmark ? `property__bookmark-button--active` : ``} button`} type="button">
+              <button
+                className={`property__bookmark-button
+                ${isInBookmark && `property__bookmark-button--active`} button`}
+                type="button"
+              >
                 <svg className="property__bookmark-icon" width="31" height="33">
                   <use xlinkHref="#icon-bookmark"/>
                 </svg>
@@ -107,7 +111,7 @@ const OfferCard = (props) => {
             </section>
           </div>
         </div>
-        <Map bemBlock={`property`} activeOffer={offer} offers={nearByOffer} zoom={zoom}/>
+        <Map bemBlock={`property`} coords={offer.coords} activeMarker={offer.id} offers={[...nearByOffer, offer]} zoom={zoom}/>
       </section>
       <div className="container">
         <section className="near-places places">
@@ -117,7 +121,6 @@ const OfferCard = (props) => {
               <PlaceCard key={place.id}
                 place={place}
                 handlePlaceTitleClick={handlePlaceTitleClick}
-                handleCardHover={handleCardHover}
               />
             ))}
           </div>
@@ -153,14 +156,14 @@ OfferCard.propTypes = {
       img: PropTypes.string.isRequired,
       isPro: PropTypes.bool
     }),
+    coords: PropTypes.arrayOf(PropTypes.number),
     description: PropTypes.string,
   }),
   handlePlaceTitleClick: PropTypes.func,
   city: PropTypes.shape({
     name: PropTypes.string,
   }),
-  handleCardHover: PropTypes.func,
-  hoveredOffer: PropTypes.number,
+  activeMarker: PropTypes.number,
 };
 
 

@@ -11,7 +11,7 @@ import {
   getActiveSortType,
   getActiveOffer,
   getFetchStatus,
-  getHoveredOffer,
+  getActiveMarker,
 } from "../../reducer/state/selectors";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {getAuthorizationStatus, getUser} from "../../reducer/user/selectors.js";
@@ -29,7 +29,7 @@ class App extends PureComponent {
       isAuthenticated,
       offers,
       nearByOffer,
-      hoveredOffer,
+      activeMarker,
       cities,
       activeCity,
       activeOffer,
@@ -51,7 +51,7 @@ class App extends PureComponent {
             isAuthenticated={isAuthenticated}
             offer={activeOffer}
             nearByOffer={nearByOffer}
-            hoveredOffer={hoveredOffer}
+            activeMarker={activeMarker}
             activeCity={activeCity}
             handlePlaceTitleClick={handlePlaceTitleClick}
             handleCardHover={handleCardHover}
@@ -69,7 +69,7 @@ class App extends PureComponent {
         <Main
           isFetching={isFetching}
           offers={offers}
-          hoveredOffer={hoveredOffer}
+          activeMarker={activeMarker}
           handlePlaceTitleClick={handlePlaceTitleClick}
           cities={cities}
           activeCity={activeCity}
@@ -127,7 +127,7 @@ App.propTypes = {
   nearByOffer: PropTypes.array,
   closest: PropTypes.array,
   cities: PropTypes.array,
-  hoveredOffer: PropTypes.number,
+  activeMarker: PropTypes.number,
   activeCity: PropTypes.object,
   activeOffer: PropTypes.object,
   activeSortType: PropTypes.string,
@@ -148,7 +148,7 @@ const mapStateToProps = (state) => {
     activeCity: getActiveCity(state),
     offers: getOffers(state),
     activeOffer: getActiveOffer(state),
-    hoveredOffer: getHoveredOffer(state),
+    activeMarker: getActiveMarker(state),
     activeSortType: getActiveSortType(state),
     user: getUser(state),
   };
@@ -163,7 +163,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handlePlaceTitleClick(offer) {
     dispatch(ActionCreator.getActiveOffer(offer));
-    dispatch(ActionCreator.getActiveOffer(offer));
     dispatch(DataOperation.loadComments(offer.id));
     dispatch(DataOperation.loadNearByOffer(offer.id));
   },
@@ -171,7 +170,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.getActiveSortType(type));
   },
   handleCardHover(id) {
-    dispatch(ActionCreator.getHoveredOffer(id));
+    dispatch(ActionCreator.getActiveMarker(id));
   }
 });
 

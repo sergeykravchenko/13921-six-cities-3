@@ -1,6 +1,5 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import data from "../../mocks/offers";
 import Map from "./map.jsx";
 
 const string = `className`;
@@ -22,16 +21,15 @@ const activeCity = {
   "zoom": 14,
 };
 
-const hoveredOffer = 2;
+const activeMarker = 2;
 const zoom = 15;
 
 it(`Should map render correctly`, () => {
   const tree = renderer
     .create(<Map
       bemBlock={string}
-      activeCity={activeCity}
-      activeOffer={data[0]}
-      hoveredOffer={hoveredOffer}
+      coords={activeCity.coords}
+      activeMarker={activeMarker}
       offers={offers}
       zoom={zoom}
     />, {

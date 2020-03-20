@@ -13,7 +13,7 @@ const Main = (props) => {
   const {
     isFetching,
     offers,
-    hoveredOffer,
+    activeMarker,
     cities,
     activeCity,
     activeSortType,
@@ -52,8 +52,8 @@ const Main = (props) => {
                 <div className="cities__right-section">
                   <Map
                     bemBlock={`cities`}
-                    activeCity={activeCity}
-                    hoveredOffer={hoveredOffer}
+                    coords={activeCity.coords}
+                    activeMarker={activeMarker}
                     offers={offers}
                     zoom={activeCity.zoom}
                   />
@@ -75,7 +75,7 @@ Main.propTypes = {
   offers: PropTypes.array,
   cities: PropTypes.array,
   activeSortType: PropTypes.string,
-  hoveredOffer: PropTypes.number,
+  activeMarker: PropTypes.number,
   handleCityClick: PropTypes.func.isRequired,
   handlePlaceTitleClick: PropTypes.func.isRequired,
   handleSortTypeClick: PropTypes.func.isRequired,

@@ -3,14 +3,16 @@ import renderer from "react-test-renderer";
 import ReviewsForm from "./reviews-form.jsx";
 
 const id = 1;
-const handleSubmit = () => {};
+const requestStatus = `WAITING`;
 
 it(`Render review form`, () => {
   const tree = renderer
     .create(
         <ReviewsForm
           id={id}
-          onSubmit={handleSubmit}
+          onSubmit={()=>{}}
+          requestStatus={requestStatus}
+          onRequestReset={()=>{}}
         />
     )
     .toJSON();

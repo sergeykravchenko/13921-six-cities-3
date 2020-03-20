@@ -2,18 +2,11 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
 import OfferCard from './offer-card.jsx';
 import offers from '../../mocks/offers';
 
 const mockStore = configureStore([]);
-const store = mockStore({
-  allOffers: [],
-  nearByOffer: offers,
-  activeOffer: null,
-  hoveredOffer: null,
-  isFetching: true,
-  requestStatus: null,
-});
 
 const offer = {
   "id": 1,
@@ -45,16 +38,11 @@ const offer = {
     "isPro": true,
   },
   "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
-  "closest": [
-    {
-      "coords": [52.3909553943508, 4.929309666406198],
-    }, {
-      "coords": [52.3909553943508, 4.929309666406197],
-    }, {
-      "coords": [52.3909553943508, 4.929309666406196],
-    },
-  ]
+  "coords": [23, 12],
 };
+
+const isAuthenticated = false;
+const activeMarker = 3;
 
 const activeCity = {
   "name": `Hamburg`,
@@ -62,14 +50,27 @@ const activeCity = {
 };
 
 it(`Offer-card renders correctly`, () => {
+  const store = mockStore({
+    [NameSpace.DATA]: {
+      allOffers: [],
+      nearByOffer: [],
+      comments: [],
+    },
+    [NameSpace.STATE]: {
+      requestStatus: ``,
+    }
+  });
   const tree = renderer
     .create(
         <Provider store={store}>
           <OfferCard
+            isAuthenticated={isAuthenticated}
             offer={offer}
-            nearByOffer={offers}
+            nearByOffer={offers.slice(0, 2)}
+            activeMarker={activeMarker}
             activeCity={activeCity}
             handlePlaceTitleClick={()=>{}}
+            handleCardHover={()=>{}}
           />,
         </Provider>, {
           createNodeMock: () => {

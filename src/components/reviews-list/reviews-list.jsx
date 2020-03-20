@@ -11,7 +11,13 @@ import ReviewsForm from "../reviews-form/reviews-form.jsx";
 const MAX_COMMENTS = 10;
 
 const ReviewsList = (props) => {
-  const {id, comments, isAuthenticated, requestStatus, handleSubmit, handleRequestStatusReset} = props;
+  const {
+    id,
+    comments,
+    isAuthenticated,
+    requestStatus,
+    handleSubmit,
+    handleRequestStatusReset} = props;
   return (
     <React.Fragment>
       <h2 className="reviews__title">
