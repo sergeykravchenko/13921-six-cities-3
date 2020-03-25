@@ -6,7 +6,7 @@ const withToggle = (Component) => {
       super(props);
 
       this.state = {
-        isOpened: false,
+        isChecked: false,
       };
 
       this._handleToggleClick = this._handleToggleClick.bind(this);
@@ -14,15 +14,15 @@ const withToggle = (Component) => {
 
     _handleToggleClick() {
       this.setState({
-        isOpened: !this.state.isOpened,
+        isChecked: !this.state.isChecked,
       });
     }
     render() {
-      const {isOpened} = this.state;
+      const {isChecked} = this.state;
       return (
         <Component
           {...this.props}
-          isOpened={isOpened}
+          isChecked={isChecked}
           handleToggleClick={this._handleToggleClick}
         />
       );

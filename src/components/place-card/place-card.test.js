@@ -1,6 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 import PlaceCard from "./place-card.jsx";
+
+const mockStore = configureStore([]);
 
 const place = {
   "id": 1,
@@ -37,14 +44,28 @@ const place = {
 it(`Render place`, () => {
   const handlePlaceTitleClick = jest.fn();
   const handleCardHover = jest.fn();
+  const handleBookmarkStatusChange = jest.fn();
+
+  const store = mockStore({
+    [NameSpace.DATA]: {
+      allOffers: [],
+    },
+  });
 
   const tree = renderer
     .create(
-        <PlaceCard
-          place={place}
-          handlePlaceTitleClick={handlePlaceTitleClick}
-          handleCardHover={handleCardHover}
-        />
+        <Provider store={store}>
+          <Router
+            history={history}
+          >
+            <PlaceCard
+              place={place}
+              handlePlaceTitleClick={handlePlaceTitleClick}
+              handleCardHover={handleCardHover}
+              handleBookmarkStatusChange={handleBookmarkStatusChange}
+            />
+          </Router>
+        </Provider>
     )
     .toJSON();
   expect(tree).toMatchSnapshot();

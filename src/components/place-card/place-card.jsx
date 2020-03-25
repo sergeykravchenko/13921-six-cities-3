@@ -1,8 +1,18 @@
 import React from "react";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
+import {AppRoute} from "../../utils";
+import {Link} from 'react-router-dom';
 
 const PlaceCard = (props) => {
-  const {place, handlePlaceTitleClick, handleCardHover} = props;
+  const {
+    place,
+    handlePlaceTitleClick,
+    handleCardHover,
+    handleBookmarkStatusChange,
+  } = props;
+
   const {
     id,
     name,
@@ -39,7 +49,10 @@ const PlaceCard = (props) => {
             <b className="place-card__price-value">&euro;{price} </b>
             <span className="place-card__price-text">&#47;&nbsp;{priceText}</span>
           </div>
-          <button className={`place-card__bookmark-button ${isInBookmark ? `place-card__bookmark-button--active` : ``} button`} type="button">
+          <button className={`place-card__bookmark-button ${isInBookmark ? `place-card__bookmark-button--active` : ``} button`}
+            onClick={() => handleBookmarkStatusChange(id, !isInBookmark)}
+            type="button"
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -53,7 +66,7 @@ const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a onClick={() => handlePlaceTitleClick(place)} href="#">{name}</a>
+          <Link to={`${AppRoute.OFFER}/${id}`} onClick={() => handlePlaceTitleClick(place)} href="#">{name}</Link>
         </h2>
         <p className="place-card__type">{features.type}</p>
       </div>
@@ -87,7 +100,16 @@ PlaceCard.propTypes = {
     description: PropTypes.string.isRequired,
   }).isRequired,
   handleCardHover: PropTypes.func,
-  handlePlaceTitleClick: PropTypes.func.isRequired
+  handlePlaceTitleClick: PropTypes.func.isRequired,
+  handleBookmarkStatusChange: PropTypes.func.isRequired,
 };
 
-export default PlaceCard;
+const mapDispatchToProps = (dispatch) => ({
+  handleBookmarkStatusChange(id, status) {
+    status = status ? 1 : 0;
+    return dispatch(DataOperation.changeBookmarkStatus(id, status));
+  },
+});
+
+export {PlaceCard};
+export default connect(null, mapDispatchToProps)(PlaceCard);

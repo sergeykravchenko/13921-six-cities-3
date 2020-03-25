@@ -1,13 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 import PlaceCard from "../place-card/place-card.jsx";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 import Map from "../map/map.jsx";
 
 const OfferCard = (props) => {
-  const {offer, nearByOffer, handlePlaceTitleClick, isAuthenticated} = props;
+  const {offer,
+    nearByOffer,
+    handlePlaceTitleClick,
+    isAuthenticated,
+    handleBookmarkStatusChange,
+    match} = props;
   const {
-    id,
     name,
     price,
     priceText,
@@ -21,6 +27,12 @@ const OfferCard = (props) => {
     description,
     zoom,
   } = offer;
+
+  const id = Number(match.params.id);
+
+  if (nearByOffer.length < 1) {
+    return null;
+  }
 
   return (
     <main id={id} className="page__main page__main--property">
@@ -49,6 +61,7 @@ const OfferCard = (props) => {
               <button
                 className={`property__bookmark-button
                 ${isInBookmark && `property__bookmark-button--active`} button`}
+                onClick={() => handleBookmarkStatusChange(id, !isInBookmark)}
                 type="button"
               >
                 <svg className="property__bookmark-icon" width="31" height="33">
@@ -94,7 +107,7 @@ const OfferCard = (props) => {
               <h2 className="property__host-title">Meet the host</h2>
               <div className="property__host-user user">
                 <div className={`property__avatar-wrapper ${host.isPro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`}>
-                  <img className="property__avatar user__avatar" src={host.img} width="74" height="74" alt="Host avatar" />
+                  <img className="property__avatar user__avatar" src={`/${host.img}`} width="74" height="74" alt="Host avatar" />
                 </div>
                 <span className="property__user-name">
                   {host.name}
@@ -111,7 +124,7 @@ const OfferCard = (props) => {
             </section>
           </div>
         </div>
-        <Map bemBlock={`property`} coords={offer.coords} activeMarker={offer.id} offers={[...nearByOffer, offer]} zoom={zoom}/>
+        <Map bemBlock={`property`} coords={offer.coords} activeMarker={id} offers={[...nearByOffer, offer]} zoom={zoom}/>
       </section>
       <div className="container">
         <section className="near-places places">
@@ -164,7 +177,16 @@ OfferCard.propTypes = {
     name: PropTypes.string,
   }),
   activeMarker: PropTypes.number,
+  match: PropTypes.object,
+  handleBookmarkStatusChange: PropTypes.func,
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  handleBookmarkStatusChange(id, status) {
+    status = status ? 1 : 0;
+    return dispatch(DataOperation.changeBookmarkStatus(id, status));
+  },
+});
 
-export default OfferCard;
+export {OfferCard};
+export default connect(null, mapDispatchToProps)(OfferCard);

@@ -6,6 +6,8 @@ exports[`Render offer-list 1`] = `
 >
   <article
     className="cities__place-card place-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="place-card__mark"
@@ -54,6 +56,7 @@ exports[`Render offer-list 1`] = `
         </div>
         <button
           className="place-card__bookmark-button place-card__bookmark-button--active button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -96,7 +99,7 @@ exports[`Render offer-list 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/1"
           onClick={[Function]}
         >
           Canal View Prinsengracht
@@ -111,6 +114,8 @@ exports[`Render offer-list 1`] = `
   </article>
   <article
     className="cities__place-card place-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     
     <div
@@ -153,6 +158,7 @@ exports[`Render offer-list 1`] = `
         </div>
         <button
           className="place-card__bookmark-button  button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -195,7 +201,7 @@ exports[`Render offer-list 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/2"
           onClick={[Function]}
         >
           Nice, cozy, warm big bed apartment
@@ -210,6 +216,8 @@ exports[`Render offer-list 1`] = `
   </article>
   <article
     className="cities__place-card place-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="place-card__mark"
@@ -258,6 +266,7 @@ exports[`Render offer-list 1`] = `
         </div>
         <button
           className="place-card__bookmark-button  button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -300,7 +309,7 @@ exports[`Render offer-list 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/3"
           onClick={[Function]}
         >
           Wood and stone place
@@ -315,6 +324,8 @@ exports[`Render offer-list 1`] = `
   </article>
   <article
     className="cities__place-card place-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     
     <div
@@ -357,6 +368,7 @@ exports[`Render offer-list 1`] = `
         </div>
         <button
           className="place-card__bookmark-button  button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -399,7 +411,7 @@ exports[`Render offer-list 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/4"
           onClick={[Function]}
         >
           Beautiful &amp; luxurious apartment at great location

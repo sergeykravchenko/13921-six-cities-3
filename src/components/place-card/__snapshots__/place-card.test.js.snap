@@ -53,6 +53,7 @@ exports[`Render place 1`] = `
       </div>
       <button
         className="place-card__bookmark-button place-card__bookmark-button--active button"
+        onClick={[Function]}
         type="button"
       >
         <svg
@@ -95,7 +96,7 @@ exports[`Render place 1`] = `
       className="place-card__name"
     >
       <a
-        href="#"
+        href="/offer/1"
         onClick={[Function]}
       >
         Canal View Prinsengracht

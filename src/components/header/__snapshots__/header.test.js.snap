@@ -15,13 +15,14 @@ exports[`Render Header 1`] = `
       >
         <a
           className="header__logo-link"
-          href="main.html"
+          href="/"
+          onClick={[Function]}
         >
           <img
             alt="6 cities logo"
             className="header__logo"
             height="41"
-            src="img/logo.svg"
+            src="/img/logo.svg"
             width="81"
           />
         </a>
@@ -37,21 +38,17 @@ exports[`Render Header 1`] = `
           >
             <a
               className="header__nav-link header__nav-link--profile"
-              href="#"
+              href="/login"
+              onClick={[Function]}
             >
               <div
                 className="header__avatar-wrapper user__avatar-wrapper"
-                style={
-                  Object {
-                    "backgroundImage": "url(https://htmlacademy-react-3.appspot.com/six-citiesundefined)",
-                    "borderRadius": "50%",
-                  }
-                }
+                style={Object {}}
               />
               <span
-                className="header__user-name user__name"
+                className="header__login"
               >
-                test@mail.ru
+                Sign in
               </span>
             </a>
           </li>

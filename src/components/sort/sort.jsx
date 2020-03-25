@@ -4,7 +4,7 @@ import {SortType} from "../../utils";
 
 class Sort extends PureComponent {
   render() {
-    const {activeSortType, handleSortTypeClick, isOpened, handleToggleClick} = this.props;
+    const {activeSortType, handleSortTypeClick, isChecked, handleToggleClick} = this.props;
     return (
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by </span>
@@ -18,7 +18,7 @@ class Sort extends PureComponent {
           </svg>
         </span>
 
-        <ul className={`places__options ${isOpened ? `  places__options--opened` : ``} places__options--custom`}>
+        <ul className={`places__options ${isChecked ? `  places__options--opened` : ``} places__options--custom`}>
           {Object.values(SortType).map((item, i) => (
             <li key={i} onClick={() => {
               handleSortTypeClick(item);
@@ -37,7 +37,7 @@ class Sort extends PureComponent {
 
 Sort.propTypes = {
   activeSortType: PropTypes.string,
-  isOpened: PropTypes.bool.isRequired,
+  isChecked: PropTypes.bool,
   handleToggleClick: PropTypes.func.isRequired,
   handleSortTypeClick: PropTypes.func.isRequired,
 };

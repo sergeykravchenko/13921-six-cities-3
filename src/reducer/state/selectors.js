@@ -40,4 +40,11 @@ export const getOffers = createSelector(
     }
 );
 
+export const getFavorites = createSelector(
+    getAllOffers,
+    (offers) => {
+      return offers.filter((item) => item.isInBookmark);
+    }
+);
+
 

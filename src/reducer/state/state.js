@@ -7,6 +7,7 @@ const initialState = {
   activeSortType: SortType.POPULAR,
   isFetching: true,
   requestStatus: null,
+  favorites: [],
 };
 
 const ActionType = {
@@ -18,6 +19,7 @@ const ActionType = {
   GET_CITIES: `GET_CITIES`,
   GET_ACTIVE_CITY: `GET_ACTIVE_CITY`,
   GET_REQUEST_STATUS: `GET_REQUEST_STATUS`,
+  GET_FAVORITES: `GET_FAVORITES`,
 };
 
 const ActionCreator = {
@@ -28,6 +30,10 @@ const ActionCreator = {
   changeFetchStatus: (bool) => ({
     type: ActionType.CHANGE_FETCH_STATUS,
     payload: bool,
+  }),
+  changeBookmarkStatus: (offer) => ({
+    type: ActionType.CHANGE_BOOKMARK_STATUS,
+    payload: offer,
   }),
   getRequestStatus: (status) => ({
     type: ActionType.GET_REQUEST_STATUS,
@@ -53,6 +59,10 @@ const ActionCreator = {
     type: ActionType.GET_ACTIVE_CITY,
     payload: city,
   }),
+  getFavorites: (array) => ({
+    type: ActionType.GET_FAVORITES,
+    payload: array,
+  })
 };
 
 const reducer = (state = initialState, action) => {
@@ -80,6 +90,9 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.GET_ACTIVE_CITY:
       return extend(state, {activeCity: action.payload});
+
+    case ActionType.GET_FAVORITES:
+      return extend(state, {favorites: action.payload});
   }
   return state;
 };
