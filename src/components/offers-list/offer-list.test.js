@@ -1,7 +1,14 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 import OffersList from "./offers-list.jsx";
 import {SortType} from '../../utils';
+
+const mockStore = configureStore([]);
 
 const offers = [
   {
@@ -157,14 +164,32 @@ const activeSortType = SortType.POPULAR;
 
 it(`Render offer-list`, () => {
   const handlePlaceTitleClick = jest.fn();
+  const handleCardHover = jest.fn();
+  const store = mockStore({
+    [NameSpace.DATA]: {
+      allOffers: [],
+      nearByOffer: [],
+      comments: [],
+    },
+    [NameSpace.STATE]: {
+      requestStatus: ``,
+    }
+  });
 
   const tree = renderer
     .create(
-        <OffersList
-          offers={offers}
-          activeSortType={activeSortType}
-          handlePlaceTitleClick={handlePlaceTitleClick}
-        />
+        <Provider store={store}>
+          <Router
+            history={history}
+          >
+            <OffersList
+              offers={offers}
+              activeSortType={activeSortType}
+              handlePlaceTitleClick={handlePlaceTitleClick}
+              handleCardHover={handleCardHover}
+            />
+          </Router>
+        </Provider>
     )
     .toJSON();
   expect(tree).toMatchSnapshot();

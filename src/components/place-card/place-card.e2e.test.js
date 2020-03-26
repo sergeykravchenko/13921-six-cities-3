@@ -1,7 +1,12 @@
 import React from "react";
 import Enzyme, {shallow} from "enzyme";
+import {Provider} from "react-redux";
+import NameSpace from "../../reducer/name-space.js";
+import configureStore from "redux-mock-store";
 import Adapter from "enzyme-adapter-react-16";
 import PlaceCard from "./place-card.jsx";
+
+const mockStore = configureStore([]);
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -54,15 +59,22 @@ const place = {
 it(`Should title be clicked`, () => {
   const handlePlaceTitleClick = jest.fn();
   const handleCardHover = jest.fn();
+  const store = mockStore({
+    [NameSpace.DATA]: {
+      allOffers: [],
+    },
+  });
 
   const placeCard = shallow(
-      <PlaceCard
-        place={place}
-        handlePlaceTitleClick={handlePlaceTitleClick}
-        handleCardHover={handleCardHover}
-      />
+      <Provider store={store}>
+        <PlaceCard
+          place={place}
+          handlePlaceTitleClick={handlePlaceTitleClick}
+          handleCardHover={handleCardHover}
+        />
+      </Provider>
   );
-  const cardTitle = placeCard.find(`.place-card__name a`);
+  const cardTitle = placeCard.find(`.place-card__name a`).first();
   cardTitle.props().onClick();
 
   expect(handlePlaceTitleClick).toHaveBeenCalledTimes(1);
@@ -71,16 +83,23 @@ it(`Should title be clicked`, () => {
 it(`On hover card must be card's id`, () => {
   const handlePlaceTitleClick = jest.fn();
   const handleCardHover = jest.fn();
+  const store = mockStore({
+    [NameSpace.DATA]: {
+      allOffers: [],
+    },
+  });
 
   const placeCard = shallow(
-      <PlaceCard
-        place={place}
-        handlePlaceTitleClick={handlePlaceTitleClick}
-        handleCardHover={handleCardHover}
-      />
+      <Provider store={store}>
+        <PlaceCard
+          place={place}
+          handlePlaceTitleClick={handlePlaceTitleClick}
+          handleCardHover={handleCardHover}
+        />
+      </Provider>
   );
 
-  const card = placeCard.find(`.place-card`);
+  const card = placeCard.find(`.place-card`).first();
   card.props().onMouseEnter();
   card.props().onMouseLeave();
 

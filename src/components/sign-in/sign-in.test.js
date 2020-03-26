@@ -5,7 +5,7 @@ import SignIn from "./sign-in.jsx";
 const city = {
   "name": `Amsterdam`,
   "coords": [1, 2],
-}
+};
 
 it(`Render SignIn`, () => {
   const tree = renderer

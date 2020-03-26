@@ -22,6 +22,9 @@ export const createAPI = (onUnauthorized) => {
     const {response} = err;
 
     if (response.status === Error.UNAUTHORIZED) {
+      if (response.request.responseURL === `${URL}/login`) {
+        return;
+      }
       onUnauthorized();
 
       throw err;

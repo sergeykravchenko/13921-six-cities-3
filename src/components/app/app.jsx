@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {Switch, Route, BrowserRouter} from "react-router-dom";
+import {Switch, Route, Router, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/state/state";
 import {getAllOffers, getNearByOffer} from "../../reducer/data/selectors";
@@ -14,16 +14,20 @@ import {
   getActiveMarker,
 } from "../../reducer/state/selectors";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
-import {getAuthorizationStatus, getUser} from "../../reducer/user/selectors.js";
-import {Operation as UserOperation} from "../../reducer/user/user.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
+import {Operation as UserOperation} from "../../reducer/user/user.js";
+import PrivateRoute from "../private-route/private-route.jsx";
 import Header from "../header/header.jsx";
 import Main from "../main/main.jsx";
+import Favorites from "../favorites/favorites.jsx";
 import OfferCard from "../offer-card/offer-card.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
+import history from "../../history";
+import {AppRoute} from "../../utils";
 
 class App extends PureComponent {
-  _renderApp() {
+  render() {
     const {
       isFetching,
       isAuthenticated,
@@ -38,83 +42,82 @@ class App extends PureComponent {
       handlePlaceTitleClick,
       handleSortTypeClick,
       handleCardHover,
-      user,
+      login,
     } = this.props;
 
-    if (activeOffer) {
-      return (
-        <div className="page">
-          <Header
-            isAuthenticated={isAuthenticated}
-            user={user}/>
-          <OfferCard
-            isAuthenticated={isAuthenticated}
-            offer={activeOffer}
-            nearByOffer={nearByOffer}
-            activeMarker={activeMarker}
-            activeCity={activeCity}
-            handlePlaceTitleClick={handlePlaceTitleClick}
-            handleCardHover={handleCardHover}
-          />
-        </div>
-      );
-    }
-
-    return (
-      <div className="page page--gray page--main">
-        <Header
-          isAuthenticated={isAuthenticated}
-          user={user}
-        />
-        <Main
-          isFetching={isFetching}
-          offers={offers}
-          activeMarker={activeMarker}
-          handlePlaceTitleClick={handlePlaceTitleClick}
-          cities={cities}
-          activeCity={activeCity}
-          activeSortType={activeSortType}
-          handleCityClick={handleCityClick}
-          handleSortTypeClick={handleSortTypeClick}
-          handleCardHover={handleCardHover}
-        />
-      </div>
-    );
-  }
-
-  _renderSignIn() {
-    const {login, user, isAuthenticated, activeCity} = this.props;
-    if (!isAuthenticated) {
-      return (
-        <div className="page page--gray page--login">
-          <Header
-            isAuthenticated={isAuthenticated}
-            user={user}
-          />
-          <SignIn
-            city={activeCity}
-            onSubmit={login}
-          />
-        </div>
-      );
-    }
-    return this._renderApp();
-  }
-
-  render() {
-    return <BrowserRouter>
+    return <Router
+      history={history}
+    >
       <Switch>
-        <Route exact path="/">
-          {this._renderApp()}
+        <Route exact path={AppRoute.ROOT}
+          render={(props)=>
+            <div className="page page--gray page--main">
+              <Header/>
+              <Main {...props}
+                isFetching={isFetching}
+                offers={offers}
+                activeMarker={activeMarker}
+                handlePlaceTitleClick={handlePlaceTitleClick}
+                cities={cities}
+                activeCity={activeCity}
+                activeSortType={activeSortType}
+                handleCityClick={handleCityClick}
+                handleSortTypeClick={handleSortTypeClick}
+                handleCardHover={handleCardHover}
+              />
+            </div>
+          }
+        >
         </Route>
-        <Route exact path="/offer">
-          <OfferCard />
-        </Route>
-        <Route exact path="/sign-in">
-          {this._renderSignIn()}
+        <Route exact path={`${AppRoute.OFFER}/:id`}
+          render={(props) =>
+            <div className="page">
+              <Header/>
+              <OfferCard {...props}
+                isAuthenticated={isAuthenticated}
+                offer={activeOffer}
+                nearByOffer={nearByOffer}
+                activeMarker={activeMarker}
+                activeCity={activeCity}
+                handlePlaceTitleClick={handlePlaceTitleClick}
+              />
+            </div>
+          }
+        />
+        <Route exact path={AppRoute.LOGIN}
+          render={() =>
+            !isAuthenticated ?
+              <div className="page page--gray page--login">
+                <Header/>
+                <SignIn
+                  city={activeCity}
+                  onSubmit={login}
+                />
+              </div>
+              :
+              <Redirect to={AppRoute.ROOT} />
+          }
+        >
         </Route>
       </Switch>
-    </BrowserRouter>;
+      <Switch>
+        <PrivateRoute
+          exact
+          path={AppRoute.FAVORITES}
+          isAuthenticated={isAuthenticated}
+          render={() => {
+            return (
+              <div className="page">
+                <Header/>
+                <Favorites
+                  handlePlaceTitleClick={handlePlaceTitleClick}
+                />
+              </div>
+            );
+          }}
+        />
+      </Switch>
+    </Router>;
   }
 }
 
@@ -150,7 +153,6 @@ const mapStateToProps = (state) => {
     activeOffer: getActiveOffer(state),
     activeMarker: getActiveMarker(state),
     activeSortType: getActiveSortType(state),
-    user: getUser(state),
   };
 };
 
@@ -171,7 +173,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleCardHover(id) {
     dispatch(ActionCreator.getActiveMarker(id));
-  }
+  },
 });
 
 export {App};

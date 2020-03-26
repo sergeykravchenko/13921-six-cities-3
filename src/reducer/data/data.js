@@ -1,7 +1,12 @@
-import {extend, RequestStatus} from '../../utils';
+import {extend, RequestStatus, AppRoute, replaceItem} from '../../utils';
 import ModelOffer from '../../models/model-offer';
 import ModelComment from '../../models/model-comment';
 import {ActionCreator as stateActionCreator} from '../state/state';
+import history from '../../history.js';
+
+const Error = {
+  UNAUTHORIZED: 401,
+};
 
 const initialState = {
   allOffers: [],
@@ -66,6 +71,24 @@ const Operation = {
         dispatch(ActionCreator.loadNearByOffer(offers));
       });
   },
+  changeBookmarkStatus: (id, status) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${id}/${status}`)
+      .then((response) => {
+        const offer = ModelOffer.parseOffer(response.data);
+        const updatedOffers = replaceItem(offer, getState().DATA.allOffers);
+        dispatch(ActionCreator.loadOffers(updatedOffers));
+        if (getState().STATE.activeOffer) {
+          dispatch(stateActionCreator.getActiveOffer(offer));
+        }
+      })
+      .catch((err) => {
+        if (err.response && err.response.status === Error.UNAUTHORIZED) {
+          history.push(AppRoute.LOGIN);
+        } else {
+          throw err;
+        }
+      });
+  }
 };
 
 const reducer = (state = initialState, action) => {

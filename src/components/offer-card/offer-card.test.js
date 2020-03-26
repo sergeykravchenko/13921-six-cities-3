@@ -2,6 +2,8 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 import NameSpace from "../../reducer/name-space.js";
 import OfferCard from './offer-card.jsx';
 import offers from '../../mocks/offers';
@@ -49,6 +51,12 @@ const activeCity = {
   "coords": [52.38013, 4.9],
 };
 
+const match = {
+  params: {
+    id: 2,
+  }
+};
+
 it(`Offer-card renders correctly`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
@@ -63,15 +71,19 @@ it(`Offer-card renders correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <OfferCard
-            isAuthenticated={isAuthenticated}
-            offer={offer}
-            nearByOffer={offers.slice(0, 2)}
-            activeMarker={activeMarker}
-            activeCity={activeCity}
-            handlePlaceTitleClick={()=>{}}
-            handleCardHover={()=>{}}
-          />,
+          <Router
+            history={history}
+          >
+            <OfferCard
+              isAuthenticated={isAuthenticated}
+              offer={offer}
+              nearByOffer={offers.slice(0, 2)}
+              activeMarker={activeMarker}
+              activeCity={activeCity}
+              handlePlaceTitleClick={()=>{}}
+              match={match}
+            />,
+          </Router>
         </Provider>, {
           createNodeMock: () => {
             return document.createElement(`div`);

@@ -11,6 +11,13 @@ export const RequestStatus = {
   FAILURE: `FAILURE`,
 };
 
+export const AppRoute = {
+  LOGIN: `/login`,
+  ROOT: `/`,
+  OFFER: `/offer`,
+  FAVORITES: `/favorites`,
+};
+
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
@@ -27,4 +34,11 @@ export const getCities = (array) => {
 
 export const getOffersByCity = (array, city) => {
   return array.filter((item) => item.city.name === city);
+};
+
+export const replaceItem = (item, array) => {
+  const newArray = [...array];
+  const index = newArray.findIndex((offer) => offer.id === item.id);
+  newArray[index] = item;
+  return newArray;
 };

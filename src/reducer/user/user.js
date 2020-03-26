@@ -48,8 +48,10 @@ const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
       .then((response) => {
-        dispatch(ActionCreator.setUser(response.data));
-        dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+        if (response && response.data) {
+          dispatch(ActionCreator.setUser(response.data));
+          dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+        }
       })
       .catch((err) => {
         throw err;

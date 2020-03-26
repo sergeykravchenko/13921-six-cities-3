@@ -12,6 +12,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
     activeSortType: `Popular`,
     isFetching: true,
     requestStatus: null,
+    favorites: [],
   });
 });
 

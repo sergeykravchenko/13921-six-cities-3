@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import leaflet from "leaflet";
 
 const ICON = leaflet.icon({
-  iconUrl: `img/pin.svg`,
+  iconUrl: `/img/pin.svg`,
   iconSize: [30, 40]
 });
 
 const ACTIVE_ICON = leaflet.icon({
-  iconUrl: `img/pin-active.svg`,
+  iconUrl: `/img/pin-active.svg`,
   iconSize: [30, 40]
 });
 

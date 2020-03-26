@@ -44,6 +44,7 @@ OffersList.propTypes = {
   activeSortType: PropTypes.string.isRequired,
   handlePlaceTitleClick: PropTypes.func.isRequired,
   handleCardHover: PropTypes.func,
+  handleBookmarkStatusChange: PropTypes.func,
 };
 
 export default OffersList;
