@@ -22,14 +22,14 @@ exports[`Render place 1`] = `
       <img
         alt="Place image"
         className="place-card__image"
-        height="200"
+        height={200}
         src="img/room.jpg"
-        width="260"
+        width={260}
       />
     </a>
   </div>
   <div
-    className="place-card__info"
+    className="cities__info place-card__info"
   >
     <div
       className="place-card__price-wrapper"

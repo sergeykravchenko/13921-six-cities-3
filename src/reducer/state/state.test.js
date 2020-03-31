@@ -12,7 +12,6 @@ it(`Reducer without additional parameters should return initial state`, () => {
     activeSortType: `Popular`,
     isFetching: true,
     requestStatus: null,
-    favorites: [],
   });
 });
 
@@ -24,7 +23,7 @@ it(`Reducer should update city by a given city`, () => {
     activeSortType: `Popular`,
     isFetching: true,
   },
-  ActionCreator.changeCity(`Paris`)
+  ActionCreator.getActiveCity(`Paris`)
   )).toEqual({
     activeCity: `Paris`,
     activeOffer: null,
@@ -34,25 +33,27 @@ it(`Reducer should update city by a given city`, () => {
   });
 });
 
-it(`Reducer set active offer `, () => {
+it(`Reducer should update fetch status by a given boolean`, () => {
   expect(reducer({
     activeCity: ``,
     activeOffer: null,
     activeMarker: null,
     activeSortType: `Popular`,
     isFetching: true,
+    requestStatus: null,
   },
-  ActionCreator.getActiveOffer(offers[0])
+  ActionCreator.changeFetchStatus(false)
   )).toEqual({
     activeCity: ``,
-    activeOffer: offers[0],
+    activeOffer: null,
     activeMarker: null,
     activeSortType: `Popular`,
-    isFetching: true,
+    isFetching: false,
+    requestStatus: null,
   });
 });
 
-it(`Reducer set request status`, () => {
+it(`Reducer should update request status by a given status`, () => {
   expect(reducer({
     activeCity: ``,
     activeOffer: null,
@@ -72,7 +73,26 @@ it(`Reducer set request status`, () => {
   });
 });
 
-it(`Reducer set active marker`, () => {
+it(`Reducer should update active offer by a given value`, () => {
+  expect(reducer({
+    activeCity: ``,
+    activeOffer: null,
+    activeMarker: null,
+    activeSortType: `Popular`,
+    isFetching: true,
+  },
+  ActionCreator.getActiveOffer(offers[0])
+  )).toEqual({
+    activeCity: ``,
+    activeOffer: offers[0],
+    activeMarker: null,
+    activeSortType: `Popular`,
+    isFetching: true,
+  });
+});
+
+
+it(`Reducer should update active marker by a given value`, () => {
   expect(reducer({
     activeCity: ``,
     activeOffer: null,
@@ -90,7 +110,7 @@ it(`Reducer set active marker`, () => {
   });
 });
 
-it(`Reducer set active sort type `, () => {
+it(`Reducer should update active sort type by a given value`, () => {
   expect(reducer({
     activeCity: ``,
     activeOffer: null,
@@ -109,10 +129,17 @@ it(`Reducer set active sort type `, () => {
 });
 
 describe(`Action creators work correctly`, () => {
-  it(`Action creator for change city returns correct action`, () => {
-    expect(ActionCreator.changeCity(cities[1])).toEqual({
-      type: ActionType.CHANGE_CITY,
-      payload: cities[1],
+  it(`Action creator for change fetch status returns correct action`, () => {
+    expect(ActionCreator.changeFetchStatus(false)).toEqual({
+      type: ActionType.CHANGE_FETCH_STATUS,
+      payload: false,
+    });
+  });
+
+  it(`Action creator for get request status returns correct action`, () => {
+    expect(ActionCreator.getRequestStatus(RequestStatus.SUCCESS)).toEqual({
+      type: ActionType.GET_REQUEST_STATUS,
+      payload: RequestStatus.SUCCESS,
     });
   });
 
@@ -137,10 +164,10 @@ describe(`Action creators work correctly`, () => {
     });
   });
 
-  it(`Action creator for get request status returns correct action`, () => {
-    expect(ActionCreator.getRequestStatus(RequestStatus.SUCCESS)).toEqual({
-      type: ActionType.GET_REQUEST_STATUS,
-      payload: RequestStatus.SUCCESS,
+  it(`Action creator for change city returns correct action`, () => {
+    expect(ActionCreator.getActiveCity(cities[1])).toEqual({
+      type: ActionType.GET_ACTIVE_CITY,
+      payload: cities[1],
     });
   });
 });

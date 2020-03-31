@@ -5,12 +5,17 @@ import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {AppRoute} from "../../utils";
 import {Link} from 'react-router-dom';
 
+const ImageSize = {
+  cities: [260, 200],
+  favorites: [150, 110],
+};
+
 const PlaceCard = (props) => {
   const {
     place,
     handlePlaceTitleClick,
     handleCardHover,
-    handleBookmarkStatusChange,
+    onBookmarkStatusChange,
   } = props;
 
   const {
@@ -25,9 +30,14 @@ const PlaceCard = (props) => {
     isInBookmark
   } = place;
 
+  let {bemblock} = props;
+  if (bemblock === undefined) {
+    bemblock = `cities`;
+  }
+
   return (
     <article
-      className="cities__place-card place-card"
+      className={bemblock ? `${bemblock}__place-card place-card` : `place-card`}
       onMouseEnter={handleCardHover ? () => handleCardHover(id) : undefined}
       onMouseLeave={handleCardHover ? () => handleCardHover(0) : undefined}
     >
@@ -38,19 +48,19 @@ const PlaceCard = (props) => {
         :
         ``
       }
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={bemblock ? `${bemblock}__image-wrapper place-card__image-wrapper` : `place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={picture} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={picture} width={ImageSize[bemblock][0]} height={ImageSize[bemblock][1]} alt="Place image" />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={bemblock ? `${bemblock}__info place-card__info` : `place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price} </b>
             <span className="place-card__price-text">&#47;&nbsp;{priceText}</span>
           </div>
           <button className={`place-card__bookmark-button ${isInBookmark ? `place-card__bookmark-button--active` : ``} button`}
-            onClick={() => handleBookmarkStatusChange(id, !isInBookmark)}
+            onClick={() => onBookmarkStatusChange(id, !isInBookmark)}
             type="button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
@@ -101,11 +111,12 @@ PlaceCard.propTypes = {
   }).isRequired,
   handleCardHover: PropTypes.func,
   handlePlaceTitleClick: PropTypes.func.isRequired,
-  handleBookmarkStatusChange: PropTypes.func.isRequired,
+  onBookmarkStatusChange: PropTypes.func,
+  bemblock: PropTypes.string,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  handleBookmarkStatusChange(id, status) {
+  onBookmarkStatusChange(id, status) {
     status = status ? 1 : 0;
     return dispatch(DataOperation.changeBookmarkStatus(id, status));
   },

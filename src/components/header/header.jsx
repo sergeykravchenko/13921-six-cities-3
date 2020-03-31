@@ -7,7 +7,7 @@ import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {Link} from 'react-router-dom';
 import {AppRoute} from "../../utils";
 
-let Header = (props) => {
+const Header = (props) => {
   const {user, isAuthenticated} = props;
   return (
     <header className="header">
@@ -56,6 +56,5 @@ const mapStateToProps = (state) => {
 };
 
 
-Header = React.memo(Header);
 export {Header};
-export default connect(mapStateToProps, null)(Header);
+export default connect(mapStateToProps, null)(React.memo(Header));

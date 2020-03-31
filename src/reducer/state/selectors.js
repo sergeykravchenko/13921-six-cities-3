@@ -1,11 +1,11 @@
 import {createSelector} from "reselect";
 import NameSpace from "../name-space.js";
-import {getAllOffers} from "../data/selectors";
-import {getCities as getUniq} from '../../utils';
+import {getAllOffers, getFavorites} from "../data/selectors";
+import {getCities as getUniqCities} from '../../utils';
 
 export const getCities = createSelector(
     getAllOffers,
-    (offers) => getUniq(offers)
+    (offers) => getUniqCities(offers)
 );
 
 export const getActiveCity = (state) => {
@@ -40,11 +40,15 @@ export const getOffers = createSelector(
     }
 );
 
-export const getFavorites = createSelector(
-    getAllOffers,
+export const getFavoritesByCity = createSelector(
+    getFavorites,
     (offers) => {
-      return offers.filter((item) => item.isInBookmark);
+      if (!offers) {
+        return null;
+      }
+      const cities = getUniqCities(offers);
+      return cities.map((city) => ({
+        [city.name]: offers.filter((item) => item.city.name === city.name)
+      }));
     }
 );
-
-

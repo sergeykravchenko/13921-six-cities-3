@@ -1,7 +1,14 @@
 import React from 'react';
 import Main from './main.jsx';
 import renderer from 'react-test-renderer';
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 import {SortType} from '../../utils';
+
+const mockStore = configureStore([]);
 
 const offers = [
   {
@@ -149,24 +156,48 @@ const offers = [
   }
 ];
 
+const isFetching = false;
+
 const cities = [`Amsterdam`, `Paris`];
 const activeCity = {"name": `Amsterdam`, "coords": [222, 333]};
 const activeSortType = SortType.POPULAR;
+const activeMarker = 14;
 
 it(`Main renders correctly`, () => {
+  const store = mockStore({
+    [NameSpace.DATA]: {
+      allOffers: [],
+    },
+    [NameSpace.STATE]: {
+      isFetching: true,
+      activeMarker: null,
+      activeCity: null,
+      activeSortType: null,
+    },
+  });
   const tree = renderer
-    .create(<Main
-      offers={offers}
-      cities={cities}
-      activeCity={activeCity}
-      activeSortType={activeSortType}
-      handleCityClick={() =>{}}
-      handlePlaceTitleClick={() => {}}
-      handleSortTypeClick={() => {}}
-    />, {
-      createNodeMock: () => {
-        return document.createElement(`div`);
-      }})
+    .create(
+        <Provider store={store}>
+          <Router
+            history={history}
+          >
+            <Main
+              isFetching={isFetching}
+              offers={offers}
+              activeMarker={activeMarker}
+              cities={cities}
+              activeCity={activeCity}
+              activeSortType={activeSortType}
+              handleCityClick={() =>{}}
+              handlePlaceTitleClick={() => {}}
+              handleSortTypeClick={() => {}}
+              handleCardHover={() => {}}
+            />
+          </Router>
+        </Provider>, {
+          createNodeMock: () => {
+            return document.createElement(`div`);
+          }})
     .toJSON();
   expect(tree).toMatchSnapshot();
 });
