@@ -1,5 +1,10 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
+import Enzyme, {shallow, mount} from "enzyme";
+import {Provider} from "react-redux";
+import NameSpace from "../../reducer/name-space.js";
+import configureStore from "redux-mock-store";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 import Adapter from "enzyme-adapter-react-16";
 import Main from "./main.jsx";
 import {SortType} from '../../utils';
@@ -7,6 +12,8 @@ import {SortType} from '../../utils';
 Enzyme.configure({
   adapter: new Adapter(),
 });
+
+const mockStore = configureStore([]);
 
 const offers = [
   {
@@ -157,20 +164,39 @@ const offers = [
 const cities = [`Amsterdam`, `Paris`];
 const activeCity = {"name": `Amsterdam`, "coords": [222, 333]};
 const activeSortType = SortType.POPULAR;
+const isFetching = false;
 
 it(`Should title link be pressed`, () => {
   const handlePlaceTitleClick = jest.fn();
+  const store = mockStore({
+    [NameSpace.DATA]: {
+      allOffers: [],
+    },
+    [NameSpace.STATE]: {
+      isFetching: true,
+      activeMarker: null,
+      activeCity: null,
+      activeSortType: null,
+    },
+  });
 
-  const main = shallow(
-      <Main
-        offers={offers}
-        cities={cities}
-        activeCity={activeCity}
-        activeSortType={activeSortType}
-        handleCityClick={() =>{}}
-        handlePlaceTitleClick={() => {}}
-        handleSortTypeClick={() => {}}
-      />
+  const main = mount(
+      <Router
+        history={history}
+      >
+        <Provider store={store}>
+          <Main
+            isFetching={isFetching}
+            offers={offers}
+            cities={cities}
+            activeCity={activeCity}
+            activeSortType={activeSortType}
+            handleCityClick={() =>{}}
+            handlePlaceTitleClick={() => {}}
+            handleSortTypeClick={() => {}}
+          />
+        </Provider>
+      </Router>
   );
 
   const PlaceTitleLinks = main.find(`.place-card__name a`);

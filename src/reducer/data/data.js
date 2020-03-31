@@ -1,4 +1,9 @@
-import {extend, RequestStatus, AppRoute, replaceItem} from '../../utils';
+import {
+  extend,
+  RequestStatus,
+  AppRoute,
+  replaceItem,
+  isObjectInArray} from '../../utils';
 import ModelOffer from '../../models/model-offer';
 import ModelComment from '../../models/model-comment';
 import {ActionCreator as stateActionCreator} from '../state/state';
@@ -12,12 +17,14 @@ const initialState = {
   allOffers: [],
   nearByOffer: [],
   comments: [],
+  favorites: [],
 };
 
 const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   LOAD_NEARBY_OFFER: `LOAD_NEARBY_OFFER`,
+  LOAD_FAVORITES: `LOAD_FAVORITES`,
 };
 
 const ActionCreator = {
@@ -33,6 +40,10 @@ const ActionCreator = {
     type: ActionType.LOAD_NEARBY_OFFER,
     payload: array,
   }),
+  loadFavorites: (array) => ({
+    type: ActionType.LOAD_FAVORITES,
+    payload: array,
+  }),
 };
 
 const Operation = {
@@ -43,6 +54,13 @@ const Operation = {
         dispatch(ActionCreator.loadOffers(offers));
         dispatch(stateActionCreator.getActiveCity(offers[0].city));
         dispatch(stateActionCreator.changeFetchStatus(false));
+      });
+  },
+  loadFavorites: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        const offers = ModelOffer.parseOffers(response.data);
+        dispatch(ActionCreator.loadFavorites(offers));
       });
   },
   loadComments: (id) => (dispatch, getState, api) => {
@@ -74,10 +92,29 @@ const Operation = {
   changeBookmarkStatus: (id, status) => (dispatch, getState, api) => {
     return api.post(`/favorite/${id}/${status}`)
       .then((response) => {
+        dispatch(Operation.loadFavorites());
         const offer = ModelOffer.parseOffer(response.data);
         const updatedOffers = replaceItem(offer, getState().DATA.allOffers);
         dispatch(ActionCreator.loadOffers(updatedOffers));
+
+        if (getState().DATA.nearByOffer && isObjectInArray(offer.id, getState().DATA.nearByOffer)) {
+          const updatedNearOffers = replaceItem(offer, getState().DATA.nearByOffer);
+          dispatch(ActionCreator.loadNearByOffer(updatedNearOffers));
+        }
+      })
+      .catch((err) => {
+        if (err.response && err.response.status === Error.UNAUTHORIZED) {
+          history.push(AppRoute.LOGIN);
+        } else {
+          throw err;
+        }
+      });
+  },
+  changeBookmarkFromCard: (id, status) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${id}/${status}`)
+      .then((response) => {
         if (getState().STATE.activeOffer) {
+          const offer = ModelOffer.parseOffer(response.data);
           dispatch(stateActionCreator.getActiveOffer(offer));
         }
       })
@@ -101,6 +138,9 @@ const reducer = (state = initialState, action) => {
 
     case ActionType.LOAD_COMMENTS:
       return extend(state, {comments: action.payload});
+
+    case ActionType.LOAD_FAVORITES:
+      return extend(state, {favorites: action.payload});
   }
   return state;
 };

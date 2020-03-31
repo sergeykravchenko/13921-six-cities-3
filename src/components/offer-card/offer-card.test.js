@@ -57,6 +57,8 @@ const match = {
   }
 };
 
+const isFetching = false;
+
 it(`Offer-card renders correctly`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
@@ -66,8 +68,20 @@ it(`Offer-card renders correctly`, () => {
     },
     [NameSpace.STATE]: {
       requestStatus: ``,
-    }
+      activeOffer: offer,
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: `AUTH`,
+      user: {
+        "avatar_url": `img/1.png`,
+        "email": `Oliver.conner@gmail.com`,
+        "id": 1,
+        "is_pro": false,
+        "name": `Oliver.conner`,
+      },
+    },
   });
+
   const tree = renderer
     .create(
         <Provider store={store}>
@@ -75,12 +89,14 @@ it(`Offer-card renders correctly`, () => {
             history={history}
           >
             <OfferCard
+              isFetching={isFetching}
+              offers={offers}
               isAuthenticated={isAuthenticated}
-              offer={offer}
+              activeOffer={offer}
               nearByOffer={offers.slice(0, 2)}
               activeMarker={activeMarker}
               activeCity={activeCity}
-              handlePlaceTitleClick={()=>{}}
+              onLoadData={()=>{}}
               match={match}
             />,
           </Router>

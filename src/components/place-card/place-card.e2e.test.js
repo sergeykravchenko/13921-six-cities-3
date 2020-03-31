@@ -1,16 +1,16 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
+import {configure, mount} from "enzyme";
 import {Provider} from "react-redux";
 import NameSpace from "../../reducer/name-space.js";
 import configureStore from "redux-mock-store";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 import Adapter from "enzyme-adapter-react-16";
 import PlaceCard from "./place-card.jsx";
 
 const mockStore = configureStore([]);
 
-Enzyme.configure({
-  adapter: new Adapter(),
-});
+configure({adapter: new Adapter()});
 
 const place = {
   "id": 1,
@@ -65,17 +65,21 @@ it(`Should title be clicked`, () => {
     },
   });
 
-  const placeCard = shallow(
-      <Provider store={store}>
-        <PlaceCard
-          place={place}
-          handlePlaceTitleClick={handlePlaceTitleClick}
-          handleCardHover={handleCardHover}
-        />
-      </Provider>
+  const placeCard = mount(
+      <Router
+        history={history}
+      >
+        <Provider store={store}>
+          <PlaceCard
+            place={place}
+            handlePlaceTitleClick={handlePlaceTitleClick}
+            handleCardHover={handleCardHover}
+          />
+        </Provider>
+      </Router>
   );
-  const cardTitle = placeCard.find(`.place-card__name a`).first();
-  cardTitle.props().onClick();
+  const cardTitle = placeCard.find(`.place-card__name a`);
+  cardTitle.simulate(`click`, {preventDefault() {}});
 
   expect(handlePlaceTitleClick).toHaveBeenCalledTimes(1);
 });
@@ -89,17 +93,21 @@ it(`On hover card must be card's id`, () => {
     },
   });
 
-  const placeCard = shallow(
-      <Provider store={store}>
-        <PlaceCard
-          place={place}
-          handlePlaceTitleClick={handlePlaceTitleClick}
-          handleCardHover={handleCardHover}
-        />
-      </Provider>
+  const placeCard = mount(
+      <Router
+        history={history}
+      >
+        <Provider store={store}>
+          <PlaceCard
+            place={place}
+            handlePlaceTitleClick={handlePlaceTitleClick}
+            handleCardHover={handleCardHover}
+          />
+        </Provider>
+      </Router>
   );
 
-  const card = placeCard.find(`.place-card`).first();
+  const card = placeCard.find(`.place-card`);
   card.props().onMouseEnter();
   card.props().onMouseLeave();
 

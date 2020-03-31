@@ -18,7 +18,7 @@ const isAuthenticated = true;
 it(`Render Header`, () => {
   const store = mockStore({
     [NameSpace.USER]: {
-      authorizationStatus: `NO_AUTH`,
+      authorizationStatus: ``,
       user: null,
     },
   });

@@ -42,3 +42,7 @@ export const replaceItem = (item, array) => {
   newArray[index] = item;
   return newArray;
 };
+
+export const isObjectInArray = (id, array) => {
+  return array.find((item) => item.id === id);
+};
