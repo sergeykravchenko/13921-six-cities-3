@@ -5,7 +5,6 @@ import ModelOffer from '../../models/model-offer';
 import ModelComment from '../../models/model-comment';
 import {createAPI} from "../../api.js";
 import offers from "../../mocks/offers";
-import {replaceItem} from "../../utils";
 
 const api = createAPI(() => {});
 
