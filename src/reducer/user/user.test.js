@@ -20,7 +20,7 @@ const user = {
 const userData = {
   "email": `Oliver.conner@gmail.com`,
   "password": `12345678`,
-}
+};
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({

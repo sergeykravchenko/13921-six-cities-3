@@ -1,5 +1,5 @@
 import React from "react";
-import Enzyme, {shallow, mount} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import {Provider} from "react-redux";
 import NameSpace from "../../reducer/name-space.js";
 import configureStore from "redux-mock-store";
