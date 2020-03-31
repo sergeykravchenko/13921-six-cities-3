@@ -17,6 +17,11 @@ const user = {
   "name": `Oliver.conner`,
 };
 
+const userData = {
+  "email": `Oliver.conner@gmail.com`,
+  "password": `12345678`,
+}
+
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -102,7 +107,7 @@ describe(`Operation work correctly`, () => {
       .onGet(`/login`)
       .reply(200, user);
 
-    return authLoader(dispatch, () => {}, apiMock)
+    return authLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -115,16 +120,13 @@ describe(`Operation work correctly`, () => {
   it(`Should make a correct API post request to /login`, function () {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const userLoader = Operation.login();
+    const userLoader = Operation.login(userData);
 
     apiMock
-      .onPost(`/login`, {
-        email: `test@mail.ru`,
-        password: `123_tT`,
-      })
+      .onPost(`/login`, userData)
       .reply(200, user);
 
-    return userLoader(dispatch, () => {}, apiMock)
+    return userLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {

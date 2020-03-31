@@ -70,6 +70,13 @@ const Operation = {
         dispatch(ActionCreator.loadComments(comments));
       });
   },
+  loadNearByOffer: (id) => (dispatch, getState, api) => {
+    return api.get(`/hotels/${id}/nearby`)
+      .then((response) => {
+        const offers = ModelOffer.parseOffers(response.data);
+        dispatch(ActionCreator.loadNearByOffer(offers));
+      });
+  },
   uploadComment: (id, data) => (dispatch, getState, api) => {
     dispatch(stateActionCreator.getRequestStatus(RequestStatus.WAITING));
     return api.post(`/comments/${id}`, data)
@@ -80,13 +87,6 @@ const Operation = {
       })
       .catch(() => {
         dispatch(stateActionCreator.getRequestStatus(RequestStatus.FAILURE));
-      });
-  },
-  loadNearByOffer: (id) => (dispatch, getState, api) => {
-    return api.get(`/hotels/${id}/nearby`)
-      .then((response) => {
-        const offers = ModelOffer.parseOffers(response.data);
-        dispatch(ActionCreator.loadNearByOffer(offers));
       });
   },
   changeBookmarkStatus: (id, status) => (dispatch, getState, api) => {
