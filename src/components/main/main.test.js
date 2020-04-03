@@ -188,10 +188,10 @@ it(`Main renders correctly`, () => {
               cities={cities}
               activeCity={activeCity}
               activeSortType={activeSortType}
-              handleCityClick={() =>{}}
-              handlePlaceTitleClick={() => {}}
-              handleSortTypeClick={() => {}}
-              handleCardHover={() => {}}
+              onCityClick={() =>{}}
+              onPlaceTitleClick={() => {}}
+              onSortTypeClick={() => {}}
+              onCardHover={() => {}}
             />
           </Router>
         </Provider>, {

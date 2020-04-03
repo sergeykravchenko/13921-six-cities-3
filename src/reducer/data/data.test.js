@@ -95,7 +95,7 @@ const comments = [
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     allOffers: [],
-    nearByOffer: [],
+    neighbors: [],
     comments: [],
     favorites: [],
   });
@@ -104,14 +104,14 @@ it(`Reducer without additional parameters should return initial state`, () => {
 it(`Reducer set near by offer `, () => {
   expect(reducer({
     allOffers: [],
-    nearByOffer: [],
+    neighbors: [],
     comments: [],
     favorites: [],
   },
-  ActionCreator.loadNearByOffer(offers)
+  ActionCreator.loadNeighbors(offers)
   )).toEqual({
     allOffers: [],
-    nearByOffer: offers,
+    neighbors: offers,
     comments: [],
     favorites: [],
   });
@@ -120,14 +120,14 @@ it(`Reducer set near by offer `, () => {
 it(`Reducer set comments `, () => {
   expect(reducer({
     allOffers: [],
-    nearByOffer: [],
+    neighbors: [],
     comments: [],
     favorites: [],
   },
   ActionCreator.loadComments(comments)
   )).toEqual({
     allOffers: [],
-    nearByOffer: [],
+    neighbors: [],
     comments,
     favorites: [],
   });
@@ -136,14 +136,14 @@ it(`Reducer set comments `, () => {
 it(`Reducer set favorites `, () => {
   expect(reducer({
     allOffers: [],
-    nearByOffer: [],
+    neighbors: [],
     comments: [],
     favorites: [],
   },
   ActionCreator.loadFavorites(offers)
   )).toEqual({
     allOffers: [],
-    nearByOffer: [],
+    neighbors: [],
     comments: [],
     favorites: offers,
   });
@@ -165,8 +165,8 @@ describe(`Action creators work correctly`, () => {
   });
 
   it(`Action creator for load near by offer work correctly`, () => {
-    expect(ActionCreator.loadNearByOffer(offers)).toEqual({
-      type: ActionType.LOAD_NEARBY_OFFER,
+    expect(ActionCreator.loadNeighbors(offers)).toEqual({
+      type: ActionType.LOAD_NEIGHBORS,
       payload: offers,
     });
   });
@@ -227,18 +227,18 @@ describe(`Operation work correctly`, () => {
   it(`Should make a correct API call to /hotels/:id/nearby`, function () {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const nearByLoader = Operation.loadNearByOffer(1);
+    const neighborsLoader = Operation.loadNeighbors(1);
 
     apiMock
       .onGet(`/hotels/1/nearby`)
       .reply(200, offersFromServer);
 
-    return nearByLoader(dispatch, () => {}, api)
+    return neighborsLoader(dispatch, () => {}, api)
       .then(() => {
         const offersParsed = ModelOffer.parseOffers(offersFromServer);
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.LOAD_NEARBY_OFFER,
+          type: ActionType.LOAD_NEIGHBORS,
           payload: offersParsed,
         });
       });

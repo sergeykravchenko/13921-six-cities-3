@@ -38,7 +38,7 @@ const place = {
     `Cabel TV`,
     `Fridge`,
   ],
-  "gallery": [
+  "images": [
     `img/apartment-01.jpg`,
     `img/apartment-02.jpg`,
     `img/apartment-03.jpg`,
@@ -57,8 +57,8 @@ const place = {
 };
 
 it(`Should title be clicked`, () => {
-  const handlePlaceTitleClick = jest.fn();
-  const handleCardHover = jest.fn();
+  const onPlaceTitleClick = jest.fn();
+  const onCardHover = jest.fn();
   const store = mockStore({
     [NameSpace.DATA]: {
       allOffers: [],
@@ -72,8 +72,8 @@ it(`Should title be clicked`, () => {
         <Provider store={store}>
           <PlaceCard
             place={place}
-            handlePlaceTitleClick={handlePlaceTitleClick}
-            handleCardHover={handleCardHover}
+            onPlaceTitleClick={onPlaceTitleClick}
+            onCardHover={onCardHover}
           />
         </Provider>
       </Router>
@@ -81,12 +81,12 @@ it(`Should title be clicked`, () => {
   const cardTitle = placeCard.find(`.place-card__name a`);
   cardTitle.simulate(`click`, {preventDefault() {}});
 
-  expect(handlePlaceTitleClick).toHaveBeenCalledTimes(1);
+  expect(onPlaceTitleClick).toHaveBeenCalledTimes(1);
 });
 
 it(`On hover card must be card's id`, () => {
-  const handlePlaceTitleClick = jest.fn();
-  const handleCardHover = jest.fn();
+  const onPlaceTitleClick = jest.fn();
+  const onCardHover = jest.fn();
   const store = mockStore({
     [NameSpace.DATA]: {
       allOffers: [],
@@ -100,8 +100,8 @@ it(`On hover card must be card's id`, () => {
         <Provider store={store}>
           <PlaceCard
             place={place}
-            handlePlaceTitleClick={handlePlaceTitleClick}
-            handleCardHover={handleCardHover}
+            onPlaceTitleClick={onPlaceTitleClick}
+            onCardHover={onCardHover}
           />
         </Provider>
       </Router>
@@ -111,5 +111,5 @@ it(`On hover card must be card's id`, () => {
   card.props().onMouseEnter();
   card.props().onMouseLeave();
 
-  expect(handleCardHover).toBeCalledWith(expect.any(Number));
+  expect(onCardHover).toBeCalledWith(expect.any(Number));
 });

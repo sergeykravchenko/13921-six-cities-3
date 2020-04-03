@@ -23,9 +23,9 @@ export const extend = (a, b) => {
 };
 
 export const getCities = (array) => {
-  const cities = array.map((item) => item.city).reduce((unique, o) => {
-    if (!unique.some((obj) => obj.name === o.name)) {
-      unique.push(o);
+  const cities = array.map((item) => item.city).reduce((unique, city) => {
+    if (!unique.some((obj) => obj.name === city.name)) {
+      unique.push(city);
     }
     return unique;
   }, []);

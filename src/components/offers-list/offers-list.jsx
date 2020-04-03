@@ -22,7 +22,7 @@ class OffersList extends PureComponent {
   }
 
   render() {
-    const {offers, activeSortType, handlePlaceTitleClick, handleCardHover} = this.props;
+    const {offers, activeSortType, onPlaceTitleClick, onCardHover} = this.props;
     const sortedOffers = this._getSortedOffers(offers, activeSortType);
 
     return (
@@ -30,8 +30,8 @@ class OffersList extends PureComponent {
         {sortedOffers.map((offer) =>
           <PlaceCard key={offer.id}
             place={offer}
-            handlePlaceTitleClick={handlePlaceTitleClick}
-            handleCardHover={handleCardHover}
+            onPlaceTitleClick={onPlaceTitleClick}
+            onCardHover={onCardHover}
           />
         )}
       </div>
@@ -42,9 +42,9 @@ class OffersList extends PureComponent {
 OffersList.propTypes = {
   offers: PropTypes.array.isRequired,
   activeSortType: PropTypes.string.isRequired,
-  handlePlaceTitleClick: PropTypes.func.isRequired,
-  handleCardHover: PropTypes.func,
-  handleBookmarkStatusChange: PropTypes.func,
+  onPlaceTitleClick: PropTypes.func.isRequired,
+  onCardHover: PropTypes.func,
+  onBookmarkStatusChange: PropTypes.func,
 };
 
 export default OffersList;

@@ -20,18 +20,18 @@ const cities = [
 const activeCity = cities[0];
 
 it(`Should title be clicked`, () => {
-  const handleCityClick = jest.fn();
+  const onCityClick = jest.fn();
 
   const locationsList = shallow(
       <LocationsList
         cities={cities}
         activeCity={activeCity}
-        handleCityClick={handleCityClick}
+        onCityClick={onCityClick}
       />
   );
   const tabsItems = locationsList.find(`.tabs__item`);
   tabsItems.forEach((item) => {
     item.props().onClick();
   });
-  expect(handleCityClick.mock.calls.length).toBe(cities.length);
+  expect(onCityClick.mock.calls.length).toBe(cities.length);
 });

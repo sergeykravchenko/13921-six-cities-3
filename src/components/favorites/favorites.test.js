@@ -31,7 +31,7 @@ const favorites = [
         `Wi-Fi`,
         `Washing machine`,
       ],
-      "gallery": [
+      "images": [
         `img/apartment-01.jpg`,
         `img/apartment-02.jpg`,
       ],
@@ -62,7 +62,7 @@ const favorites = [
         `Wi-Fi`,
         `Washing machine`,
       ],
-      "gallery": [
+      "images": [
         `img/apartment-01.jpg`,
         `img/apartment-02.jpg`,
       ],
@@ -98,7 +98,7 @@ it(`Render Favorites`, () => {
             <Favorites
               favorites={favorites}
               onMount={() => {}}
-              handlePlaceTitleClick={() => {}}
+              onPlaceTitleClick={() => {}}
             />
           </Router>
         </Provider>

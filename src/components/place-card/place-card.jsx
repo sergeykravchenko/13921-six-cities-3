@@ -13,8 +13,8 @@ const ImageSize = {
 const PlaceCard = (props) => {
   const {
     place,
-    handlePlaceTitleClick,
-    handleCardHover,
+    onPlaceTitleClick,
+    onCardHover,
     onBookmarkStatusChange,
   } = props;
 
@@ -38,8 +38,8 @@ const PlaceCard = (props) => {
   return (
     <article
       className={bemblock ? `${bemblock}__place-card place-card` : `place-card`}
-      onMouseEnter={handleCardHover ? () => handleCardHover(id) : undefined}
-      onMouseLeave={handleCardHover ? () => handleCardHover(0) : undefined}
+      onMouseEnter={onCardHover ? () => onCardHover(id) : undefined}
+      onMouseLeave={onCardHover ? () => onCardHover(0) : undefined}
     >
       {isPremium ?
         <div className="place-card__mark">
@@ -76,7 +76,7 @@ const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.OFFER}/${id}`} onClick={() => handlePlaceTitleClick(place)} href="#">{name}</Link>
+          <Link to={`${AppRoute.OFFER}/${id}`} onClick={() => onPlaceTitleClick(place)} href="#">{name}</Link>
         </h2>
         <p className="place-card__type">{features.type}</p>
       </div>
@@ -100,7 +100,7 @@ PlaceCard.propTypes = {
     isPremium: PropTypes.bool,
     isInBookmark: PropTypes.bool,
     houseHolds: PropTypes.arrayOf(PropTypes.string).isRequired,
-    gallery: PropTypes.arrayOf(PropTypes.string).isRequired,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
     host: PropTypes.exact({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
@@ -109,8 +109,8 @@ PlaceCard.propTypes = {
     }),
     description: PropTypes.string.isRequired,
   }).isRequired,
-  handleCardHover: PropTypes.func,
-  handlePlaceTitleClick: PropTypes.func.isRequired,
+  onCardHover: PropTypes.func,
+  onPlaceTitleClick: PropTypes.func.isRequired,
   onBookmarkStatusChange: PropTypes.func,
   bemblock: PropTypes.string,
 };

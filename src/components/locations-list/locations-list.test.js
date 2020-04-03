@@ -15,14 +15,14 @@ const cities = [
 const activeCity = cities[0];
 
 it(`Render locations list correctly`, () => {
-  const handleCityClick = jest.fn();
+  const onCityClick = jest.fn();
 
   const tree = renderer
     .create(
         <LocationsList
           cities={cities}
           activeCity={activeCity}
-          handleCityClick={handleCityClick}
+          onCityClick={onCityClick}
         />
     )
     .toJSON();

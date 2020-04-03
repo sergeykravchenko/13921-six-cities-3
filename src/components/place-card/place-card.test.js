@@ -27,7 +27,7 @@ const place = {
     `Wi-Fi`,
     `Washing machine`,
   ],
-  "gallery": [
+  "images": [
     `img/apartment-01.jpg`,
     `img/apartment-02.jpg`,
   ],
@@ -42,9 +42,9 @@ const place = {
 };
 
 it(`Render place`, () => {
-  const handlePlaceTitleClick = jest.fn();
-  const handleCardHover = jest.fn();
-  const handleBookmarkStatusChange = jest.fn();
+  const onPlaceTitleClick = jest.fn();
+  const onCardHover = jest.fn();
+  const onBookmarkStatusChange = jest.fn();
 
   const store = mockStore({
     [NameSpace.DATA]: {
@@ -60,9 +60,9 @@ it(`Render place`, () => {
           >
             <PlaceCard
               place={place}
-              handlePlaceTitleClick={handlePlaceTitleClick}
-              handleCardHover={handleCardHover}
-              handleBookmarkStatusChange={handleBookmarkStatusChange}
+              onPlaceTitleClick={onPlaceTitleClick}
+              onCardHover={onCardHover}
+              onBookmarkStatusChange={onBookmarkStatusChange}
             />
           </Router>
         </Provider>

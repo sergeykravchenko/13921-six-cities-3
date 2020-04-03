@@ -13,6 +13,6 @@ it(`Should toggle component`, () => {
   const MockComponentWrapped = withToggle(MockComponent);
   const wrapper = shallow(<MockComponentWrapped/>);
   expect(wrapper.props().isChecked).toBe(false);
-  wrapper.props().handleToggleClick();
+  wrapper.props().onToggleClick();
   expect(wrapper.props().isChecked).toBe(true);
 });

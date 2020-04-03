@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, Router, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
@@ -12,38 +12,36 @@ import SignIn from "../sign-in/sign-in.jsx";
 import history from "../../history";
 import {AppRoute} from "../../utils";
 
-class App extends PureComponent {
-  render() {
-    const {
-      isAuthenticated,
-    } = this.props;
+const App = (props) => {
+  const {
+    isAuthenticated,
+  } = props;
 
-    return <Router
-      history={history}
-    >
-      <Switch>
-        <Route exact path={AppRoute.ROOT} component={Main}/>
-        <Route exact path={`${AppRoute.OFFER}/:id`} component={OfferCard}/>
-        <Route exact path={AppRoute.LOGIN}
-          render={() =>
-            !isAuthenticated ?
-              <SignIn/>
-              :
-              <Redirect to={AppRoute.ROOT} />
-          }
-        />
-        <PrivateRoute
-          exact
-          path={AppRoute.FAVORITES}
-          isAuthenticated={isAuthenticated}
-          render={() => {
-            return (<Favorites/>);
-          }}
-        />
-      </Switch>
-    </Router>;
-  }
-}
+  return <Router
+    history={history}
+  >
+    <Switch>
+      <Route exact path={AppRoute.ROOT} component={Main}/>
+      <Route exact path={`${AppRoute.OFFER}/:id`} component={OfferCard}/>
+      <Route exact path={AppRoute.LOGIN}
+        render={() =>
+          !isAuthenticated ?
+            <SignIn/>
+            :
+            <Redirect to={AppRoute.ROOT} />
+        }
+      />
+      <PrivateRoute
+        exact
+        path={AppRoute.FAVORITES}
+        isAuthenticated={isAuthenticated}
+        render={() => {
+          return (<Favorites/>);
+        }}
+      />
+    </Switch>
+  </Router>;
+};
 
 App.propTypes = {
   isAuthenticated: PropTypes.bool,
@@ -56,4 +54,4 @@ const mapStateToProps = (state) => {
 };
 
 export {App};
-export default connect(mapStateToProps, null)(App);
+export default connect(mapStateToProps, null)(React.memo(App));

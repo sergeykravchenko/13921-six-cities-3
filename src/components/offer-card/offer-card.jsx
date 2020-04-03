@@ -9,7 +9,7 @@ import {
   getActiveMarker,
   getFetchStatus,
 } from "../../reducer/state/selectors";
-import {getNearByOffer, getAllOffers} from "../../reducer/data/selectors";
+import {getNeighbors, getAllOffers} from "../../reducer/data/selectors";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import Header from "../header/header.jsx";
@@ -17,14 +17,16 @@ import PlaceCard from "../place-card/place-card.jsx";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 import Map from "../map/map.jsx";
 
+const IMAGES_NUM = 6;
+
 const OfferCard = (props) => {
   const {
     isFetching,
     offers,
-    nearByOffer,
+    neighbors,
     onLoadData,
     isAuthenticated,
-    handleBookmarkStatusChange,
+    onBookmarkStatusChange,
     match,
   } = props;
   let {activeOffer} = props;
@@ -52,7 +54,7 @@ const OfferCard = (props) => {
     isPremium,
     isInBookmark,
     houseHolds,
-    gallery,
+    images,
     host,
     description,
     zoom,
@@ -65,7 +67,7 @@ const OfferCard = (props) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {gallery.slice(0, 6).map((item, i) => (
+              {images.slice(0, IMAGES_NUM).map((item, i) => (
                 <div key={i} className="property__image-wrapper">
                   <img className="property__image" src={item} alt="Photo studio" />
                 </div>
@@ -87,7 +89,7 @@ const OfferCard = (props) => {
                 <button
                   className={`property__bookmark-button
                   ${isInBookmark ? `property__bookmark-button--active` : ``} button`}
-                  onClick={() => handleBookmarkStatusChange(id, !isInBookmark)}
+                  onClick={() => onBookmarkStatusChange(id, !isInBookmark)}
                   type="button"
                 >
                   <svg className="place-card__bookmark-icon" width="31" height="33">
@@ -150,16 +152,16 @@ const OfferCard = (props) => {
               </section>
             </div>
           </div>
-          <Map bemBlock={`property`} coords={activeOffer.coords} activeMarker={id} offers={[...nearByOffer, activeOffer]} zoom={zoom}/>
+          <Map bemBlock={`property`} coords={activeOffer.coords} activeMarker={id} offers={[...neighbors, activeOffer]} zoom={zoom}/>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              {nearByOffer.map((place) => (
+              {neighbors.map((place) => (
                 <PlaceCard key={place.id}
                   place={place}
-                  handlePlaceTitleClick={onLoadData}
+                  onPlaceTitleClick={onLoadData}
                 />
               ))}
             </div>
@@ -172,7 +174,7 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   isAuthenticated: PropTypes.bool,
-  nearByOffer: PropTypes.array,
+  neighbors: PropTypes.array,
   activeOffer: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
@@ -189,7 +191,7 @@ OfferCard.propTypes = {
     isPremium: PropTypes.bool,
     isInBookmark: PropTypes.bool,
     houseHolds: PropTypes.arrayOf(PropTypes.string),
-    gallery: PropTypes.arrayOf(PropTypes.string),
+    images: PropTypes.arrayOf(PropTypes.string),
     host: PropTypes.exact({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
@@ -205,7 +207,7 @@ OfferCard.propTypes = {
   }),
   activeMarker: PropTypes.number,
   match: PropTypes.object,
-  handleBookmarkStatusChange: PropTypes.func,
+  onBookmarkStatusChange: PropTypes.func,
   offers: PropTypes.array,
   isFetching: PropTypes.bool,
 };
@@ -215,7 +217,7 @@ const mapStateToProps = (state) => {
     isFetching: getFetchStatus(state),
     isAuthenticated: getAuthorizationStatus(state) === AuthorizationStatus.AUTH,
     activeOffer: getActiveOffer(state),
-    nearByOffer: getNearByOffer(state),
+    neighbors: getNeighbors(state),
     activeMarker: getActiveMarker(state),
     activeCity: getActiveCity(state),
     offers: getAllOffers(state),
@@ -226,9 +228,9 @@ const mapDispatchToProps = (dispatch) => ({
   onLoadData(offer) {
     dispatch(ActionCreator.getActiveOffer(offer));
     dispatch(DataOperation.loadComments(offer.id));
-    dispatch(DataOperation.loadNearByOffer(offer.id));
+    dispatch(DataOperation.loadNeighbors(offer.id));
   },
-  handleBookmarkStatusChange(id, status) {
+  onBookmarkStatusChange(id, status) {
     status = status ? 1 : 0;
     return dispatch(DataOperation.changeBookmarkFromCard(id, status));
   },

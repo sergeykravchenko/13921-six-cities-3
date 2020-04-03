@@ -10,8 +10,8 @@ it(`Should Sort render correctly`, () => {
     .create(<Sort
       activeSortType={activeSortType}
       isOpened={false}
-      handleSortTypeClick={() => {}}
-      handleToggleClick={() => {}}
+      onSortTypeClick={() => {}}
+      onToggleClick={() => {}}
     />)
     .toJSON();
 

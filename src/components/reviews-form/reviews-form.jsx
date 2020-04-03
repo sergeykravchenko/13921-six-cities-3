@@ -5,16 +5,25 @@ import {RequestStatus} from "../../utils";
 
 const COMMENT_MIN_LENGTH = 50;
 const COMMENT_MAX_LENGTH = 300;
+const STARS_NUM = 5;
 
 class ReviewsForm extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleError = this.handleError.bind(this);
   }
 
-  handleSubmit(evt) {
+  componentDidUpdate() {
+    const {onReset, requestStatus, onRequestReset} = this.props;
+    if (requestStatus === RequestStatus.SUCCESS) {
+      onReset();
+      onRequestReset();
+    }
+  }
+
+  handleFormSubmit(evt) {
     evt.preventDefault();
     const {id, rating, comment, onSubmit} = this.props;
     onSubmit(id, {
@@ -27,17 +36,9 @@ class ReviewsForm extends PureComponent {
     return <strong style={{display: `block`, color: `#ff0000`, marginBottom: `20px`}}>Что-то пошло не так, попробуйте еще раз</strong>;
   }
 
-  componentDidUpdate() {
-    const {onReset, requestStatus, onRequestReset} = this.props;
-    if (requestStatus === RequestStatus.SUCCESS) {
-      onReset();
-      onRequestReset();
-    }
-  }
-
   _createRating() {
     const {rating, onRatingChange} = this.props;
-    return [...Array(5).keys()].map((i) => ++i).reverse().map((value) => {
+    return [...Array(STARS_NUM).keys()].map((i) => ++i).reverse().map((value) => {
       return (
         <React.Fragment key={`id-${value}`}>
           <input className="form__rating-input visually-hidden"
@@ -71,7 +72,7 @@ class ReviewsForm extends PureComponent {
     return (
       <form className="reviews__form form" action="#" method="post"
         disabled={requestStatus && requestStatus === RequestStatus.WAITING}
-        onSubmit={this.handleSubmit}
+        onSubmit={this.handleFormSubmit}
       >
         {requestStatus === RequestStatus.FAILURE && this.handleError() || ``}
         <label className="reviews__label form__label" htmlFor="review">Your review</label>

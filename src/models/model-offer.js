@@ -14,7 +14,7 @@ export default class ModelOffer {
     this.isPremium = data[`is_premium`];
     this.isInBookmark = data[`is_favorite`];
     this.houseHolds = data[`goods`];
-    this.gallery = data[`images`];
+    this.images = data[`images`];
     this.host = {
       id: data[`host`][`id`],
       name: data[`host`][`name`],

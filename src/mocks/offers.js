@@ -26,7 +26,7 @@ export default [
       `Cabel TV`,
       `Fridge`,
     ],
-    "gallery": [
+    "images": [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
       `img/apartment-03.jpg`,
@@ -84,7 +84,7 @@ export default [
       `Heating`,
       `Coffee machine`,
     ],
-    "gallery": [
+    "images": [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
       `img/apartment-03.jpg`,
@@ -134,7 +134,7 @@ export default [
       `Dishwasher`,
       `Cabel TV`,
     ],
-    "gallery": [
+    "images": [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
       `img/apartment-03.jpg`,
@@ -184,7 +184,7 @@ export default [
       `Baby seat`,
       `Kitchen`,
     ],
-    "gallery": [
+    "images": [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
       `img/apartment-03.jpg`,

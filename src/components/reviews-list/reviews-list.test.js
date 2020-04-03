@@ -49,8 +49,8 @@ it(`Render review list`, () => {
             id={id}
             comments={comments}
             requestStatus={``}
-            handleSubmit={()=>{}}
-            handleRequestStatusReset={()=>{}}
+            onSubmit={()=>{}}
+            onRequestStatusReset={()=>{}}
           />
         </Provider>
     )
