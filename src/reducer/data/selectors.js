@@ -4,8 +4,8 @@ export const getAllOffers = (state) => {
   return state[NameSpace.DATA].allOffers;
 };
 
-export const getNearByOffer = (state) => {
-  return state[NameSpace.DATA].nearByOffer;
+export const getNeighbors = (state) => {
+  return state[NameSpace.DATA].neighbors;
 };
 
 export const getComments = (state) => {

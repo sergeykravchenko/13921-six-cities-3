@@ -29,7 +29,7 @@ const offer = {
     `Wi-Fi`,
     `Washing machine`,
   ],
-  "gallery": [
+  "images": [
     `img/apartment-01.jpg`,
     `img/apartment-02.jpg`,
   ],
@@ -63,7 +63,7 @@ it(`Offer-card renders correctly`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
       allOffers: [],
-      nearByOffer: [],
+      neighbors: [],
       comments: [],
     },
     [NameSpace.STATE]: {
@@ -93,7 +93,7 @@ it(`Offer-card renders correctly`, () => {
               offers={offers}
               isAuthenticated={isAuthenticated}
               activeOffer={offer}
-              nearByOffer={offers.slice(0, 2)}
+              neighbors={offers.slice(0, 2)}
               activeMarker={activeMarker}
               activeCity={activeCity}
               onLoadData={()=>{}}

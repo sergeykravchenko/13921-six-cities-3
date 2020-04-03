@@ -19,7 +19,7 @@ class Favorites extends PureComponent {
   }
 
   render() {
-    const {favorites, handlePlaceTitleClick} = this.props;
+    const {favorites, onPlaceTitleClick} = this.props;
 
     if (!favorites || favorites.length <= 0) {
       return (
@@ -54,7 +54,7 @@ class Favorites extends PureComponent {
                             bemblock={`favorites`}
                             key={offer.id}
                             place={offer}
-                            handlePlaceTitleClick={handlePlaceTitleClick}
+                            onPlaceTitleClick={onPlaceTitleClick}
                           />
                         )}
                       </div>
@@ -72,7 +72,7 @@ class Favorites extends PureComponent {
 
 Favorites.propTypes = {
   favorites: PropTypes.array,
-  handlePlaceTitleClick: PropTypes.func,
+  onPlaceTitleClick: PropTypes.func,
   onMount: PropTypes.func,
 };
 
@@ -86,10 +86,10 @@ const mapDispatchToProps = (dispatch) => ({
   onMount() {
     dispatch(DataOperation.loadFavorites());
   },
-  handlePlaceTitleClick(offer) {
+  onPlaceTitleClick(offer) {
     dispatch(ActionCreator.getActiveOffer(offer));
     dispatch(DataOperation.loadComments(offer.id));
-    dispatch(DataOperation.loadNearByOffer(offer.id));
+    dispatch(DataOperation.loadNeighbors(offer.id));
   },
 });
 

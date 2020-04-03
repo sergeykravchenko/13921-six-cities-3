@@ -16,8 +16,8 @@ const ReviewsList = (props) => {
     comments,
     isAuthenticated,
     requestStatus,
-    handleSubmit,
-    handleRequestStatusReset} = props;
+    onSubmit,
+    onRequestStatusReset} = props;
   return (
     <React.Fragment>
       <h2 className="reviews__title">
@@ -38,8 +38,8 @@ const ReviewsList = (props) => {
       <ReviewsForm
         id={id}
         requestStatus={requestStatus}
-        onSubmit={handleSubmit}
-        onRequestReset={handleRequestStatusReset}
+        onSubmit={onSubmit}
+        onRequestReset={onRequestStatusReset}
       />}
     </React.Fragment>
   );
@@ -49,9 +49,9 @@ ReviewsList.propTypes = {
   id: PropTypes.number,
   comments: PropTypes.array,
   isAuthenticated: PropTypes.bool,
-  handleSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
   requestStatus: PropTypes.string,
-  handleRequestStatusReset: PropTypes.func,
+  onRequestStatusReset: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -60,10 +60,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleSubmit(id, data) {
+  onSubmit(id, data) {
     dispatch(Operation.uploadComment(id, data));
   },
-  handleRequestStatusReset() {
+  onRequestStatusReset() {
     dispatch(ActionCreator.getRequestStatus(null));
   }
 });

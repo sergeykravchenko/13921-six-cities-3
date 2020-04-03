@@ -23,7 +23,7 @@ const withToggle = (Component) => {
         <Component
           {...this.props}
           isChecked={isChecked}
-          handleToggleClick={this._handleToggleClick}
+          onToggleClick={this._handleToggleClick}
         />
       );
     }

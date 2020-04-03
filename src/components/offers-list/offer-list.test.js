@@ -37,7 +37,7 @@ const offers = [
       `Cabel TV`,
       `Fridge`,
     ],
-    "gallery": [
+    "images": [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
       `img/apartment-03.jpg`,
@@ -72,7 +72,7 @@ const offers = [
       `Heating`,
       `Coffee machine`,
     ],
-    "gallery": [
+    "images": [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
       `img/apartment-03.jpg`,
@@ -107,7 +107,7 @@ const offers = [
       `Dishwasher`,
       `Cabel TV`,
     ],
-    "gallery": [
+    "images": [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
       `img/apartment-03.jpg`,
@@ -141,7 +141,7 @@ const offers = [
       `Baby seat`,
       `Kitchen`,
     ],
-    "gallery": [
+    "images": [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
       `img/apartment-03.jpg`,
@@ -163,12 +163,12 @@ const offers = [
 const activeSortType = SortType.POPULAR;
 
 it(`Render offer-list`, () => {
-  const handlePlaceTitleClick = jest.fn();
-  const handleCardHover = jest.fn();
+  const onPlaceTitleClick = jest.fn();
+  const onCardHover = jest.fn();
   const store = mockStore({
     [NameSpace.DATA]: {
       allOffers: [],
-      nearByOffer: [],
+      neighbors: [],
       comments: [],
     },
     [NameSpace.STATE]: {
@@ -185,8 +185,8 @@ it(`Render offer-list`, () => {
             <OffersList
               offers={offers}
               activeSortType={activeSortType}
-              handlePlaceTitleClick={handlePlaceTitleClick}
-              handleCardHover={handleCardHover}
+              onPlaceTitleClick={onPlaceTitleClick}
+              onCardHover={onCardHover}
             />
           </Router>
         </Provider>

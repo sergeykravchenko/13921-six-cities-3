@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-let LocationsList = (props) => {
-  const {cities, activeCity, handleCityClick} = props;
+const LocationsList = (props) => {
+  const {cities, activeCity, onCityClick} = props;
   return (
     <ul className="locations__list tabs__list">
       {cities.map((city, i) => (
         <li key={i} className="locations__item">
           <a className={`locations__item-link tabs__item ${activeCity.name === city.name ? ` tabs__item--active` : ``}`}
-            onClick={() => handleCityClick(city)}
+            onClick={() => onCityClick(city)}
             href="#">
             <span>{city.name}</span>
           </a>
@@ -21,7 +21,7 @@ let LocationsList = (props) => {
 LocationsList.propTypes = {
   cities: PropTypes.array,
   activeCity: PropTypes.object,
-  handleCityClick: PropTypes.func,
+  onCityClick: PropTypes.func,
 };
 
-export default LocationsList = React.memo(LocationsList);
+export default React.memo(LocationsList);

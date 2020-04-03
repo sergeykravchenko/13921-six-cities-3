@@ -19,21 +19,6 @@ export default class Map extends PureComponent {
     this._mapRef = createRef();
   }
 
-  _createMap(activeMarkerId) {
-    if (this._layerGroup) {
-      this._layerGroup.clearLayers();
-    }
-
-    this._layerGroup = leaflet.layerGroup().addTo(this._map);
-    const offers = this.props.offers;
-
-    offers.map((item) => {
-      leaflet
-      .marker(item.coords, {icon: activeMarkerId && activeMarkerId === item.id ? ACTIVE_ICON : ICON})
-      .addTo(this._layerGroup);
-    });
-  }
-
   componentDidMount() {
     const {coords, zoom} = this.props;
 
@@ -68,6 +53,21 @@ export default class Map extends PureComponent {
 
   componentWillUnmount() {
     this._map.remove();
+  }
+
+  _createMap(activeMarkerId) {
+    if (this._layerGroup) {
+      this._layerGroup.clearLayers();
+    }
+
+    this._layerGroup = leaflet.layerGroup().addTo(this._map);
+    const offers = this.props.offers;
+
+    offers.map((item) => {
+      leaflet
+      .marker(item.coords, {icon: activeMarkerId && activeMarkerId === item.id ? ACTIVE_ICON : ICON})
+      .addTo(this._layerGroup);
+    });
   }
 
   render() {

@@ -30,10 +30,10 @@ const Main = (props) => {
     cities,
     activeCity,
     activeSortType,
-    handleCityClick,
-    handlePlaceTitleClick,
-    handleSortTypeClick,
-    handleCardHover} = props;
+    onCityClick,
+    onPlaceTitleClick,
+    onSortTypeClick,
+    onCardHover} = props;
 
   if (isFetching) {
     return (
@@ -51,7 +51,7 @@ const Main = (props) => {
                 <LocationsList
                   cities={cities}
                   activeCity={activeCity}
-                  handleCityClick={handleCityClick}
+                  onCityClick={onCityClick}
                 />
               </section>
             </div>
@@ -61,8 +61,8 @@ const Main = (props) => {
                   <section className="cities__places places">
                     <h2 className="visually-hidden">Places</h2>
                     <b className="places__found">{offers.length} place{offers.length > 1 && `s`} to stay in {activeCity.name}</b>
-                    <SortWrapped activeSortType={activeSortType} handleSortTypeClick={handleSortTypeClick}/>
-                    <OffersList offers={offers} handleCardHover={handleCardHover} activeSortType={activeSortType} handlePlaceTitleClick={handlePlaceTitleClick}/>
+                    <SortWrapped activeSortType={activeSortType} onSortTypeClick={onSortTypeClick}/>
+                    <OffersList offers={offers} onCardHover={onCardHover} activeSortType={activeSortType} onPlaceTitleClick={onPlaceTitleClick}/>
                   </section>
                   <div className="cities__right-section">
                     <Map
@@ -92,10 +92,10 @@ Main.propTypes = {
   cities: PropTypes.array,
   activeSortType: PropTypes.string,
   activeMarker: PropTypes.number,
-  handleCityClick: PropTypes.func.isRequired,
-  handlePlaceTitleClick: PropTypes.func.isRequired,
-  handleSortTypeClick: PropTypes.func.isRequired,
-  handleCardHover: PropTypes.func,
+  onCityClick: PropTypes.func.isRequired,
+  onPlaceTitleClick: PropTypes.func.isRequired,
+  onSortTypeClick: PropTypes.func.isRequired,
+  onCardHover: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
@@ -111,18 +111,18 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  handleCityClick(activeCity) {
+  onCityClick(activeCity) {
     dispatch(ActionCreator.getActiveCity(activeCity));
   },
-  handlePlaceTitleClick(offer) {
+  onPlaceTitleClick(offer) {
     dispatch(ActionCreator.getActiveOffer(offer));
     dispatch(DataOperation.loadComments(offer.id));
-    dispatch(DataOperation.loadNearByOffer(offer.id));
+    dispatch(DataOperation.loadNeighbors(offer.id));
   },
-  handleSortTypeClick(type) {
+  onSortTypeClick(type) {
     dispatch(ActionCreator.getActiveSortType(type));
   },
-  handleCardHover(id) {
+  onCardHover(id) {
     dispatch(ActionCreator.getActiveMarker(id));
   },
 });

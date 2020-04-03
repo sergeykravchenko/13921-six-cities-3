@@ -167,7 +167,7 @@ const activeSortType = SortType.POPULAR;
 const isFetching = false;
 
 it(`Should title link be pressed`, () => {
-  const handlePlaceTitleClick = jest.fn();
+  const onPlaceTitleClick = jest.fn();
   const store = mockStore({
     [NameSpace.DATA]: {
       allOffers: [],
@@ -191,9 +191,9 @@ it(`Should title link be pressed`, () => {
             cities={cities}
             activeCity={activeCity}
             activeSortType={activeSortType}
-            handleCityClick={() =>{}}
-            handlePlaceTitleClick={() => {}}
-            handleSortTypeClick={() => {}}
+            onCityClick={() =>{}}
+            onPlaceTitleClick={() => {}}
+            onSortTypeClick={() => {}}
           />
         </Provider>
       </Router>
@@ -205,5 +205,5 @@ it(`Should title link be pressed`, () => {
     item.props().onClick();
   });
 
-  expect(handlePlaceTitleClick.mock.calls.length).toBe(PlaceTitleLinks.length);
+  expect(onPlaceTitleClick.mock.calls.length).toBe(PlaceTitleLinks.length);
 });

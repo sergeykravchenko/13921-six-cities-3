@@ -12,15 +12,15 @@ class SignIn extends PureComponent {
     this.emailRef = createRef();
     this.passwordRef = createRef();
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-  handleSubmit(evt) {
-    const {handleLoginSubmit} = this.props;
+  handleFormSubmit(evt) {
+    const {onLoginSubmit} = this.props;
 
     evt.preventDefault();
 
-    handleLoginSubmit({
+    onLoginSubmit({
       email: this.emailRef.current.value,
       password: this.passwordRef.current.value,
     });
@@ -38,7 +38,7 @@ class SignIn extends PureComponent {
               <form className="login__form form"
                 action="#"
                 method="post"
-                onSubmit={this.handleSubmit}
+                onSubmit={this.handleFormSubmit}
               >
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>
@@ -79,7 +79,7 @@ class SignIn extends PureComponent {
 
 SignIn.propTypes = {
   activeCity: PropTypes.object,
-  handleLoginSubmit: PropTypes.func,
+  onLoginSubmit: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
@@ -89,7 +89,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  handleLoginSubmit(authData) {
+  onLoginSubmit(authData) {
     dispatch(UserOperation.login(authData));
   },
 });
