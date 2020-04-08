@@ -4,9 +4,9 @@ import {
   ActionType,
   AuthorizationStatus,
   Operation
-} from "./user.js";
+} from "./user";
 import MockAdapter from "axios-mock-adapter";
-import {createAPI} from "../../api.js";
+import {createAPI} from "../../api";
 
 const api = createAPI(() => {});
 const user = {

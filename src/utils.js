@@ -46,3 +46,7 @@ export const replaceItem = (item, array) => {
 export const isObjectInArray = (id, array) => {
   return array.find((item) => item.id === id);
 };
+
+export const noop = () => {
+  // do nothing
+};

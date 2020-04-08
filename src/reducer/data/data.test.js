@@ -1,9 +1,9 @@
-import {reducer, ActionCreator, ActionType, Operation} from "./data.js";
-import {ActionType as stateActionType} from "../state/state.js";
+import {reducer, ActionCreator, ActionType, Operation} from "./data";
+import {ActionType as stateActionType} from "../state/state";
 import MockAdapter from "axios-mock-adapter";
 import ModelOffer from '../../models/model-offer';
 import ModelComment from '../../models/model-comment';
-import {createAPI} from "../../api.js";
+import {createAPI} from "../../api";
 import offers from "../../mocks/offers";
 
 const api = createAPI(() => {});

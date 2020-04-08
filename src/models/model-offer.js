@@ -18,7 +18,7 @@ export default class ModelOffer {
     this.host = {
       id: data[`host`][`id`],
       name: data[`host`][`name`],
-      img: data[`host`][`avatar_url`],
+      avatar: data[`host`][`avatar_url`],
       isPro: data[`host`][`is_pro`],
     };
     this.description = data[`description`];

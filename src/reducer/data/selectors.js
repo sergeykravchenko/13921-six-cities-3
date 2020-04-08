@@ -1,4 +1,4 @@
-import NameSpace from "../name-space.js";
+import NameSpace from "../name-space";
 
 export const getAllOffers = (state) => {
   return state[NameSpace.DATA].allOffers;

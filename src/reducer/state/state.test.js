@@ -1,4 +1,4 @@
-import {reducer, ActionCreator, ActionType} from "./state.js";
+import {reducer, ActionCreator, ActionType} from "./state";
 import offers from "../../mocks/offers";
 import {getCities, RequestStatus} from "../../utils";
 
